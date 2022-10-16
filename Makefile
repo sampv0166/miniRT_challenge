@@ -1,4 +1,14 @@
-SRCS = $(wildcard *.c */*.c)
+SRCS = 	main.c \
+		srcs/gnl/get_next_line_utils.c \
+		srcs/gnl/get_next_line.c \
+		srcs/parser/parse_ambient_lighting.c \
+		srcs/parser/parser_utils.c \
+		srcs/parser/parser.c \
+		srcs/utils/error.c \
+		srcs/utils/free.c \
+		srcs/utils/get2d_array_size.c \
+		srcs/utils/parse_color.c \
+		srcs/utils/parse_double.c 
 
 OBJS = ${SRCS:.c=.o}
 
