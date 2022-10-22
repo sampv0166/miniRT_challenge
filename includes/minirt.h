@@ -12,7 +12,6 @@
 #include "../libs/mlx/mac/mlx.h"
 #include "../libs/libft/libft.h"
 
-
 typedef struct s_color
 {
     double r;
@@ -110,42 +109,22 @@ typedef struct s_data
 	int 	total_plane_count;
 	int		total_cylinder_count;
 
-
-
 	char *line_ptr;
 }	t_data;
 
-
-
-
-
 void print_error_msg_and_exit(char *error_msg, t_data *scene_data);
 
-//free
-void free_scene_data(t_data *scene_data);
-char	*free_memmory(char **ptr);
 
-//getnextline utils
-char	*get_next_line(int fd);
-char	*free_memmory(char **ptr);
-char	*ft_strchr(const char *str, int c);
-size_t	get_current_line_size(char *saved_line);
 
-//parcer utils
-int check_file_name(char *file_name);
-void replace_tabs_and_newline(char *line);
+
+
+
 
 //utils
-double parse_double(char *str);
-int get_2darray_size(char **arr);
-void parse_color(char *str, t_data *scene_data, t_color *colors);
-void free_2d_char_array(char **arr);
-int skip_dot_verify_digits(char *str);
 
 
 
-void parse_scene(char *file_name, t_data *scene_data);
-void parse_ambient_lighting(char **info, t_data *scene_data);
+
 
 
 #endif

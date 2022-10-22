@@ -56,7 +56,6 @@ int	main(int argc, char **argv)
 	init_scene_data(&scene_data);
 	parse_scene(argv[1], &scene_data);
 	
-
 	setup_mlx(&scene_data);
 	mlx_put_image_to_window(scene_data.mlx.mlx_ptr, scene_data.mlx.win_ptr,
 		scene_data.img.img_ptr, 0, 0);

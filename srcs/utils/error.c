@@ -1,5 +1,7 @@
 #include "../../includes/minirt.h"
 
+#include  "../../includes/utils.h"
+
 void print_error_msg_and_exit(char *error_msg, t_data *scene_data)
 {
     ft_putstr_fd("Error\n", 1);

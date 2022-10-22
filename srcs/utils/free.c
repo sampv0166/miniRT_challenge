@@ -1,4 +1,5 @@
 #include "../../includes/minirt.h"
+#include "../../includes/utils.h"
 
 void free_2d_char_array(char **arr)
 {

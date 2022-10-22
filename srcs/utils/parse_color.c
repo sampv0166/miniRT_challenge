@@ -1,4 +1,6 @@
 #include "../../includes/minirt.h"
+#include "../../includes/utils.h"
+#include "../../includes/parse.h"
 
 void parse_color(char *str, t_data *scene_data, t_color *colors)
 {
