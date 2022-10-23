@@ -94,6 +94,25 @@ typedef struct s_img
 	unsigned char	*data;
 }					t_img;
 
+typedef struct s_camera2
+{
+    double	hsize;
+	double	vsize;
+    double	field_of_view;
+	double	**transform;
+	double	half_width;
+	double	half_height;
+	double	pixel_size;
+
+}	t_camera2;
+
+typedef struct s_camera
+{
+    t_point pos;
+    t_vector norm_vector;
+    double fov;
+
+}               t_camera;
 typedef struct s_data
 {
 	t_mlx	mlx;
@@ -103,6 +122,8 @@ typedef struct s_data
 	int     amb_set;
    	double  amb_ratio;
  	t_color amb_color;
+
+	t_camera camera;
 
 	int 	total_shape_count;
 	int 	total_sphere_count;

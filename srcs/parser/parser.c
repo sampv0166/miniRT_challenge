@@ -9,10 +9,10 @@ void check_for_a_c_l( char **info_split, t_data *scene_data)
     {
         parse_ambient_lighting(info_split, scene_data);
     }
-    // else if (info_split[0][0] == 'C')
-    // {
-    //     parse_camera(info_split,scene_data);
-    // }
+    else if (info_split[0][0] == 'C')
+    {
+        parse_camera(info_split,scene_data);
+    }
     // else if (info_split[0][0] == 'L')
     // {
     //     parse_light(info_split,scene_data);
