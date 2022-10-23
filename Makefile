@@ -8,7 +8,16 @@ SRCS = 	main.c \
 		srcs/utils/free.c \
 		srcs/utils/get2d_array_size.c \
 		srcs/utils/parse_color.c \
-		srcs/utils/parse_double.c 
+		srcs/utils/parse_double.c  \
+		srcs/parser/parse_camera.c  \
+		srcs/parser/parse_light.c  \
+		srcs/parser/parse_plane.c \
+		srcs/parser/parse_sphere.c \
+		srcs/parser/parse_cylinder.c  \
+		srcs/maths/matrix/matrix_functions.c   
+  
+
+
 
 OBJS = ${SRCS:.c=.o}
 

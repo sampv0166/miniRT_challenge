@@ -52,6 +52,15 @@ typedef struct s_ray
 }	t_ray;
 
 
+
+typedef struct s_light
+{
+    t_point pos;
+    t_color color;
+    double  ratio;
+
+}               t_light;
+
 typedef struct s_shape
 {
 	t_point		position;
@@ -62,19 +71,20 @@ typedef struct s_shape
 	t_vector	norm_vector;
 	void*		shape;
 	char*		shape_name;
+
+	//specifically for sphere
+	double		radius;
+
+	//specicifcally for cylinder
+	double diameter;
+    double height;
+
 }			   t_shape;
 
-typedef struct s_light
-{
-    t_point pos;
-    t_color color;
-    double  ratio;
-
-}               t_light;
 
 typedef struct s_world
 {
-	t_shape		*s;
+	t_list		*shapes;
 	t_light		l;
 	int         shape_count;
 }	t_world;
@@ -113,6 +123,9 @@ typedef struct s_camera
     double fov;
 
 }               t_camera;
+
+
+
 typedef struct s_data
 {
 	t_mlx	mlx;
@@ -124,6 +137,8 @@ typedef struct s_data
  	t_color amb_color;
 
 	t_camera camera;
+
+	t_light light_src;
 
 	int 	total_shape_count;
 	int 	total_sphere_count;
