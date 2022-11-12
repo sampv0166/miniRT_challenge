@@ -1,7 +1,5 @@
 #include "../../includes/minirt.h"
 
-#include "../../includes/parse.h"
-#include "../../includes/maths.h"
 static void store_in_scene_data(t_data *scene_data, char **point_split, char **norm_vec, char **info)
 {
     t_shape *cy;

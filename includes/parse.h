@@ -1,6 +1,7 @@
 #ifndef PARSE_H
 # define PARSE_H
 
+# include "common.h"
 
 //parcer utils
 int check_file_name(char *file_name);

@@ -1,7 +1,5 @@
 #include "../../includes/minirt.h"
 
-#include "../../includes/parse.h"
-
 int verify_digits(char **nrm_vec_split, char **pnt_split, char **info)
 {
     int i;

@@ -1,8 +1,5 @@
 #include "../../includes/minirt.h"
 
-#include "../../includes/parse.h"
-
-#include "../../includes/maths.h"
 static int verify_digits( char **pnt_split, char **color_split ,char **info)
 {
     int i;

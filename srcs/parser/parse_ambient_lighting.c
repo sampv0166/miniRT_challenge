@@ -1,8 +1,5 @@
 #include "../../includes/minirt.h"
 
-#include "../../includes/parse.h"
-
-
 int skip_dot_verify_digits(char *str)
 {
     int i;

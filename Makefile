@@ -14,10 +14,23 @@ SRCS = 	main.c \
 		srcs/parser/parse_plane.c \
 		srcs/parser/parse_sphere.c \
 		srcs/parser/parse_cylinder.c  \
-		srcs/maths/matrix/matrix_functions.c   
-  
-
-
+		srcs/maths/matrix/matrix_functions.c  \
+		srcs/create_default_world.c \
+		srcs/camera/camera.c \
+		srcs/maths/matrix/inverse.c  \
+		srcs/maths/normal.c  \
+		srcs/render/ray.c  \
+		srcs/render/render.c  \
+		srcs/tuple/point_operations.c \
+		srcs/tuple/tuple_operations.c \
+		srcs/color_operations.c \
+		srcs/maths/product.c  \
+		srcs/maths/transformations/transformations.c  \
+		srcs/color_at/color_at.c  \
+		srcs/color_at/hit.c  \
+		srcs/color_at/local_normal.c  \
+		srcs/color_at/prepare_computations.c  \
+		srcs/color_at/shade_hit.c  \
 
 OBJS = ${SRCS:.c=.o}
 

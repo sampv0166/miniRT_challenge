@@ -1,9 +1,5 @@
 #include "./includes/minirt.h"
 
-#include "./includes/utils.h"
-
-#include "./includes/parse.h"
-
 /*
 The first thing is to check the arguments
 Then its parsing the data
@@ -142,11 +138,13 @@ void print_parsed_values(t_data *scene_data)
     }
 }
 
-
-
 int	main(int argc, char **argv)	
 {
 	t_data	scene_data;
+	t_camera2 c;
+	t_point		from;
+	t_point		to;
+    t_vector	up;
 
 	(void) argc;
 	(void) argv;
@@ -154,8 +152,19 @@ int	main(int argc, char **argv)
         print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);    
 	init_scene_data(&scene_data);
 	parse_scene(argv[1], &scene_data);
-	// create_default_world();
-	// transform_default_world();
+	default_world(&scene_data);
+
+
+	c = camera(HEIGHT, WIDTH , (scene_data.camera.fov * (PI/180)));
+
+	from = scene_data.camera.pos;
+	to = point(0,3,-7);
+    up = scene_data.camera.norm_vector;
+
+    c.transform = view_transform(from, to, up);
+    c.transform = inverse(c.transform, 4);
+
+	render(c, scene_data.wrld, &scene_data);
 	print_parsed_values(&scene_data);
 	setup_mlx(&scene_data);
 	mlx_put_image_to_window(scene_data.mlx.mlx_ptr, scene_data.mlx.win_ptr,

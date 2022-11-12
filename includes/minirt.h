@@ -4,163 +4,56 @@
 # define WIDTH 800
 # define HEIGHT 500
 # define KEY_ESC 53
+# define TRUE 1
+# define FALSE 0
 
+#include <math.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include "../libs/mlx/mac/mlx.h"
 #include "../libs/libft/libft.h"
-
-typedef struct s_color
-{
-    double r;
-    double g;
-    double b;
-
-}               t_color;
-
-typedef struct s_point
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_point;
-
-//vector
-
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_vector;
-
-typedef struct s_material
-{
-	t_color	color;
-	double	ambient;
-	double	diffuse;
-	double	specular;
-	double	shininess;
-}	t_material;
-
-typedef struct s_ray
-{
-	t_point		origin;
-	t_vector	direction;
-}	t_ray;
-
-
-
-typedef struct s_light
-{
-    t_point pos;
-    t_color color;
-    double  ratio;
-
-}               t_light;
-
-typedef struct s_shape
-{
-	t_point		position;
-	double		**transform;
-	t_material  material;
-	t_color		color;
-	t_ray		ray_in_obj_space;
-	t_vector	norm_vector;
-	void*		shape;
-	char*		shape_name;
-
-	//specifically for sphere
-	double		radius;
-
-	//specicifcally for cylinder
-	double diameter;
-    double height;
-
-}			   t_shape;
-
-
-typedef struct s_world
-{
-	t_list		*shapes;
-	t_light		l;
-	int         shape_count;
-}	t_world;
-
-typedef struct s_mlx
-{
-	void			*mlx_ptr;
-	void			*win_ptr;
-}					t_mlx;
-
-typedef struct s_img
-{
-	void			*img_ptr;
-	int				bits_per_pixel;
-	int				size_line;
-	int				endian;
-	unsigned char	*data;
-}					t_img;
-
-typedef struct s_camera2
-{
-    double	hsize;
-	double	vsize;
-    double	field_of_view;
-	double	**transform;
-	double	half_width;
-	double	half_height;
-	double	pixel_size;
-
-}	t_camera2;
-
-typedef struct s_camera
-{
-    t_point pos;
-    t_vector norm_vector;
-    double fov;
-
-}               t_camera;
-
-
-
-typedef struct s_data
-{
-	t_mlx	mlx;
-	t_img	img;
-	t_world wrld;
-
-	int     amb_set;
-   	double  amb_ratio;
- 	t_color amb_color;
-
-	t_camera camera;
-
-	t_light light_src;
-
-	int 	total_shape_count;
-	int 	total_sphere_count;
-	int 	total_plane_count;
-	int		total_cylinder_count;
-
-	char *line_ptr;
-}	t_data;
+# define EPSILON 0.00001
+# define	PI 4.0 * atan(1.0)
+# include "parse.h"
+# include "maths.h"
+# include "tests.h"
+# include "utils.h"
+# include "render.h"
 
 void print_error_msg_and_exit(char *error_msg, t_data *scene_data);
 
+void default_world(t_data *scene_data);
+t_color	color(double red, double green, double blue);
 
 
+t_camera2	camera(double hsize, double vsize, double field_of_view);
+double	**view_transform(t_point from, t_point to, t_vector up);
+
+void render(t_camera2 cam, t_world wrld, t_data *scene_data);
+// tuples
+t_tuple	tuple(double x, double y, double z, double w);
+t_point	point(double x, double y, double z);
+t_tuple	point_tp(t_point p);
+
+// utils
+
+t_ray	ray(t_point p, t_vector v);
+t_intersection	hit(t_list *xs);
 
 
+t_comps	prepare_computations(t_intersection i, t_ray r);
 
+t_vector		local_normal_at_sphere(t_point obj_point, t_point point);
+t_vector		local_normal_at_cylinder(void *shape,  t_point pnt);
+t_vector		local_normal_at_plane();
 
-//utils
+t_color	shade_hit(t_world w, t_comps comps);
+t_color	color_at(t_world w, t_ray r);
 
-
-
-
-
+t_intersect local_intersect_plane(t_ray r);
+t_intersect	local_intersect_sphere(t_ray r);
+t_intersect local_intersect_cylinder(void *shape, t_ray r);
 
 #endif

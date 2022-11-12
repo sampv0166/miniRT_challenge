@@ -1,7 +1,4 @@
 #include "../../includes/minirt.h"
-#include "../../includes/parse.h"
-#include "../../includes/utils.h"
-#include "../../includes/maths.h"
 
 void check_for_a_c_l( char **info_split, t_data *scene_data)
 {
