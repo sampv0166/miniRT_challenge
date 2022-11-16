@@ -67,7 +67,9 @@ t_intersection	hit(t_list *xs)
 		{
 			inter = temp->content;
 			if (inter->t > 0.0)
+			{
 				return(*inter);
+			}
 			i++;
 			temp = temp->next;
 		}

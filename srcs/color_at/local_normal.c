@@ -10,13 +10,13 @@ t_vector		local_normal_at_plane()
 	return (vector(0, 1 ,0));
 }
 
-t_vector		local_normal_at_cylinder(void *shape,  t_point pnt)
+t_vector		local_normal_at_cylinder(t_shape *shape,  t_point pnt)
 {
 	double max;
 	double min;
-	t_shape *cy;
+	// t_shape *cy;
 
-	max = cy->height / 2.0;
+	max = shape->height / 2.0;
 	min = -1.0 * max;
 
 

@@ -28,7 +28,7 @@ void free_2d_char_array(char **arr)
 
 void free_scene_data(t_data *scene_data)
 {
-   	free(scene_data->mlx.mlx_ptr);
+   	// free(scene_data->mlx.mlx_ptr);
 
     if (scene_data->line_ptr)
     {

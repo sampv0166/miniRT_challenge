@@ -17,6 +17,29 @@ t_intersect local_intersect_plane(t_ray r)
 	return (inter);
 }
 
+int chec_approx_zero(double a)
+{
+	double temp = fabs(a - 0);
+
+	if(temp < EPSILON)
+	{
+		return 1;
+	}
+	return 0;
+}
+
+t_bool check_cap(t_ray r, double t)
+{
+	double x;
+	double z;
+
+	x = r.origin.x + t * r.direction.x;
+	z = r.origin.z + t * r.direction.z;
+
+	if ((pow(x, 2) + pow(z, 2)) <= 1)
+		return (TRUE);
+	return (FALSE);
+}
 
 
 t_intersect	local_intersect_sphere(t_ray r)
@@ -77,6 +100,7 @@ t_intersect local_intersect_cylinder(void *shape, t_ray r)
 
 	double max;
 	double min;
+	cy = (t_shape *) shape ; 
 		
 	max = cy->height / 2.0;
 	min = -1.0 * max;
@@ -89,7 +113,6 @@ t_intersect local_intersect_cylinder(void *shape, t_ray r)
 	{
 		if (chec_approx_zero(a))
 		{
-			printf("here");
 			inter.count = 0;
 			inter.t[0] = 0;
 			inter.t[1] = 0;

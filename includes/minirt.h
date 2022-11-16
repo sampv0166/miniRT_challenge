@@ -1,7 +1,7 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 800
+# define WIDTH 500
 # define HEIGHT 500
 # define KEY_ESC 53
 # define TRUE 1
@@ -46,7 +46,7 @@ t_intersection	hit(t_list *xs);
 t_comps	prepare_computations(t_intersection i, t_ray r);
 
 t_vector		local_normal_at_sphere(t_point obj_point, t_point point);
-t_vector		local_normal_at_cylinder(void *shape,  t_point pnt);
+t_vector		local_normal_at_cylinder(t_shape *shape,  t_point pnt);
 t_vector		local_normal_at_plane();
 
 t_color	shade_hit(t_world w, t_comps comps);
@@ -56,4 +56,6 @@ t_intersect local_intersect_plane(t_ray r);
 t_intersect	local_intersect_sphere(t_ray r);
 t_intersect local_intersect_cylinder(void *shape, t_ray r);
 
+t_list	*intersect_world(t_world w, t_ray r);
+void print_parsed_values(t_data *scene_data);
 #endif

@@ -39,10 +39,12 @@ t_intersect	intersect(t_shape s, t_ray r)
 }
 
 
+
 t_list	*intersect_world(t_world w, t_ray r)
 {
 	t_list *xs;
-	
+	t_list *shapes;
+
 	t_intersect inter;
 	t_intersection *intersection1;
 	t_intersection *intersection2;
@@ -52,20 +54,22 @@ t_list	*intersect_world(t_world w, t_ray r)
 	i = 0;
 	count = 0;
 	xs = NULL;
-		
-	while (i < w.shape_count)
+	t_shape *s;
+	shapes = w.shapes;
+
+	while (shapes)
 	{
-		inter = intersect(w.shapes[i], r);
+		s = (t_shape *) shapes->content;
+		inter = intersect(*s, r);
 		if (inter.count > 0)
 		{
 			intersection1 = malloc (sizeof (t_intersection));
 			intersection2 = malloc (sizeof (t_intersection));
 
-			intersection1->object = w.shapes[i];
-            //stopped here
+			intersection1->object = s;
 			intersection1->t = inter.t[0];
 
-			intersection2->object = w.s[i];
+			intersection2->object = s;
 			intersection2->t = inter.t[1];
 			if (i == 0)
 			{
@@ -84,6 +88,7 @@ t_list	*intersect_world(t_world w, t_ray r)
 			// 	printf("\n%f\n",intersection1->t);
 			count = count + inter.count;
 		}
+		shapes = shapes->next;
 		i++;
 	}
 
@@ -106,18 +111,32 @@ t_color	color_at(t_world w, t_ray r)
 {
 	t_list	*i;
 	t_intersection	h;
-	t_comps			comps;
-
+	t_comps			comps;	
+	// t_shape *ss;
+	// 
+	i = NULL;
 	i = intersect_world(w, r);
-
+	// if (i)
+	// {
+	
 	h = hit(i);
+	// }
+	// exit(0);
+
+
 	if (h.count == 0)
 	{
 		free(i);
 		return (color(0, 0, 0));
 	}
-	comps = prepare_computations(h, r);
+	// exit(0);
+	// printf("%s", h.object.shape_name);
 		
+	comps = prepare_computations(h, r);
+
+	// 
+		// exit(0);
 	free(i);
+
 	return (shade_hit(w, comps));
 }

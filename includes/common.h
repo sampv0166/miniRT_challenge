@@ -80,13 +80,13 @@ typedef	struct s_intersection
 {
 	int			count;
 	double		t;
-	t_shape	   object;
+	t_shape	   *object;
 }	t_intersection;
 
 typedef	struct s_comps
 {
 	double			t;
-	t_shape		object;
+	t_shape			*object;
 	t_point			point;
 	t_point			over_point;
 	t_vector		eyev;

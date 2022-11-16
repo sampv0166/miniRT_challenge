@@ -8,8 +8,8 @@ double	**create_matrix(double *elem, int col);
 double	**inverse(double **mat, int size);
 t_tuple	matrix_multi_tp(double **mat, t_tuple tp);
 t_vector	normalize(t_vector vec);
-
-
+double	**transpose(double **mat);
+double	magnitude(t_vector vec);
 t_vector	subtract_points(t_point p1, t_point p2);
 double	minor(double **mat, int size, int row, int col);
 

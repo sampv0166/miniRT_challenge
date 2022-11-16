@@ -29,8 +29,12 @@ SRCS = 	main.c \
 		srcs/color_at/color_at.c  \
 		srcs/color_at/hit.c  \
 		srcs/color_at/local_normal.c  \
+		srcs/color_at/local_intersect.c  \
 		srcs/color_at/prepare_computations.c  \
 		srcs/color_at/shade_hit.c  \
+		srcs/maths/matrix/transpose.c  \
+		srcs/maths/vector_operations.c  \
+	
 
 OBJS = ${SRCS:.c=.o}
 
@@ -58,6 +62,7 @@ NAME = miniRT
 
 all : $(NAME)
 
+
 $(NAME) : $(OBJS)
 	$(MAKE) -C $(MLX_PATH)
 	$(MAKE) -C $(LIBFT_PATH)
@@ -75,4 +80,7 @@ fclean: clean
 	$(MAKE) fclean -C $(LIBFT_PATH)
 
 re : fclean all
+
+
+
 

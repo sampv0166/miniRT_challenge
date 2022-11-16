@@ -38,6 +38,7 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
     // rotation
     // skew
     // spehere.transform = transformed matrix
+	
     ft_lstadd_back(&scene_data->wrld.shapes, ft_lstnew(plane));
 }
 

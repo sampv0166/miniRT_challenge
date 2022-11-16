@@ -86,6 +86,7 @@ void print_parsed_values(t_data *scene_data)
 		{
 			printf("here");
 			printf("\n SPHERE CENTER POINT\n");
+			printf("%s\n", shape->shape_name);
 			printf("%f\n", shape->position.x);
 			printf("%f\n",  shape->position.y);
 			printf("%f\n",  shape->position.z);
@@ -153,20 +154,22 @@ int	main(int argc, char **argv)
 	init_scene_data(&scene_data);
 	parse_scene(argv[1], &scene_data);
 	default_world(&scene_data);
-
-
+	setup_mlx(&scene_data);
 	c = camera(HEIGHT, WIDTH , (scene_data.camera.fov * (PI/180)));
-
 	from = scene_data.camera.pos;
 	to = point(0,3,-7);
     up = scene_data.camera.norm_vector;
-
     c.transform = view_transform(from, to, up);
     c.transform = inverse(c.transform, 4);
-
+	// print_parsed_values(&scene_data);
+	// exit(0);
+	// t_shape *ss;
+	// ss = (t_shape *) scene_data.wrld.shapes->content;
+	// 
+	// printf("%s" , ss->shape_name);
+	scene_data.wrld.shapes = scene_data.wrld.shapes->next;
 	render(c, scene_data.wrld, &scene_data);
-	print_parsed_values(&scene_data);
-	setup_mlx(&scene_data);
+	
 	mlx_put_image_to_window(scene_data.mlx.mlx_ptr, scene_data.mlx.win_ptr,
 		scene_data.img.img_ptr, 0, 0);
 	mlx_key_hook(scene_data.mlx.win_ptr, &key, &scene_data);
