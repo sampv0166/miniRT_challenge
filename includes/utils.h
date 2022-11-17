@@ -12,6 +12,7 @@
 
 void free_scene_data(t_data *scene_data);
 char	*free_memmory(char **ptr);
+void free_2d_array(double **arr, int size);
 
 // getnextline utils
 

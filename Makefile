@@ -8,7 +8,33 @@ SRCS = 	main.c \
 		srcs/utils/free.c \
 		srcs/utils/get2d_array_size.c \
 		srcs/utils/parse_color.c \
-		srcs/utils/parse_double.c 
+		srcs/utils/parse_double.c  \
+		srcs/parser/parse_camera.c  \
+		srcs/parser/parse_light.c  \
+		srcs/parser/parse_plane.c \
+		srcs/parser/parse_sphere.c \
+		srcs/parser/parse_cylinder.c  \
+		srcs/maths/matrix/matrix_functions.c  \
+		srcs/create_default_world.c \
+		srcs/camera/camera.c \
+		srcs/maths/matrix/inverse.c  \
+		srcs/maths/normal.c  \
+		srcs/render/ray.c  \
+		srcs/render/render.c  \
+		srcs/tuple/point_operations.c \
+		srcs/tuple/tuple_operations.c \
+		srcs/color_operations.c \
+		srcs/maths/product.c  \
+		srcs/maths/transformations/transformations.c  \
+		srcs/color_at/color_at.c  \
+		srcs/color_at/hit.c  \
+		srcs/color_at/local_normal.c  \
+		srcs/color_at/local_intersect.c  \
+		srcs/color_at/prepare_computations.c  \
+		srcs/color_at/shade_hit.c  \
+		srcs/maths/matrix/transpose.c  \
+		srcs/maths/vector_operations.c  \
+	
 
 OBJS = ${SRCS:.c=.o}
 
@@ -36,6 +62,7 @@ NAME = miniRT
 
 all : $(NAME)
 
+
 $(NAME) : $(OBJS)
 	$(MAKE) -C $(MLX_PATH)
 	$(MAKE) -C $(LIBFT_PATH)
@@ -53,4 +80,7 @@ fclean: clean
 	$(MAKE) fclean -C $(LIBFT_PATH)
 
 re : fclean all
+
+
+
 

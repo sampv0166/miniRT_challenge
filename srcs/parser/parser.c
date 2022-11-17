@@ -1,6 +1,4 @@
 #include "../../includes/minirt.h"
-#include "../../includes/parse.h"
-#include "../../includes/utils.h"
 
 void check_for_a_c_l( char **info_split, t_data *scene_data)
 {
@@ -9,39 +7,36 @@ void check_for_a_c_l( char **info_split, t_data *scene_data)
     {
         parse_ambient_lighting(info_split, scene_data);
     }
-    // else if (info_split[0][0] == 'C')
-    // {
-    //     parse_camera(info_split,scene_data);
-    // }
-    // else if (info_split[0][0] == 'L')
-    // {
-    //     parse_light(info_split,scene_data);
-    // }
+    else if (info_split[0][0] == 'C')
+    {
+        parse_camera(info_split,scene_data);
+    }
+    else if (info_split[0][0] == 'L')
+    {
+        parse_light(info_split,scene_data);
+    }
 }
 
 void check_for_sp_pl_cy( char **info_split, t_data *scene_data)
 {
-
-    (void) info_split;
-        (void) scene_data;
-    // if(info_split[0][0] == 's' && info_split[0][1] == 'p')
-    // {
-    //     scene_data->total_shape_count++;
-    //     scene_data->total_sphere_count++;
-    //     parse_sphere(info_split,scene_data);
-    // }
-    // else if (info_split[0][0] == 'p' && info_split[0][1] == 'l')
-    // {
-    //     scene_data->total_shape_count++;
-    //     scene_data->total_plane_count++;
-    //     parse_plane(info_split,scene_data);
-    // }
-    // else if (info_split[0][0] == 'c' && info_split[0][1] == 'y')
-    // {
-    //     scene_data->total_shape_count++;
-    //     scene_data->total_cylinder_count++;
-    //     parse_cylinder(info_split,scene_data);  
-    // }
+    if(info_split[0][0] == 's' && info_split[0][1] == 'p')
+    {
+        scene_data->total_shape_count++;
+        scene_data->total_sphere_count++;
+        parse_sphere(info_split,scene_data);
+    }
+    else if (info_split[0][0] == 'p' && info_split[0][1] == 'l')
+    {
+        scene_data->total_shape_count++;
+        scene_data->total_plane_count++;
+        parse_plane(info_split,scene_data);
+    }
+    else if (info_split[0][0] == 'c' && info_split[0][1] == 'y')
+    {
+        scene_data->total_shape_count++;
+        scene_data->total_cylinder_count++;
+        parse_cylinder(info_split,scene_data);  
+    }
 }
 
 static void parse_current_line(char *line, t_data *scene_data)

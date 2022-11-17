@@ -1,8 +1,5 @@
 #include "../../includes/minirt.h"
 
-#include "../../includes/parse.h"
-
-
 int skip_dot_verify_digits(char *str)
 {
     int i;
@@ -66,7 +63,7 @@ void parse_ambient_lighting(char **info, t_data *scene_data)
         scene_data->amb_set = 1;
     }
     else
-    {
+    {   
         free_2d_char_array(color_split);
         print_error_msg_and_exit("Wrong Input", scene_data);
     }
