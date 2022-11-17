@@ -70,8 +70,8 @@ void print_parsed_values(t_data *scene_data)
     printf("%f\n",  scene_data->light_src.pos.z);
 	printf("\nLight COLOR\n");
     printf("%f\n", scene_data->light_src.color.r);
-     printf("%f\n", scene_data->light_src.color.r);
-    printf("%f\n", scene_data->light_src.color.r);
+     printf("%f\n", scene_data->light_src.color.g);
+    printf("%f\n", scene_data->light_src.color.b);
 	printf("\nLIGHT RATIO\n");
     printf("%f\n", scene_data->light_src.ratio);
 	printf("---------------------------------");
@@ -142,10 +142,8 @@ void print_parsed_values(t_data *scene_data)
 int	main(int argc, char **argv)	
 {
 	t_data	scene_data;
-	t_camera2 c;
-	t_point		from;
-	t_point		to;
-    t_vector	up;
+	// t_camera2 c;
+
 
 	(void) argc;
 	(void) argv;
@@ -153,23 +151,15 @@ int	main(int argc, char **argv)
         print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);    
 	init_scene_data(&scene_data);
 	parse_scene(argv[1], &scene_data);
-	default_world(&scene_data);
 	setup_mlx(&scene_data);
-	c = camera(HEIGHT, WIDTH , (scene_data.camera.fov * (PI/180)));
-	from = scene_data.camera.pos;
-	to = point(0,3,-7);
-    up = scene_data.camera.norm_vector;
-    c.transform = view_transform(from, to, up);
-    c.transform = inverse(c.transform, 4);
-	// print_parsed_values(&scene_data);
-	// exit(0);
-	// t_shape *ss;
-	// ss = (t_shape *) scene_data.wrld.shapes->content;
-	// 
-	// printf("%s" , ss->shape_name);
 	scene_data.wrld.shapes = scene_data.wrld.shapes->next;
-	render(c, scene_data.wrld, &scene_data);
+
+	// create default world
+	default_world(&scene_data);
+	// create camera transformation matrix
 	
+	// render(c, scene_data.wrld, &scene_data);
+		
 	mlx_put_image_to_window(scene_data.mlx.mlx_ptr, scene_data.mlx.win_ptr,
 		scene_data.img.img_ptr, 0, 0);
 	mlx_key_hook(scene_data.mlx.win_ptr, &key, &scene_data);

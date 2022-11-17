@@ -45,7 +45,7 @@ void parse_sphere(char **info, t_data *scene_data)
 		sphere->material.specular = 0.2;
         sphere->shape_name = "sp";
         sphere->material.ambient = scene_data->amb_ratio;
-		sphere->transform = identity_matrix();
+		// sphere->transform = identity_matrix();
         // transalation
         // scaling
         // rotation

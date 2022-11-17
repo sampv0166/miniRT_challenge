@@ -27,7 +27,6 @@ void print_error_msg_and_exit(char *error_msg, t_data *scene_data);
 void default_world(t_data *scene_data);
 t_color	color(double red, double green, double blue);
 
-
 t_camera2	camera(double hsize, double vsize, double field_of_view);
 double	**view_transform(t_point from, t_point to, t_vector up);
 
