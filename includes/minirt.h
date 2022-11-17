@@ -57,4 +57,7 @@ t_intersect local_intersect_cylinder(void *shape, t_ray r);
 
 t_list	*intersect_world(t_world w, t_ray r);
 void print_parsed_values(t_data *scene_data);
+
+
+t_ray	transform(t_ray r, double **m);
 #endif
