@@ -35,7 +35,6 @@ void	setup_mlx(t_data *scene_data)
 				WIDTH, HEIGHT, "minirt");
 }
 
-
 void init_scene_data (t_data *scene_data)
 {
 	t_shape *shape;
@@ -139,44 +138,6 @@ void print_parsed_values(t_data *scene_data)
     }
 }
 
-t_intersect intersect_sphere(t_shape *s, t_ray r)
-{
-	t_intersect intersection;
-	t_vector	sphere_to_ray;	
-	double a;
-	double b;
-	double c;
-	double disc;
-	t_tuple		tp1;
-	t_tuple		tp2;
-	t_point		origin;
-	t_ray		r2;
-
-	
-	r2 = transform(r, inverse(identity_matrix(), 4));
-	origin = point(0, 0, 0);
-	sphere_to_ray = subtract_points(r2.origin, origin);
-	tp1 = vector_tp(r2.direction);
-	a = dot(tp1, tp1);
-	tp2 = vector_tp(sphere_to_ray);
-	b = 2 * dot(tp1, tp2);
-
-	c = dot(tp2, tp2) - 1;
-	disc = pow(b, 2) - 4 * a * c;
-
-
-	if (disc < 0)
-	{
-		intersection.count = 0;
-		intersection.t[0] = 0;
-		intersection.t[1] = 0;
-		return(intersection);
-	}
-	intersection.count = 2;
-	intersection.t[0] = (-b - sqrt(disc)) / (2 * a);
-	intersection.t[1] = (-b + sqrt(disc)) / (2 * a);
-	return (intersection);
-}
 
 void write_pixel1(unsigned char *dst, double w, double h, t_color color,t_data *scene_data)
 {
@@ -188,47 +149,12 @@ void write_pixel1(unsigned char *dst, double w, double h, t_color color,t_data *
     rr = color.r * 255;
     gg = color.g * 255;
     bb = color.b * 255;
-
     color_code = rr << 16 | gg << 8 | bb;
-
     dst =  scene_data->img.data + (int)(h * scene_data->img.size_line +
-    w * (scene_data->img.bits_per_pixel / 8));  
-
-    	//     printf("\nr == %f\n", col.r);
-    // printf("\ng == %f\n", col.g);
-    //printf("\nb == %d\n", color_code);
-    
+    w * (scene_data->img.bits_per_pixel / 8));   
     *(unsigned int*)dst  = color_code;
 }
 
-// ​ 	​function​ normal_at(sphere, p)
-// ​ 	  ​return​ normalize(p - point(0, 0, 0))
-// ​ 	​end​ ​function
-
-// 	​function​ normal_at(sphere, world_point)
-// ​ 	  object_point ← inverse(sphere.transform) * world_point
-// ​ 	  object_normal ← object_point - point(0, 0, 0)
-// ​ 	  world_normal ← transpose(inverse(sphere.transform)) * object_normal
-// ​ 	  world_normal.w ← 0
-// ​ 	  ​return​ normalize(world_normal)
-// ​ 	​end​ ​function
-
-// function​ reflect(in, normal)
-// ​ 	  ​return​ in - normal * 2 * dot(in, normal)
-// ​ 	​end​ ​function
-
-
-
-
-// function​ position(ray, t)
-// ​ 	  ​return​ ray.origin + ray.direction * t
-// ​ 	​end​ ​function
-
-
-// t_point	position(t_ray r, float num)
-// {
-// 	return (r.origin + r.direction * t);
-// }
 
 int	main(int argc, char **argv)	
 {
@@ -254,6 +180,7 @@ int	main(int argc, char **argv)
 	to = point(0, 0, -1);
 	up = vector(0, 1, 0);
 	c.transform = view_transform(from, to, up);
+	
 	render(c, scene_data.wrld ,  &scene_data);
 	mlx_put_image_to_window(scene_data.mlx.mlx_ptr, scene_data.mlx.win_ptr,
 		scene_data.img.img_ptr, 0, 0);

@@ -1,8 +1,8 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 200
-# define HEIGHT 200
+# define WIDTH 500
+# define HEIGHT 500
 # define KEY_ESC 53
 # define TRUE 1
 # define FALSE 0
@@ -39,10 +39,10 @@ t_tuple	point_tp(t_point p);
 // utils
 
 t_ray	ray(t_point p, t_vector v);
-t_intersection	hit(t_list *xs);
+t_intersection* hit(t_list *xs);
 
 
-t_comps	prepare_computations(t_intersection i, t_ray r);
+t_comps	prepare_computations(t_intersection *i, t_ray r);
 
 t_vector		local_normal_at_sphere(t_point obj_point, t_point point);
 t_vector		local_normal_at_cylinder(t_shape *shape,  t_point pnt);

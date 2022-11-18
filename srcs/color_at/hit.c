@@ -30,15 +30,15 @@
 
 void	sort_intersections(t_list *xs)
 {
-	int				i;
-	int				j;
+	// int				i;
+	// int				j;
 	t_intersection	*inter1;
 	t_intersection	*inter2;
 	t_list *temp;
 	t_intersection	*temp_intersection;
 	temp = xs;
 
-	i = 0;
+	// i = 0;
 	while (xs)
 	{
 		// typecast content to inter;
@@ -97,25 +97,27 @@ void	sort_intersections(t_list *xs)
 // 	return (inter2);
 // }
 
-t_intersection	hit(t_list *xs)
+t_intersection* hit(t_list *xs)
 {
-	int				i;
-	t_intersection	inter;
+	// int				i;
 	t_intersection	*inter2;
+	t_intersection	*inter;
 
-	// i = 0;
+	inter = malloc(sizeof(t_intersection));
 	if (xs)
 	{
-		inter2 = (t_intersection*) xs->content;
+		inter2 = (t_intersection *) xs->content;
 		sort_intersections(xs);
 		while (xs)
 		{
 			if (inter2->t > 0.0)
-				return(*inter2); // try to make this return pointer instead of returning value directly
+			{
+				return(inter2) ; // try to make this return pointer instead of returning value directly
+			}
 			xs = xs->next;
 		}
 	}
-	inter.count = 0;
-	inter.t = 0;
-	return (inter);
+	inter->count = 0;
+	inter->t = 0;
+	return(inter);
 }
