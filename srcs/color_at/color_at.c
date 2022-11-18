@@ -103,34 +103,34 @@ t_list	*intersect_world(t_world w, t_ray r)
 
 t_color	color_at(t_world w, t_ray r)
 {
-	t_list	*i;
+
+	t_intersection	*i;
 	t_intersection	h;
-	t_comps			comps;	
-	// t_shape *ss;
-	// 
-	i = NULL;
+	t_comps			comps;
+
 	i = intersect_world(w, r);
-	// if (i)
-	// {
-	
 	h = hit(i);
-	// }
-	// exit(0);
-
-
 	if (h.count == 0)
-	{
-		free(i);
 		return (color(0, 0, 0));
-	}
-	// exit(0);
-	// printf("%s", h.object.shape_name);
-		
 	comps = prepare_computations(h, r);
-
-	// 
-		// exit(0);
-	free(i);
-
 	return (shade_hit(w, comps));
+
+
+
+
+
+	// t_list	*i;
+	// t_intersection	h;
+	// t_comps			comps;	
+	// i = NULL;
+	// i = intersect_world(w, r);
+	// h = hit(i);
+	// if (h.count == 0)
+	// {
+	// 	free(i);
+	// 	return (color(0, 0, 0));
+	// }
+	// comps = prepare_computations(h, r);
+	// free(i);
+	// return (shade_hit(w, comps));
 }

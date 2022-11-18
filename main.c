@@ -233,10 +233,10 @@ void write_pixel1(unsigned char *dst, double w, double h, t_color color,t_data *
 int	main(int argc, char **argv)	
 {
 	t_data	scene_data;
-	// t_camera2 c;
-	// t_point		from;
-	// t_point		to;
-    // t_vector	up;
+	t_camera2 c;
+	t_point		from;
+	t_point		to;
+    t_vector	up;
 
 	(void) argc;
 	(void) argv;
@@ -247,131 +247,14 @@ int	main(int argc, char **argv)
 	setup_mlx(&scene_data);
 
 	scene_data.wrld.shapes = scene_data.wrld.shapes->next;
+	default_world(&scene_data);
+	c = camera(HEIGHT, WIDTH , 1.0471975512);
 
-	t_point ray_origin;
-	
-	ray_origin.x =  scene_data.camera.pos.x ;
-	ray_origin.y =  scene_data.camera.pos.y ;
-	ray_origin.z =  scene_data.camera.pos.z ;
-	
-	double wall_z ;
-	double wall_size;
-	int canvas_pixels ;
-	double pixel_size;
-	double half;
-	double x;
-	double y;
-
-	canvas_pixels = 200;
-	wall_z = 5;
-	wall_size = 7 ; 
-
-
-	pixel_size = wall_size / canvas_pixels;
-	half = wall_size / 2;
-
-	x = 0; 
-	y = 0;
-
-	double world_y;
-	double world_x;
-
-	world_x = 0;
-	world_y= 0;
-
-	t_point position1;
-	t_ray r;
-
-	t_intersect intersection;
-
-
-	t_color colors;
-    unsigned char	*dst;
-	dst = NULL;
-	// color(1, 0, 0)
-	colors.r = 1;
-	colors.g = 0.2;
-	colors.b = 1;
-
-	scene_data.wrld.l = point_light(scene_data.light_src.pos, 
-                        (color(scene_data.light_src.ratio,
-                        scene_data.light_src.ratio,scene_data.light_src.ratio)));
-	// t_point dest_point;
-	t_point p;
-	t_vector eye;
-	t_shape *sp;
-	
-	
-	t_vector normal;
-	t_bool	shadowed;
-
-	shadowed = FALSE;
-
-
-	t_ray testRay;
-	testRay = ray(point(0 , 0 ,0) , vector(0 , 0, 1));
-
-	t_list *intersectionList;
-	intersectionList = NULL;
-
-	intersectionList = intersect_world(scene_data.wrld, testRay);
-	t_intersection *inters;
-	while (intersectionList)
-	{
-		inters = (t_intersection*)  intersectionList->content;
-		printf("count = %d\n", inters->count);
-		printf("t = %f\n", inters->t);
-		intersectionList = intersectionList->next;
-	}
-	
-	exit(0);
-
-	while(y < canvas_pixels - 1)
-	{
-		world_y = half - pixel_size * y;
-		x = 0;
-		while (x < canvas_pixels - 1)
-		{
-			world_x = -half + pixel_size * x;
-			position1.x = world_x;
-			position1.y = world_y;
-			position1.z = wall_z;
-			r.origin.x = 0;
-			r.origin.y = 0;
-			r.origin.z = -5;
-			r = ray(ray_origin , normalize(subtract_points(position1 , ray_origin)));
-			intersection =  intersect_sphere(sp, r);	
-			if (intersection.count > 0)
-			{
-				p = position(r, intersection.t[0]);
-
-				sp = (t_shape *) scene_data.wrld.shapes->content;
-				eye = negate_vector(r.direction);
-				normal = normal_at(sp , p);
-				colors =  lighting(sp->material, scene_data.wrld.l , p, eye, normal, FALSE);
-  				write_pixel1(dst,x, y,colors, &scene_data);
-			}
-			x++;
-		}
-		y++;
-	}
-
-	// exit(0);
-	// // print_parsed_values(&scene_data);
-	// // create default world
-	// default_world(&scene_data);
-	// c = camera(HEIGHT, WIDTH , (scene_data.camera.fov * (PI/180)));
-
-	// from = scene_data.camera.pos;
-	// to =point(scene_data.camera.norm_vector.x ,scene_data.camera.norm_vector.y , scene_data.camera.norm_vector.z );
-    // up = vector(0,1,0);
-
-    // c.transform = view_transform(from, to, up);
-    // c.transform = inverse(c.transform, 4);
-
-	// render(c, scene_data.wrld, &scene_data);
-	// // create camera transformation matrix
-
+	from = point(0, 0, -5);
+	to = point(0, 0, -1);
+	up = vector(0, 1, 0);
+	c.transform = view_transform(from, to, up);
+	render(c, scene_data.wrld ,  &scene_data);
 	mlx_put_image_to_window(scene_data.mlx.mlx_ptr, scene_data.mlx.win_ptr,
 		scene_data.img.img_ptr, 0, 0);
 	// mlx_key_hook(scene_data.mlx.win_ptr, &key, &scene_data);
