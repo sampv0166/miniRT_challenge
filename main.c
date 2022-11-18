@@ -32,7 +32,7 @@ void	setup_mlx(t_data *scene_data)
 		&(scene_data->img.bits_per_pixel), &(scene_data->img.size_line),
 		&(scene_data->img.endian));
 	scene_data->mlx.win_ptr = mlx_new_window(scene_data->mlx.mlx_ptr,
-			400, 400, "minirt");
+				WIDTH, HEIGHT, "minirt");
 }
 
 
@@ -139,10 +139,10 @@ void print_parsed_values(t_data *scene_data)
     }
 }
 
-t_intersect intersect_sphere(t_ray r)
+t_intersect intersect_sphere(t_shape *s, t_ray r)
 {
 	t_intersect intersection;
-	t_vector	sphere_to_ray;
+	t_vector	sphere_to_ray;	
 	double a;
 	double b;
 	double c;
@@ -152,6 +152,7 @@ t_intersect intersect_sphere(t_ray r)
 	t_point		origin;
 	t_ray		r2;
 
+	
 	r2 = transform(r, inverse(identity_matrix(), 4));
 	origin = point(0, 0, 0);
 	sphere_to_ray = subtract_points(r2.origin, origin);
@@ -262,7 +263,7 @@ int	main(int argc, char **argv)
 	double y;
 
 	canvas_pixels = 200;
-	wall_z = 10;
+	wall_z = 5;
 	wall_size = 7 ; 
 
 
@@ -305,6 +306,26 @@ int	main(int argc, char **argv)
 	t_bool	shadowed;
 
 	shadowed = FALSE;
+
+
+	t_ray testRay;
+	testRay = ray(point(0 , 0 ,0) , vector(0 , 0, 1));
+
+	t_list *intersectionList;
+	intersectionList = NULL;
+
+	intersectionList = intersect_world(scene_data.wrld, testRay);
+	t_intersection *inters;
+	while (intersectionList)
+	{
+		inters = (t_intersection*)  intersectionList->content;
+		printf("count = %d\n", inters->count);
+		printf("t = %f\n", inters->t);
+		intersectionList = intersectionList->next;
+	}
+	
+	exit(0);
+
 	while(y < canvas_pixels - 1)
 	{
 		world_y = half - pixel_size * y;
@@ -319,7 +340,7 @@ int	main(int argc, char **argv)
 			r.origin.y = 0;
 			r.origin.z = -5;
 			r = ray(ray_origin , normalize(subtract_points(position1 , ray_origin)));
-			intersection =  intersect_sphere(r);	
+			intersection =  intersect_sphere(sp, r);	
 			if (intersection.count > 0)
 			{
 				p = position(r, intersection.t[0]);

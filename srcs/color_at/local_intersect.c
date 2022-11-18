@@ -167,7 +167,6 @@ t_intersect local_intersect_cylinder(void *shape, t_ray r)
 		}
 		//return (inter);
 	}
-	
 	if (chec_approx_zero(r.direction.y))
 	{
 		inter.count = 0;
@@ -175,22 +174,18 @@ t_intersect local_intersect_cylinder(void *shape, t_ray r)
 		inter.t[1] = 0;
 		return (inter);
 	}
-
 	double rt;
-
 	rt = (min - r.origin.y) / r.direction.y;
 	if (check_cap(r, rt))
 	{
 		inter.count++;
 		inter.t[0] = rt; 
 	}
-
 	rt = (max - r.origin.y) / r.direction.y;
 	if (check_cap(r, rt))
 	{
 		inter.count++;
 		inter.t	[1] = rt; 
 	}
-
 	return (inter);
 }

@@ -50,12 +50,31 @@ void parse_sphere(char **info, t_data *scene_data)
 
         sphere->shape_name = "sp";
         sphere->material.ambient = scene_data->amb_ratio;
+
+		// 		double	**translate;
+		// double	**scale;
+		// double	**transform;
+		// translate = translation(tuple( sphere->position.x,
+		// sphere->position.y, sphere->position.z, 1));
+		// scale = scaling( tuple (sphere->radius, sphere->radius, sphere->radius, 1));
+
+		// transform = matrix_multi(scale, translate);
+		// sphere->transform = transform;
+    // 	double	**translate;
+	// 	double	**scale;
+	// 	double	**transform;
+
+	// 	translate = translation(tuple (sphere->position.x,
+	// 	sphere->position.y, sphere->position.z , 1));
+	// 	scale = scaling( tuple(sphere->radius, sphere->radius, sphere->radius , 1));
+	// transform = matrix_multi(scale, translate);
+	// sphere->transform = transform;
 		// sphere->transform = identity_matrix();
         // transalation
         // scaling
         // rotation
         // skew
-        // spehere.transform = transformed matrix
+
         ft_lstadd_back(&scene_data->wrld.shapes, ft_lstnew(sphere));
     }
     else

@@ -40,7 +40,7 @@ OBJS = ${SRCS:.c=.o}
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS =  -g3
 
 OS = $(shell uname)
 

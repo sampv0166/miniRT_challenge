@@ -1,8 +1,8 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 500
-# define HEIGHT 500
+# define WIDTH 200
+# define HEIGHT 200
 # define KEY_ESC 53
 # define TRUE 1
 # define FALSE 0
@@ -65,4 +65,5 @@ t_point	position(t_ray r, float num);
 t_vector	normal_at(t_shape *s, t_point p);
 t_color	lighting(t_material m, t_light l, t_point pos,
 t_vector eyev, t_vector normalv, t_bool in_shadow);
+t_intersect intersect_sphere(t_shape *s, t_ray r);
 #endif

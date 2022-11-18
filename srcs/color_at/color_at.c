@@ -37,8 +37,6 @@ t_intersect	intersect(t_shape s, t_ray r)
 	return (local_intersect_sphere(s.ray_in_obj_space));		
 }
 
-
-
 t_list	*intersect_world(t_world w, t_ray r)
 {
 	t_list *xs;
@@ -59,7 +57,7 @@ t_list	*intersect_world(t_world w, t_ray r)
 	while (shapes)
 	{
 		s = (t_shape *) shapes->content;
-		inter = intersect(*s, r);
+		inter = intersect_sphere(s, r);
 		if (inter.count > 0)
 		{
 			intersection1 = malloc (sizeof (t_intersection));
@@ -99,7 +97,6 @@ t_list	*intersect_world(t_world w, t_ray r)
 		intersection1->count = count;
 		lst = lst->next;
 	}
-	
 	// exit(0);
 	return (xs);
 }
