@@ -21,10 +21,6 @@ t_ray	transform(t_ray r, double **m)
 	return (ret);
 }
 
-
-
-
-
 t_intersect	intersect(t_shape s, t_ray r)
 {
 	double **invrs;
@@ -90,9 +86,7 @@ t_list	*intersect_world(t_world w, t_ray r)
 			// printf("\n%f\n",intersection1->t);
 			// 	printf("\n%f\n",intersection1->t);
 			count = count + inter.count;
-		}
-		shapes = shapes->next;
-		i++;
+		}		shapes = shapes->next;		i++;
 	}
 
 	t_list *lst;

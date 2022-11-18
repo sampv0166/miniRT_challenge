@@ -43,6 +43,11 @@ void parse_sphere(char **info, t_data *scene_data)
         sphere->material.shininess = 200.0;;
 	    sphere->material.diffuse = 0.7;
 		sphere->material.specular = 0.2;
+
+		sphere->material.color.r = sphere->color.r/ 255;
+		sphere->material.color.g = sphere->color.g/ 255;
+		sphere->material.color.b = sphere->color.b/ 255;
+
         sphere->shape_name = "sp";
         sphere->material.ambient = scene_data->amb_ratio;
 		// sphere->transform = identity_matrix();

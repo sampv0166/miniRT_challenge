@@ -200,6 +200,35 @@ void write_pixel1(unsigned char *dst, double w, double h, t_color color,t_data *
     *(unsigned int*)dst  = color_code;
 }
 
+// ​ 	​function​ normal_at(sphere, p)
+// ​ 	  ​return​ normalize(p - point(0, 0, 0))
+// ​ 	​end​ ​function
+
+// 	​function​ normal_at(sphere, world_point)
+// ​ 	  object_point ← inverse(sphere.transform) * world_point
+// ​ 	  object_normal ← object_point - point(0, 0, 0)
+// ​ 	  world_normal ← transpose(inverse(sphere.transform)) * object_normal
+// ​ 	  world_normal.w ← 0
+// ​ 	  ​return​ normalize(world_normal)
+// ​ 	​end​ ​function
+
+// function​ reflect(in, normal)
+// ​ 	  ​return​ in - normal * 2 * dot(in, normal)
+// ​ 	​end​ ​function
+
+
+
+
+// function​ position(ray, t)
+// ​ 	  ​return​ ray.origin + ray.direction * t
+// ​ 	​end​ ​function
+
+
+// t_point	position(t_ray r, float num)
+// {
+// 	return (r.origin + r.direction * t);
+// }
+
 int	main(int argc, char **argv)	
 {
 	t_data	scene_data;
@@ -232,7 +261,7 @@ int	main(int argc, char **argv)
 	double x;
 	double y;
 
-	canvas_pixels = 100;
+	canvas_pixels = 200;
 	wall_z = 10;
 	wall_size = 7 ; 
 
@@ -249,19 +278,33 @@ int	main(int argc, char **argv)
 	world_x = 0;
 	world_y= 0;
 
-	t_point position;
+	t_point position1;
 	t_ray r;
 
 	t_intersect intersection;
 
 
-	t_color color;
+	t_color colors;
     unsigned char	*dst;
 	dst = NULL;
 	// color(1, 0, 0)
-	color.r = 1;
-	color.g = 0;
-	color.b = 0;
+	colors.r = 1;
+	colors.g = 0.2;
+	colors.b = 1;
+
+	scene_data.wrld.l = point_light(scene_data.light_src.pos, 
+                        (color(scene_data.light_src.ratio,
+                        scene_data.light_src.ratio,scene_data.light_src.ratio)));
+	// t_point dest_point;
+	t_point p;
+	t_vector eye;
+	t_shape *sp;
+	
+	
+	t_vector normal;
+	t_bool	shadowed;
+
+	shadowed = FALSE;
 	while(y < canvas_pixels - 1)
 	{
 		world_y = half - pixel_size * y;
@@ -269,30 +312,30 @@ int	main(int argc, char **argv)
 		while (x < canvas_pixels - 1)
 		{
 			world_x = -half + pixel_size * x;
-			position.x = world_x;
-			position.y = world_y;
-			position.z = wall_z;
+			position1.x = world_x;
+			position1.y = world_y;
+			position1.z = wall_z;
 			r.origin.x = 0;
 			r.origin.y = 0;
 			r.origin.z = -5;
-			r = ray(ray_origin , normalize(subtract_points(position , ray_origin)));
+			r = ray(ray_origin , normalize(subtract_points(position1 , ray_origin)));
 			intersection =  intersect_sphere(r);	
-				
 			if (intersection.count > 0)
 			{
-  				write_pixel1(dst,x, y, color, &scene_data);
+				p = position(r, intersection.t[0]);
+
+				sp = (t_shape *) scene_data.wrld.shapes->content;
+				eye = negate_vector(r.direction);
+				normal = normal_at(sp , p);
+				colors =  lighting(sp->material, scene_data.wrld.l , p, eye, normal, FALSE);
+  				write_pixel1(dst,x, y,colors, &scene_data);
 			}
 			x++;
 		}
 		y++;
 	}
 
-
-
 	// exit(0);
-
-
-
 	// // print_parsed_values(&scene_data);
 	// // create default world
 	// default_world(&scene_data);

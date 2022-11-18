@@ -60,4 +60,9 @@ void print_parsed_values(t_data *scene_data);
 
 
 t_ray	transform(t_ray r, double **m);
+t_light	point_light(t_point pos, t_color intensity);
+t_point	position(t_ray r, float num);
+t_vector	normal_at(t_shape *s, t_point p);
+t_color	lighting(t_material m, t_light l, t_point pos,
+t_vector eyev, t_vector normalv, t_bool in_shadow);
 #endif

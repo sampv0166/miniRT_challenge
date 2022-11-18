@@ -65,13 +65,17 @@ t_color	lighting(t_material m, t_light l, t_point pos,
 	t_tuple		tp1;
 	t_tuple		tp2;
 	t_tuple		tp3;
-
 	effective_color.x = m.color.r * l.color.r;
 	effective_color.y = m.color.g * l.color.g;
 	effective_color.z = m.color.b * l.color.b;
+
+
 	p = point(l.pos.x, l.pos.y, l.pos.z);
 	lightv = normalize(subtract_points(p, pos));
+
 	tp1 = multiply(point_tp(effective_color), m.ambient);
+
+	
 	ambient = color(tp1.x, tp1.y, tp1.z);
 	light_dot_normal = dot(vector_tp(lightv), vector_tp(normalv));
 	if (light_dot_normal < 0 || in_shadow)
@@ -99,6 +103,8 @@ t_color	lighting(t_material m, t_light l, t_point pos,
 	ret.r = ambient.r + diffuse.r + specular.r;
 	ret.g = ambient.g + diffuse.g + specular.g;
 	ret.b = ambient.b + diffuse.b + specular.b;
+
+
 	return (ret);
 }
 

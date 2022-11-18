@@ -21,6 +21,10 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
     cy->material.specular = 0.2;
     cy->shape_name = "sp";
     cy->material.ambient = scene_data->amb_ratio;
+	cy->material.color.r = cy->color.r/ 255;
+	cy->material.color.g = cy->color.g/ 255;
+	cy->material.color.b = cy->color.b/ 255;
+
     // transalation
     // scaling
     // rotation
