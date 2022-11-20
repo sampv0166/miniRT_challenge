@@ -1,19 +1,22 @@
 SRCS = 	main.c \
 		srcs/gnl/get_next_line_utils.c \
 		srcs/gnl/get_next_line.c \
-		srcs/parser/parse_ambient_lighting.c \
-		srcs/parser/parser_utils.c \
-		srcs/parser/parser.c \
+		srcs/parser/ps_ambient.c \
+		srcs/parser/ps_utils.c \
+		srcs/parser/parse.c \
+		srcs/parser/ps_camera.c  \
+		srcs/parser/ps_light.c  \
+		srcs/parser/ps_plane.c \
+		srcs/parser/ps_sphere.c \
+		srcs/parser/ps_cylinder.c  \
+		srcs/light/lighting.c \
+		srcs/light/lg_vars.c \
+		srcs/light/lg_calculate.c \
 		srcs/utils/error.c \
 		srcs/utils/free.c \
 		srcs/utils/get2d_array_size.c \
 		srcs/utils/parse_color.c \
 		srcs/utils/parse_double.c  \
-		srcs/parser/parse_camera.c  \
-		srcs/parser/parse_light.c  \
-		srcs/parser/parse_plane.c \
-		srcs/parser/parse_sphere.c \
-		srcs/parser/parse_cylinder.c  \
 		srcs/maths/matrix/matrix_functions.c  \
 		srcs/create_default_world.c \
 		srcs/camera/camera.c \
