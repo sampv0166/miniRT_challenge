@@ -2,6 +2,7 @@
 	"files.associations": {
 		"chrono": "c",
 		"unordered_map": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"minirt.h": "c"
 	}
 }

@@ -33,6 +33,9 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
     plane->material.specular = 0.2;
     plane->shape_name = "sp";
     plane->material.ambient = scene_data->amb_ratio;
+	plane->material.color.r = plane->color.r/ 255;
+	plane->material.color.g = plane->color.g/ 255;
+	plane->material.color.b = plane->color.b/ 255;
     // transalation
     // scaling
     // rotation

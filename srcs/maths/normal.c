@@ -1,8 +1,6 @@
 
 #include "../../includes/minirt.h"
 
-
-
 double	magnitude(t_vector vec)
 {
 	double		ret;

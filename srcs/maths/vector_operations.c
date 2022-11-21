@@ -1,4 +1,3 @@
-
 #include "../../includes/minirt.h"
 
 t_vector	vector(double x, double y, double z)
@@ -10,7 +9,6 @@ t_vector	vector(double x, double y, double z)
 	vec.z = z;
 	return (vec);
 }
-
 
 t_vector	negate_vector(t_vector vec)
 {

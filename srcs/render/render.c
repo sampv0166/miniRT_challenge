@@ -35,22 +35,17 @@ t_ray	ray_for_pixel(t_camera2 camera, double x, double y)
 	t_point		pixel;
 	t_point		origin;
 	t_vector	direction;
-	double		**invrs;
 
 	xoffset = (x + 0.5) * camera.pixel_size;
 	yoffset = (y + 0.5) * camera.pixel_size;
 	world_x = camera.half_width - xoffset;
 	world_y = camera.half_height - yoffset;
 	p = point(world_x, world_y, -1);
-	invrs = inverse(camera.transform, 4);
-	multi1 = matrix_multi_tp(invrs, point_tp(p));
-
+	multi1 = matrix_multi_tp(inverse(camera.transform, 4), point_tp(p));
 	pixel = point(multi1.x, multi1.y, multi1.z);
-	multi2 = matrix_multi_tp(invrs, tuple(0, 0, 0, 1));
+	multi2 = matrix_multi_tp(inverse(camera.transform, 4), tuple(0, 0, 0, 1));
 	origin = point(multi2.x, multi2.y, multi2.z);
-	// print_point("origin",&origin);
 	direction = normalize(subtract_points(pixel, origin));
-	free_2d_array(invrs, 4);
 	return (ray(origin, direction));
 }
 
@@ -58,12 +53,6 @@ t_ray	ray_for_pixel(t_camera2 camera, double x, double y)
 
 void render(t_camera2 cam, t_world wrld, t_data *scene_data)
 {
-// t_shape *ss;
-// ss = (t_shape *) scene_data->wrld.shapes->content;
-// 	// 
-// printf("%s" , ss->shape_name);
-// 	exit(0);
-
     double w;
     double h;
     t_ray r;
@@ -86,4 +75,5 @@ void render(t_camera2 cam, t_world wrld, t_data *scene_data)
 		// printf("%f\n", w);
         h++;
     }
+	// exit(0);
 }

@@ -1,8 +1,5 @@
 
-#include "../../includes/minirt.h"
-#include "../../includes/parse.h"
-#include "../../includes/utils.h"
-#include "../../includes/maths.h"
+#include "../../../includes/minirt.h"
 
 t_tuple	vector_tp(t_vector vec)
 {
