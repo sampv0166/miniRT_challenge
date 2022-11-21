@@ -1,4 +1,4 @@
-#include "../../includes/minirt.h"
+#include "../../../includes/minirt.h"
 
 t_color	lighting(t_comps c, t_light l, t_bool in_shadow)
 {

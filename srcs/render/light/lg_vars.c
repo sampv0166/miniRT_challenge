@@ -1,4 +1,4 @@
-#include "../../includes/minirt.h"
+#include "../../../includes/minirt.h"
 
 t_vector	reflect(t_vector vec, t_vector normal)
 {

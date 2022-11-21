@@ -1,4 +1,4 @@
-#include "../../includes/minirt.h"
+#include "../../../includes/minirt.h"
 
 t_ray	transform(t_ray r, double **m)
 {

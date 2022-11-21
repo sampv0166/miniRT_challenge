@@ -1,4 +1,4 @@
-#include "../../includes/minirt.h"
+#include "../../../includes/minirt.h"
 
 t_point	effective_color(t_material m, t_light l)
 {

@@ -1,4 +1,4 @@
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 // t_light	point_light(t_point pos, t_color intensity)
 // {

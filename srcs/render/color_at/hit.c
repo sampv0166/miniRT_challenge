@@ -1,4 +1,4 @@
-#include "../../includes/minirt.h"
+#include "../../../includes/minirt.h"
 
 // void	sort_intersections(t_list *xs)
 // {
