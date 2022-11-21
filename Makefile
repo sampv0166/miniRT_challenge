@@ -1,41 +1,44 @@
 SRCS = 	main.c \
-		srcs/gnl/get_next_line_utils.c \
-		srcs/gnl/get_next_line.c \
-		srcs/parser/parse_ambient_lighting.c \
-		srcs/parser/parser_utils.c \
-		srcs/parser/parser.c \
+		srcs/parser/ps_ambient.c \
+		srcs/parser/ps_utils.c \
+		srcs/parser/parse.c \
+		srcs/parser/ps_camera.c  \
+		srcs/parser/ps_light.c  \
+		srcs/parser/ps_plane.c \
+		srcs/parser/ps_sphere.c \
+		srcs/parser/ps_cylinder.c  \
+		srcs/maths/matrix/matrix_functions.c  \
+		srcs/maths/matrix/transpose.c  \
+		srcs/maths/vector_operations.c  \
+		srcs/maths/matrix/inverse.c  \
+		srcs/maths/normal.c \
+		srcs/maths/tuple/point_operations.c \
+		srcs/maths/tuple/tuple_operations.c \
+		srcs/maths/product.c \
+		srcs/maths/transformations/transformations.c  \
+		srcs/render/light/lighting.c \
+		srcs/render/light/lg_vars.c \
+		srcs/render/light/lg_calculate.c \
+		srcs/render/create_default_world.c \
+		srcs/render/camera/camera.c \
+		srcs/render/ray.c \
+		srcs/render/render.c \
+		srcs/render/color_operations.c \
+		srcs/render/color_at/color_at.c  \
+		srcs/render/color_at/hit.c \
+		srcs/render/color_at/local_normal.c \
+		srcs/render/color_at/local_intersect.c \
+		srcs/render/color_at/prepare_computations.c \
+		srcs/render/color_at/shade_hit.c \
+		srcs/utils/gnl/get_next_line_utils.c \
+		srcs/utils/gnl/get_next_line.c \
 		srcs/utils/error.c \
 		srcs/utils/free.c \
 		srcs/utils/get2d_array_size.c \
 		srcs/utils/parse_color.c \
 		srcs/utils/parse_double.c  \
-		srcs/parser/parse_camera.c  \
-		srcs/parser/parse_light.c  \
-		srcs/parser/parse_plane.c \
-		srcs/parser/parse_sphere.c \
-		srcs/parser/parse_cylinder.c  \
-		srcs/maths/matrix/matrix_functions.c  \
-		srcs/create_default_world.c \
-		srcs/camera/camera.c \
-		srcs/maths/matrix/inverse.c  \
-		srcs/maths/normal.c  \
-		srcs/render/ray.c  \
-		srcs/render/render.c  \
-		srcs/tuple/point_operations.c \
-		srcs/tuple/tuple_operations.c \
-		srcs/color_operations.c \
-		srcs/maths/product.c  \
-		srcs/maths/transformations/transformations.c  \
-		srcs/color_at/color_at.c  \
-		srcs/color_at/hit.c  \
-		srcs/color_at/local_normal.c  \
-		srcs/color_at/local_intersect.c  \
-		srcs/color_at/prepare_computations.c  \
-		srcs/color_at/shade_hit.c  \
-		srcs/maths/matrix/transpose.c  \
-		srcs/maths/vector_operations.c  \
+		extra/print.c  \
 	
-
 OBJS = ${SRCS:.c=.o}
 
 CC = gcc

@@ -1,5 +1,5 @@
 
-#include "../../includes/minirt.h"
+#include "../../../includes/minirt.h"
 
 double	**view_transform(t_point from, t_point to, t_vector up)
 {
@@ -26,6 +26,32 @@ double	**view_transform(t_point from, t_point to, t_vector up)
 	return (matrix_multi(m, translation(tp)));
 }
 
+// t_camera2	camera(double hsize, double vsize, double field_of_view)
+// {
+// 	t_camera2	c;
+// 	double		half_view;
+// 	double		aspect;
+
+// 	c.hsize = hsize;
+// 	c.vsize = vsize;
+// 	c.field_of_view = field_of_view;
+// 	//c.transform = identity_matrix();
+// 	half_view = tan(c.field_of_view / 2);
+// 	aspect = c.hsize / c.vsize;
+// 	if (aspect >= 1)
+// 	{
+// 		c.half_width = half_view;
+// 		c.half_height = half_view / aspect;
+// 	}
+// 	else
+// 	{
+// 		c.half_width = half_view * aspect;
+// 		c.half_height = half_view;
+// 	}
+// 	c.pixel_size = (c.half_width * 2) / c.hsize;
+// 	return (c);
+// }
+
 t_camera2	camera(double hsize, double vsize, double field_of_view)
 {
 	t_camera2	c;
@@ -35,7 +61,7 @@ t_camera2	camera(double hsize, double vsize, double field_of_view)
 	c.hsize = hsize;
 	c.vsize = vsize;
 	c.field_of_view = field_of_view;
-	//c.transform = identity_matrix();
+	c.transform = identity_matrix();
 	half_view = tan(c.field_of_view / 2);
 	aspect = c.hsize / c.vsize;
 	if (aspect >= 1)

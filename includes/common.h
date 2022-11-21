@@ -47,6 +47,8 @@ typedef struct s_intersect
 	double			t[2];
 }	t_intersect;
 
+
+
 typedef struct s_material
 {
 	t_color	color;
@@ -77,13 +79,13 @@ typedef struct s_shape
 
 }			   t_shape;
 
+
 typedef	struct s_intersection
 {
 	int			count;
 	double		t;
 	t_shape	   *object;
 }	t_intersection;
-
 typedef	struct s_comps
 {
 	double			t;
