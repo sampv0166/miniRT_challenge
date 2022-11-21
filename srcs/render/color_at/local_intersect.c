@@ -13,6 +13,7 @@ t_intersect local_intersect_plane(t_ray r)
 	}
 	inter.count = 2;
 	inter.t[0] = -r.origin.y / r.direction.y ;
+	printf("\n%f\n", inter.t[0] );
 	inter.t[1] = 0; 
 	return (inter);
 }
