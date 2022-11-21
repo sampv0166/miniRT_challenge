@@ -1,4 +1,4 @@
-#include "../../includes/minirt.h"
+#include "../includes/minirt.h"
 
 void	print_parsed_values(t_data *scene_data)
 {

@@ -21,21 +21,23 @@ t_ray	transform(t_ray r, double **m)
 	return (ret);
 }
 
-// t_intersect	intersect(t_shape s, t_ray r)
-// {
-// 	double **invrs;
+t_intersect	intersect(t_shape s, t_ray r)
+{
+	double **invrs;
 
-// 	invrs = inverse(s.transform, 4);
-// 	s.ray_in_obj_space = transform(r, invrs);
-// 	free_2d_array(invrs, 4);
-// 	if (!ft_strncmp(s.shape_name, "sp", 2))
-// 		return (local_intersect_sphere(s.ray_in_obj_space));
-// 	else if(!ft_strncmp(s.shape_name, "pl", 2))
-// 		return(local_intersect_plane(s.ray_in_obj_space));
-// 	else if (!ft_strncmp(s.shape_name, "cy",2))
-// 		return(local_intersect_cylinder( &s , s.ray_in_obj_space));
-// 	return (local_intersect_sphere(s.ray_in_obj_space));		
-// }
+	invrs = inverse(s.transform, 4);
+	s.ray_in_obj_space = transform(r, invrs);
+	free_2d_array(invrs, 4);
+	if (!ft_strncmp(s.shape_name, "sp", 2))
+		return (local_intersect_sphere(s.ray_in_obj_space));
+	else if(!ft_strncmp(s.shape_name, "pl", 2))
+		return(local_intersect_plane(s.ray_in_obj_space));
+	else if (!ft_strncmp(s.shape_name, "cy",2))
+		return(local_intersect_cylinder( &s , s.ray_in_obj_space));
+	return (local_intersect_sphere(s.ray_in_obj_space));		
+}
+
+
 void print_vector(t_vector *tp)
 {
     printf("vec x = %f\n", tp->x);
