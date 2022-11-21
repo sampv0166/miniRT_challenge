@@ -75,12 +75,26 @@ int	main(int argc, char **argv)
 		print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);
 	init_scene_data(&scene_data);
 	parse_scene(argv[1], &scene_data);
+
+
+	// t_ray r;
+	// t_intersect inter;
+
+	// r = ray(point(0,-1,0), vector(0,1,0));
+
+	// inter =   local_intersect_plane(r);
+
+	// printf("%d\n", inter.count);
+	// printf("%f\n",inter.t[0] );
+	// printf("%f\n",inter.t[1] );
+	// exit(0);
+
 	setup_mlx(&scene_data);
 	scene_data.wrld.shapes = scene_data.wrld.shapes->next;
 	default_world(&scene_data);
 	c = camera(HEIGHT, WIDTH, 1.0471975512);
-	from = point(0, 0, -5);
-	to = point(0, 0, -1);
+	from = scene_data.camera.pos;
+	to = point(0, 2, 4);
 	up = vector(0, 1, 0);
 	c.transform = view_transform(from, to, up);
 	render(c, scene_data.wrld, &scene_data);
