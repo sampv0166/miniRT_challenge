@@ -15,49 +15,6 @@ t_point	position(t_ray r, float num)
 	// return (r.origin + r.direction * num);
 }
 
-// t_vector	normal_at(t_shape *s, t_point p)
-// {
-// 	t_vector	obj_normal;
-// 	t_vector	world_normal;
-// 	t_point		point;
-// 	t_point		obj_point;
-// 	t_tuple		tp1;
-// 	t_tuple		tp2;
-// 	t_tuple		tp3;
-// 	t_tuple		tp4;
-// 	double		**invrs;
-// 	double		**trnspose;
-
-// 	tp1 = point_tp(p);
-// 		// 
-
-// 	invrs = inverse(s->transform, 4);
-// 	tp2 = matrix_multi_tp(invrs, tp1);
-// 	obj_point.x = tp2.x;
-// 	obj_point.y = tp2.y;
-// 	obj_point.z = tp2.z;
-// 	point.x = 0;
-// 	point.y = 0;
-// 	point.z = 0;
-// 	if (!ft_strncmp(s->shape_name, "sp", 2))
-// 		obj_normal = local_normal_at_sphere(obj_point, point);
-// 	if (!ft_strncmp(s->shape_name, "pl", 2))
-// 		obj_normal = local_normal_at_plane(obj_point, point);
-// 	if (!ft_strncmp(s->shape_name, "cy", 2))
-// 		obj_normal = local_normal_at_cylinder(s,obj_point);	
-// 	tp3 = vector_tp(obj_normal);
-
-// 	trnspose = transpose(invrs);
-// 	tp4 = matrix_multi_tp(trnspose , tp3);
-// 	world_normal.x = tp4.x;
-// 	world_normal.y = tp4.y;
-// 	world_normal.z = tp4.z;
-
-// 	free_2d_array(invrs,4 );
-// 	free_2d_array(trnspose,4 );
-// 	return (normalize(world_normal));
-// }
-
 t_vector	normal_at(t_shape *s, t_point p)
 {
 	t_vector	obj_normal;
@@ -68,23 +25,70 @@ t_vector	normal_at(t_shape *s, t_point p)
 	t_tuple		tp2;
 	t_tuple		tp3;
 	t_tuple		tp4;
+	double		**invrs;
+	double		**trnspose;
 
 	tp1 = point_tp(p);
-	tp2 = matrix_multi_tp(inverse(s->transform, 4), tp1);
+		// 
+
+	invrs = inverse(s->transform, 4);
+	tp2 = matrix_multi_tp(invrs, tp1);
 	obj_point.x = tp2.x;
 	obj_point.y = tp2.y;
 	obj_point.z = tp2.z;
 	point.x = 0;
 	point.y = 0;
 	point.z = 0;
-	obj_normal = subtract_points(obj_point, point);
+	write(1, s->shape_name, 2);
+	if (!ft_strncmp(s->shape_name, "sp", 2))
+		obj_normal = local_normal_at_sphere(obj_point, point);
+	if (!ft_strncmp(s->shape_name, "pl", 2))
+	{
+		write(1,"2", 1);
+		obj_normal = local_normal_at_plane();
+	}
+	if (!ft_strncmp(s->shape_name, "cy", 2))
+		obj_normal = local_normal_at_cylinder(s,obj_point);	
 	tp3 = vector_tp(obj_normal);
-	tp4 = matrix_multi_tp(transpose(inverse(s->transform, 4)), tp3);
+
+	trnspose = transpose(invrs);
+	tp4 = matrix_multi_tp(trnspose , tp3);
 	world_normal.x = tp4.x;
 	world_normal.y = tp4.y;
 	world_normal.z = tp4.z;
+
+	free_2d_array(invrs,4 );
+	free_2d_array(trnspose,4 );
 	return (normalize(world_normal));
 }
+
+// t_vector	normal_at(t_shape *s, t_point p)
+// {
+// 	t_vector	obj_normal;
+// 	t_vector	world_normal;
+// 	t_point		point;
+// 	t_point		obj_point;
+// 	t_tuple		tp1;
+// 	t_tuple		tp2;
+// 	t_tuple		tp3;
+// 	t_tuple		tp4;
+
+// 	tp1 = point_tp(p);
+// 	tp2 = matrix_multi_tp(inverse(s->transform, 4), tp1);
+// 	obj_point.x = tp2.x;
+// 	obj_point.y = tp2.y;
+// 	obj_point.z = tp2.z;
+// 	point.x = 0;
+// 	point.y = 0;
+// 	point.z = 0;
+// 	obj_normal = subtract_points(obj_point, point);
+// 	tp3 = vector_tp(obj_normal);
+// 	tp4 = matrix_multi_tp(transpose(inverse(s->transform, 4)), tp3);
+// 	world_normal.x = tp4.x;
+// 	world_normal.y = tp4.y;
+// 	world_normal.z = tp4.z;
+// 	return (normalize(world_normal));
+// }
 
 
 t_comps	prepare_computations(t_intersection *i, t_ray r)

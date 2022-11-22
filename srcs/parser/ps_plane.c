@@ -31,11 +31,15 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
     plane->material.shininess = 200.0;;
     plane->material.diffuse = 0.7;
     plane->material.specular = 0.2;
-    plane->shape_name = "sp";
+    plane->shape_name = "pl";
     plane->material.ambient = scene_data->amb_ratio;
 	plane->material.color.r = plane->color.r/ 255;
 	plane->material.color.g = plane->color.g/ 255;
 	plane->material.color.b = plane->color.b/ 255;
+    plane->transform = translation(tuple(plane->position.x, plane->position.y , plane->position.y , 1));
+
+    // rotation_x()
+    // rotation_x
     // transalation
     // scaling
     // rotation
