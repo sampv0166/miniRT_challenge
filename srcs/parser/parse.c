@@ -83,8 +83,10 @@ void parse_scene(char *file_name, t_data *scene_data)
     {
         line = get_next_line(fd);
         if (line && *line != '#' && *line != '\n')
+        {
             parse_current_line(line, scene_data);
-        else
+        }
+        else if (!line)
         {
             free_memmory(&line);
             break ;
