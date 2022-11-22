@@ -21,20 +21,20 @@ t_ray	transform(t_ray r, double **m)
 	return (ret);
 }
 
-t_intersect	intersect(t_shape s, t_ray r)
+t_intersect	intersect(t_shape *s, t_ray r)
 {
 	double **invrs;
 
-	invrs = inverse(s.transform, 4);
-	s.ray_in_obj_space = transform(r, invrs);
+	invrs = inverse(s->transform, 4);
+	s->ray_in_obj_space = transform(r, invrs);
 	free_2d_array(invrs, 4);
-	if (!ft_strncmp(s.shape_name, "sp", 2))
-		return (local_intersect_sphere(s.ray_in_obj_space));
-	else if(!ft_strncmp(s.shape_name, "pl", 2))
-		return(local_intersect_plane(s.ray_in_obj_space));
-	else if (!ft_strncmp(s.shape_name, "cy",2))
-		return(local_intersect_cylinder( &s , s.ray_in_obj_space));
-	return (local_intersect_sphere(s.ray_in_obj_space));		
+	if (!ft_strncmp(s->shape_name, "sp", 2))
+		return (local_intersect_sphere(s->ray_in_obj_space));
+	else if(!ft_strncmp(s->shape_name, "pl", 2))
+		return(local_intersect_plane(s->ray_in_obj_space));
+	else if (!ft_strncmp(s->shape_name, "cy",2))
+		return(local_intersect_cylinder( &s , s->ray_in_obj_space));
+	return (local_intersect_sphere(s->ray_in_obj_space));		
 }
 
 
@@ -53,38 +53,38 @@ void print_tuple_sam( t_tuple *tp)
     printf("tp w = %f\n", tp->w);
 }
 
-t_intersect	intersect(t_shape *s, t_ray r)
-{
-	t_intersect	inter;
-	t_vector	sphere_to_ray;
-	t_tuple		tp1;
-	t_tuple		tp2;
-	t_ray		r2;
-	double		a;
-	double		b;
-	double		c;
-	double		d;
+// t_intersect	intersect(t_shape *s, t_ray r)
+// {
+// 	t_intersect	inter;
+// 	t_vector	sphere_to_ray;
+// 	t_tuple		tp1;
+// 	t_tuple		tp2;
+// 	t_ray		r2;
+// 	double		a;
+// 	double		b;
+// 	double		c;
+// 	double		d;
 
-	r2 = transform(r, inverse(s->transform, 4));
-	sphere_to_ray = subtract_points(r2.origin, point(0, 0, 0));
-	tp1 = vector_tp(r2.direction);
-	a = dot(tp1, tp1);
-	tp2 = vector_tp(sphere_to_ray);
-	b = 2 * dot(tp1, tp2);
-	c = dot(tp2, tp2) - 1;
-	d = (b * b) - (4 * a * c);
-	if (d < 0)
-	{
-		inter.count = 0;
-		inter.t[0] = 0;
-		inter.t[1] = 0;
-		return (inter);
-	}
-	inter.count = 2;
-	inter.t[0] = (-b - sqrt(d)) / (2 * a);
-	inter.t[1] = (-b + sqrt(d)) / (2 * a);
-	return (inter);
-}
+// 	r2 = transform(r, inverse(s->transform, 4));
+// 	sphere_to_ray = subtract_points(r2.origin, point(0, 0, 0));
+// 	tp1 = vector_tp(r2.direction);
+// 	a = dot(tp1, tp1);
+// 	tp2 = vector_tp(sphere_to_ray);
+// 	b = 2 * dot(tp1, tp2);
+// 	c = dot(tp2, tp2) - 1;
+// 	d = (b * b) - (4 * a * c);
+// 	if (d < 0)
+// 	{
+// 		inter.count = 0;
+// 		inter.t[0] = 0;
+// 		inter.t[1] = 0;
+// 		return (inter);
+// 	}
+// 	inter.count = 2;
+// 	inter.t[0] = (-b - sqrt(d)) / (2 * a);
+// 	inter.t[1] = (-b + sqrt(d)) / (2 * a);
+// 	return (inter);
+// }
 
 // t_list	*intersect_world(t_world w, t_ray r)
 // {
@@ -212,13 +212,7 @@ t_color	color_at(t_world w, t_ray r)
 	if (inter->count == 0)
 		return (color(0, 0, 0));
 	comps = prepare_computations(inter, r);
-	
 	return (shade_hit(w, comps));
-
-
-
-
-
 	// t_list	*i;
 	// t_intersection	h;
 	// t_comps			comps;	
