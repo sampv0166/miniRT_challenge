@@ -39,12 +39,12 @@ t_vector	normal_at(t_shape *s, t_point p)
 	point.x = 0;
 	point.y = 0;
 	point.z = 0;
-	write(1, s->shape_name, 2);
+	
 	if (!ft_strncmp(s->shape_name, "sp", 2))
 		obj_normal = local_normal_at_sphere(obj_point, point);
 	if (!ft_strncmp(s->shape_name, "pl", 2))
 	{
-		write(1,"2", 1);
+
 		obj_normal = local_normal_at_plane();
 	}
 	if (!ft_strncmp(s->shape_name, "cy", 2))

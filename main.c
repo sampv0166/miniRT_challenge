@@ -63,6 +63,7 @@ void	write_pixel1(unsigned char *dst, double w, double h,
 
 int	main(int argc, char **argv)
 {
+
 	t_data		scene_data;
 	t_camera2	c;
 	t_point		from;
@@ -92,9 +93,9 @@ int	main(int argc, char **argv)
 	setup_mlx(&scene_data);
 	scene_data.wrld.shapes = scene_data.wrld.shapes->next;
 	default_world(&scene_data);
-	c = camera(HEIGHT, WIDTH, 1.0471975512);
+	c = camera(HEIGHT, WIDTH, PI/ 3);
 	from = scene_data.camera.pos;
-	to = point(0, 2, 4);
+	to = point(0, 0, 0);
 	up = vector(0, 1, 0);
 	c.transform = view_transform(from, to, up);
 	render(c, scene_data.wrld, &scene_data);

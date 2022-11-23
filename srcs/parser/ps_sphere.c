@@ -50,8 +50,14 @@ void parse_sphere(char **info, t_data *scene_data)
 
         sphere->shape_name = "sp";
         sphere->material.ambient = scene_data->amb_ratio;
-		sphere->transform = translation(tuple(sphere->position.x, sphere->position.y , sphere->position.y , 1));
-		
+		double **scale;
+        double **translated;
+		translated = translation(tuple(sphere->position.x, sphere->position.y , sphere->position.z , 1));
+        scale = scaling(tuple(sphere->radius / 2, sphere->radius / 2,sphere->radius / 2, 1));
+
+        sphere->transform =  matrix_multi(translated, scale);
+
+
 
 		// sphere->transform = identity_matrix();
         // transalation

@@ -75,5 +75,6 @@ void render(t_camera2 cam, t_world wrld, t_data *scene_data)
 		// printf("%f\n", w);
         h++;
     }
+    write(1, "1", 1);
 	// exit(0);
 }
