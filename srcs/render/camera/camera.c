@@ -81,7 +81,7 @@ t_camera2	camera(double hsize, double vsize, double field_of_view)
 		c.half_height = half_view;
 	}
 	c.pixel_size = (c.half_width * 2) / c.hsize;
-		printf("\npixel size  = %f\n", c.pixel_size);
+		// printf("\npixel size  = %f\n", c.pixel_size);
 	// exit(0);
 	return (c);
 }

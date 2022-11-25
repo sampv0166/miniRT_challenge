@@ -22,6 +22,7 @@ void parse_sphere(char **info, t_data *scene_data)
     char **point_split;
     char **color_split;
     t_shape *sphere;
+
     if (get_2darray_size(info) != 4)
         print_error_msg_and_exit("INVALID NUMBER OF VALUES FOR SPHERE", scene_data);
     
@@ -50,12 +51,29 @@ void parse_sphere(char **info, t_data *scene_data)
 
         sphere->shape_name = "sp";
         sphere->material.ambient = scene_data->amb_ratio;
-		double **scale;
-        double **translated;
-		translated = translation(tuple(sphere->position.x, sphere->position.y , sphere->position.z , 1));
-        scale = scaling(tuple(sphere->radius / 2, sphere->radius / 2,sphere->radius / 2, 1));
 
-        sphere->transform =  matrix_multi(translated, scale);
+
+
+    double **	scale;
+	double **	transform;
+	double **	translate;
+
+
+	translate = translation(tuple (sphere->position.x,sphere->position.y, sphere->position.z, 1));
+	scale = scaling(tuple (sphere->radius/ 2, sphere->radius/ 2, sphere->radius / 2, 1));
+	transform = matrix_multi(scale, translate);
+	sphere->transform = transform;
+	// free_matrix(translate);
+	// free_matrix(scale);
+    // print_matrix(sphere->transform, 4);
+    // exit(0);
+		// double **scale;
+        // double **translated;
+
+
+		// translated = translation(tuple(sphere->position.x, sphere->position.y , sphere->position.z , 1));
+        // scale = scaling(tuple(sphere->radius / 2, sphere->radius / 2,sphere->radius / 2, 1));
+        // sphere->transform =  matrix_multi(translated, scale);
 
 
 

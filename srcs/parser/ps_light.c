@@ -41,6 +41,11 @@ void parse_light(char **info, t_data *scene_data)
         scene_data->light_src.pos.y = parse_double(point_split[1]);
         scene_data->light_src.pos.z = parse_double(point_split[2]);
         parse_color(info[3], scene_data, &scene_data->light_src.color);
+
+        scene_data->light_src.color.r = scene_data->light_src.color.r/ 255;
+	    scene_data->light_src.color.g  = scene_data->light_src.color.g/ 255;
+	    scene_data->light_src.color.b = scene_data->light_src.color.b/ 255;
+        // normmalize the light color here
     }
     else
     {

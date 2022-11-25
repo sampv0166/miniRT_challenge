@@ -20,7 +20,7 @@ double  **normal_rotation_matrix(t_tuple normal)
 	double		vals[3];
 	t_vector	axis;
 	double	    **rotation;
-
+    
 	rotation = identity_matrix();
     angle = acos(dot(normal, tuple(0, 1, 0, 0)));
 	axis = cross(vector(normal.x, normal.y, normal.z), vector(0, 1, 0));
@@ -64,19 +64,28 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
 	plane->material.color.g = plane->color.g/ 255;
 	plane->material.color.b = plane->color.b/ 255;
 
-    // 	rotate = normal_rotation_matrix(plane->norm);
+    // double **rotate;
+    // double **transform;
+
+
+    // rotate = normal_rotation_matrix(plane->norm);
 	// transform = mult_matrix(translate, rotate);
 	// plane->transform = transform;
 
     double**	translate;
 	double**	rotate;
 	double**	transform;
+  
 	translate = translation(tuple (plane->position.x,
 		plane->position.y, plane->position.z, 1));
+    //                 print_matrix(translate, 4);
+    // exit(0);
     rotate = normal_rotation_matrix(tuple(plane->norm_vector.x , plane->norm_vector.y, plane->norm_vector.z, 0));
     transform = matrix_multi(translate , rotate);
     plane->transform = transform ;
 
+    print_matrix(plane->transform, 4);
+    // exit(0);
     // double **rotation;
     // double **scaling;
     // double **translated;

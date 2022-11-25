@@ -57,7 +57,7 @@ void parse_camera(char **info, t_data *scene_data)
         to_tp_vector = tuple(scene_data->camera.pos.x, scene_data->camera.pos.y, scene_data->camera.pos.z ,0);
         to_result = add(to_tp_point, to_tp_vector);
 
-        print_tuple_sam(&to_result);
+        // print_tuple_sam(&to_result);
         // exit(0);
         to = point(to_result.x, to_result.y, to_result.z);
         
@@ -82,15 +82,16 @@ void parse_camera(char **info, t_data *scene_data)
 		// rt->cam->transform = invert_matrix(transform);
 
         scene_data->camera2.transform = inverse(transform, 4);
-        print_matrix(scene_data->camera2.transform, 4);
+        // print_matrix(scene_data->camera2.transform, 4);
         
-		camera(WIDTH , HEIGHT, scene_data->camera.fov);
+		scene_data->camera2 =  camera(WIDTH , HEIGHT, scene_data->camera.fov);
         t_tuple origin_tp;
-
+          scene_data->camera2.transform = inverse(transform, 4);
          origin_tp =   matrix_multi_tp(scene_data->camera2.transform, tuple(0, 0, 0, 1));
 		 scene_data->camera2.origin = point(origin_tp.x, origin_tp.y, origin_tp.z);
-         print_point(scene_data->camera2.origin);
-         exit(0);
+        //  print_point(point(origin_tp));
+        //  printf("%f, %f, %f", origin_tp.x, origin_tp.y, origin_tp.z);
+        //  exit(0);
     }   
     else
     {
