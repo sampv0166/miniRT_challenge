@@ -1,5 +1,20 @@
 #include "../includes/minirt.h"
 
+
+void print_vector(t_vector vector)
+{
+		printf("%f\n",vector.x);
+	printf("%f\n", vector.y);
+	printf("%f\n", vector.z);
+}
+
+void print_point(t_point point)
+{
+		printf("%f\n",point.x);
+	printf("%f\n", point.y);
+	printf("%f\n", point.z);
+}
+
 void	print_parsed_values(t_data *scene_data)
 {
 	t_shape	*shape;
@@ -89,5 +104,28 @@ void	print_parsed_values(t_data *scene_data)
 		}
 		printf("---------------------------------");
 		scene_data->wrld.shapes = scene_data->wrld.shapes->next;
+	}
+}
+
+
+
+void	print_matrix(double **mat, int col)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	if (!mat)
+		return ;
+	while (i < col)
+	{
+		j = 0;
+		while (j < col)
+		{
+			printf("| %lf\t", mat[i][j]);
+			j++;
+		}
+		printf("|\n");
+		i++;
 	}
 }

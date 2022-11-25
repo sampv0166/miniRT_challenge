@@ -19,11 +19,13 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
     cy->material.shininess = 200.0;
     cy->material.diffuse = 0.7;
     cy->material.specular = 0.2;
-    cy->shape_name = "sp";
+    cy->shape_name = "cy";
     cy->material.ambient = scene_data->amb_ratio;
 	cy->material.color.r = cy->color.r/ 255;
 	cy->material.color.g = cy->color.g/ 255;
 	cy->material.color.b = cy->color.b/ 255;
+
+    cy->transform = translation(tuple (cy->position.x,cy->position.y,cy->position.z,1));
     // transalation
     // scaling
     // rotation

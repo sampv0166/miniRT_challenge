@@ -22,6 +22,12 @@
 # include "utils.h"
 # include "render.h"
 
+
+void print_vector(t_vector vector);
+
+void print_point(t_point point);
+void print_tuple_sam( t_tuple *tp);
+void	print_matrix(double **mat, int col);
 void			print_error_msg_and_exit(char *error_msg, t_data *scene_data);
 void			default_world(t_data *scene_data);
 t_color			color(double red, double green, double blue);

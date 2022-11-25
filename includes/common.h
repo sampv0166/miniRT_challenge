@@ -159,6 +159,8 @@ typedef struct s_data
 
 	t_camera camera;
 
+	t_camera2 camera2;
+	
 	t_light light_src;
 
 	int 	total_shape_count;

@@ -38,12 +38,12 @@ t_intersect	intersect(t_shape *s, t_ray r)
 }
 
 
-void print_vector(t_vector *tp)
-{
-    printf("vec x = %f\n", tp->x);
-    printf("vec y = %f\n", tp->y);
-    printf("vec z = %f\n", tp->z);
-}
+// void print_vector(t_vector *tp)
+// {
+//     printf("vec x = %f\n", tp->x);
+//     printf("vec y = %f\n", tp->y);
+//     printf("vec z = %f\n", tp->z);
+// }
 
 void print_tuple_sam( t_tuple *tp)
 {
