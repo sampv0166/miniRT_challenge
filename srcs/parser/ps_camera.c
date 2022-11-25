@@ -79,12 +79,19 @@ void parse_camera(char **info, t_data *scene_data)
 
         transform = view_transform(from , to , up);
         scene_data->camera2.transform = transform;
-        print_matrix(scene_data->camera2.transform, 4);
-        exit(0);
 		// rt->cam->transform = invert_matrix(transform);
-		// camera_pixel_size(rt->cam);
-		// rt->cam->origin = mult_matrix_tuple(rt->cam->transform, create_tuple(0, 0, 0, 1));
-    }
+
+        scene_data->camera2.transform = inverse(transform, 4);
+        print_matrix(scene_data->camera2.transform, 4);
+        
+		camera(WIDTH , HEIGHT, scene_data->camera.fov);
+        t_tuple origin_tp;
+
+         origin_tp =   matrix_multi_tp(scene_data->camera2.transform, tuple(0, 0, 0, 1));
+		 scene_data->camera2.origin = point(origin_tp.x, origin_tp.y, origin_tp.z);
+         print_point(scene_data->camera2.origin);
+         exit(0);
+    }   
     else
     {
         free_2d_char_array(point_split);
