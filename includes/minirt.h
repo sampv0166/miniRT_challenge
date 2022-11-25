@@ -1,8 +1,8 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 250
-# define HEIGHT 250
+# define WIDTH 500
+# define HEIGHT 500
 
 # define KEY_ESC 53
 # define TRUE 1
@@ -23,9 +23,10 @@
 # include "utils.h"
 # include "render.h"
 
+double  **normal_rotation_matrix(t_tuple normal);
 
 void print_vector(t_vector vector);
-
+int	double_equal(double a, double b);
 void print_point(t_point point);
 void print_tuple_sam( t_tuple *tp);
 void	print_matrix(double **mat, int col);
