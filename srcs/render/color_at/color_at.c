@@ -55,7 +55,7 @@ t_intersect	intersect(t_shape *s, t_ray r)
 	else if(!ft_strncmp(s->shape_name, "pl", 2))
 		return(local_intersect_plane(s->ray_in_obj_space));
 	else if (!ft_strncmp(s->shape_name, "cy",2))
-		return(local_intersect_cylinder( &s , s->ray_in_obj_space));
+		return(local_intersect_cylinder(s->height, s->ray_in_obj_space));
 	return (local_intersect_sphere(s->ray_in_obj_space));		
 }
 

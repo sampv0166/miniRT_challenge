@@ -142,20 +142,20 @@ t_intersect				intersect_caps(t_shape *cy, t_ray ray)
 
 
 
-t_intersect local_intersect_cylinder(void *shape, t_ray ray)
+t_intersect local_intersect_cylinder(double height, t_ray ray)
 {
 	double	a;
 	double		b;
 	double		c;
 	double		disc;
 	t_intersect inter1;
-	(void) shape;
+	(void) height;
 
 	a = pow(ray.direction.x, 2) + pow(ray.direction.z, 2);
 
 	if (chec_approx_zero(a))
 	{
-			inter1.count = 0;
+		inter1.count = 0;
 		inter1.t[0] = 0;
 		inter1.t[1] = 0;
 	}
@@ -175,7 +175,7 @@ t_intersect local_intersect_cylinder(void *shape, t_ray ray)
 
 	// t0 ← (-b - √(disc)) / (2 * a)
 // t1 ← (-b + √(disc)) / (2 * a)
-
+	inter1.count =2;
 	inter1.t[0] = (((-1 * b) - sqrt(disc)) / (2 * a));
 	inter1.t[1] = (((-1 * b) + sqrt(disc)) / (2 * a));
 	// # this is just a placeholder, to ensure the tests
