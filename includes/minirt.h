@@ -1,8 +1,9 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 200
-# define HEIGHT 200
+# define WIDTH 500
+# define HEIGHT 500
+
 # define KEY_ESC 53
 # define TRUE 1
 # define FALSE 0
@@ -22,9 +23,16 @@
 # include "utils.h"
 # include "render.h"
 
+double  **normal_rotation_matrix(t_tuple normal);
+
+void print_vector(t_vector vector);
+int	double_equal(double a, double b);
+void print_point(t_point point);
+void print_tuple_sam( t_tuple *tp);
+void	print_matrix(double **mat, int col);
 void			print_error_msg_and_exit(char *error_msg, t_data *scene_data);
 void			default_world(t_data *scene_data);
-t_color			color(double red, double green, double blue);
+t_color			color(double red, double green, double blue);   
 t_camera2		camera(double hsize, double vsize, double field_of_view);
 double			**view_transform(t_point from, t_point to, t_vector up);
 void			render(t_camera2 cam, t_world wrld, t_data *scene_data);

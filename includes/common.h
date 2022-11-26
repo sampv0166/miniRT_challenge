@@ -136,6 +136,7 @@ typedef struct s_camera2
 	double	half_width;
 	double	half_height;
 	double	pixel_size;
+	t_point origin;
 
 }	t_camera2;
 
@@ -159,6 +160,8 @@ typedef struct s_data
 
 	t_camera camera;
 
+	t_camera2 camera2;
+	
 	t_light light_src;
 
 	int 	total_shape_count;

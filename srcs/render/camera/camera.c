@@ -52,6 +52,12 @@ double	**view_transform(t_point from, t_point to, t_vector up)
 // 	return (c);
 // }
 
+double	degrees_to_radians(double degr)
+{
+	return ((degr * M_PI) / 180.0);
+}
+
+
 t_camera2	camera(double hsize, double vsize, double field_of_view)
 {
 	t_camera2	c;
@@ -62,7 +68,7 @@ t_camera2	camera(double hsize, double vsize, double field_of_view)
 	c.vsize = vsize;
 	c.field_of_view = field_of_view;
 	c.transform = identity_matrix();
-	half_view = tan(c.field_of_view / 2);
+	half_view = tan( degrees_to_radians (field_of_view) / 2);
 	aspect = c.hsize / c.vsize;
 	if (aspect >= 1)
 	{
@@ -75,5 +81,7 @@ t_camera2	camera(double hsize, double vsize, double field_of_view)
 		c.half_height = half_view;
 	}
 	c.pixel_size = (c.half_width * 2) / c.hsize;
+		// printf("\npixel size  = %f\n", c.pixel_size);
+	// exit(0);
 	return (c);
 }

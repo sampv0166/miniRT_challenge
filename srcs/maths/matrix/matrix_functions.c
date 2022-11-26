@@ -2,6 +2,15 @@
 
 t_tuple	matrix_multi_tp(double **mat, t_tuple tp)
 {
+
+	// printf("\rec matrix\n");
+	// print_matrix(mat, 4);
+	// printf("\rec matrix\n");
+
+	// printf("\rrec tup\n");
+	// print_tuple_sam(&tp);
+	// printf("\rec tup\n");
+
 	t_tuple	res;
 	double	tmp[4];
 	int		i;
@@ -20,6 +29,11 @@ t_tuple	matrix_multi_tp(double **mat, t_tuple tp)
 	res.y = tmp[1];
 	res.z = tmp[2];
 	res.w = tmp[3];
+
+	// printf("\nnew matrix\n");
+	// print_tuple_sam(&res);
+	// printf("\nnew matrix\n");
+
 	return (res);
 }
 

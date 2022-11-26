@@ -19,6 +19,8 @@ t_tuple	add(t_tuple a, t_tuple b)
 	tp.y = (a.y + b.y);
 	tp.z = (a.z + b.z);
 	tp.w = (a.w + b.w);
+
+	
 	return (tp);
 }
 

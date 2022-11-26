@@ -19,11 +19,34 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
     cy->material.shininess = 200.0;
     cy->material.diffuse = 0.7;
     cy->material.specular = 0.2;
-    cy->shape_name = "sp";
+    cy->shape_name = "cy";
     cy->material.ambient = scene_data->amb_ratio;
 	cy->material.color.r = cy->color.r/ 255;
 	cy->material.color.g = cy->color.g/ 255;
 	cy->material.color.b = cy->color.b/ 255;
+
+    // cy->transform = translation(tuple (cy->position.x,cy->position.y,cy->position.z,1));
+    
+    	double**	translate;
+	double**	rotate;
+	double**	scale;
+	double**	transform;
+	double		radius;
+
+	radius = cy->diameter * 0.5;
+	scale = scaling(tuple (radius, cy->height * 0.5, radius, 1));
+	translate = translation(tuple (cy->position.x,
+		cy->position.y, cy->position.z, 1));
+	transform = matrix_multi(translate, scale);
+	// free_matrix(translate);
+	rotate = normal_rotation_matrix(tuple(cy->norm_vector.x, cy->norm_vector.y, cy->norm_vector.z ,0 ));
+	translate = matrix_multi(rotate, transform);
+	cy->transform = translate;
+	// free_matrix(rotate);
+	// free_matrix(transform);
+	// free_matrix(scale);
+    
+    
     // transalation
     // scaling
     // rotation

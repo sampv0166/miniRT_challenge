@@ -48,12 +48,7 @@ void	sort_intersections(t_list *xs)
 		while (temp)
 		{
 			inter2 = (t_intersection*) temp->content;
-			// if (xs[i].t > xs[j].t)
-			// {
-			// 	a = xs[i];
-			// 	xs[i] = xs[j];
-			// 	xs[j] = a;
-			// }
+
 			if (inter1->t > inter2->t)
 			{
 				temp_intersection = inter1;
@@ -102,19 +97,31 @@ t_intersection* hit(t_list *xs)
 	// int				i;
 	t_intersection	*inter2;
 	t_intersection	*inter;
+	t_intersection	*min_inter;
+	double min;
+	min_inter = NULL;
+
+	min = __INT_MAX__;
 
 	inter = malloc(sizeof(t_intersection));
 	if (xs)
 	{
-		inter2 = (t_intersection *) xs->content;
 		sort_intersections(xs);
 		while (xs)
 		{
-			if (inter2->t > 0.0)
+			inter2 = (t_intersection *) xs->content;
+			if (min > inter2->t && inter2->t > 0)
 			{
-				return(inter2) ; // try to make this return pointer instead of returning value directly
+				min_inter = inter2;
+				min = inter2->t;
+				printf("\n smallest values is == %f\n", inter2->t);
+				// return(inter2) ; // try to make this return pointer instead of returning value directly
 			}
 			xs = xs->next;
+		}
+		if (min_inter && min_inter->t > 0)
+		{
+			return (min_inter);
 		}
 	}
 	inter->count = 0;

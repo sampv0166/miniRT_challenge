@@ -31,22 +31,34 @@ t_ray	ray_for_pixel(t_camera2 camera, double x, double y)
 	double		world_y;
 	t_point		p;
 	t_tuple		multi1;
-	t_tuple		multi2;
+	// t_tuple		multi2;
 	t_point		pixel;
-	t_point		origin;
+	// t_point		origin;
 	t_vector	direction;
 
 	xoffset = (x + 0.5) * camera.pixel_size;
 	yoffset = (y + 0.5) * camera.pixel_size;
+	// printf("\nxofset =  %f\n", camera.pixel_size);
+	// printf("\nyofset =  %f\n", yoffset);
+	// exit(0);
 	world_x = camera.half_width - xoffset;
 	world_y = camera.half_height - yoffset;
 	p = point(world_x, world_y, -1);
-	multi1 = matrix_multi_tp(inverse(camera.transform, 4), point_tp(p));
+    // tuple(p.x, p.y, p.z, 1);
+
+	multi1 = matrix_multi_tp(camera.transform, point_tp(p));
+
 	pixel = point(multi1.x, multi1.y, multi1.z);
-	multi2 = matrix_multi_tp(inverse(camera.transform, 4), tuple(0, 0, 0, 1));
-	origin = point(multi2.x, multi2.y, multi2.z);
-	direction = normalize(subtract_points(pixel, origin));
-	return (ray(origin, direction));
+
+    // printf("\npixel point\n");
+    // print_point(pixel);
+    //   printf("\npixel point\n");
+	// multi2 = matrix_multi_tp(camera.transform, tuple(0, 0, 0, 1));
+	// origin = point(multi2.x, multi2.y, multi2.z);
+	direction = normalize(subtract_points(pixel, camera.origin));
+
+
+	return (ray(camera.origin, direction));
 }
 
 
@@ -61,12 +73,16 @@ void render(t_camera2 cam, t_world wrld, t_data *scene_data)
 	dst = NULL;
     h = 0; 
     w = 0;
-    while (h < HEIGHT - 1)
+    while (h < HEIGHT)
     {
         w = 0;
-        while(w < WIDTH - 1)
+        while(w < WIDTH )
         {
             r = ray_for_pixel(cam, w, h);
+
+
+
+
             color = color_at(wrld, r);       
 			// exit(0);
             write_pixel(dst,w, h, color, scene_data);
@@ -75,5 +91,6 @@ void render(t_camera2 cam, t_world wrld, t_data *scene_data)
 		// printf("%f\n", w);
         h++;
     }
+    write(1, "1", 1);
 	// exit(0);
 }

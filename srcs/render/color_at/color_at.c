@@ -10,6 +10,15 @@ t_ray	transform(t_ray r, double **m)
 	t_point		p;
 	t_vector	vec;
 
+	// printf("inverse matrix\n");
+	// print_matrix(m, 4);
+	// printf("r\nay origin = \n");
+	// print_point(r.origin);
+
+	// printf("\nray diirection = \n");
+	// print_vector(r.direction);
+
+
 	tp1 = point_tp(r.origin);
 	multi1 = matrix_multi_tp(m, tp1);
 	tp2 = vector_tp(r.direction);
@@ -18,6 +27,13 @@ t_ray	transform(t_ray r, double **m)
 	vec = vector(multi2.x, multi2.y, multi2.z);
 	ret.origin = p;
 	ret.direction = vec;
+
+	// printf("ray origin\n");
+	// print_point(ret.origin);
+
+	// printf("ray diirection\n");
+	// print_vector(ret.direction);
+	// exit(0);
 	return (ret);
 }
 
@@ -27,9 +43,15 @@ t_intersect	intersect(t_shape *s, t_ray r)
 
 	invrs = inverse(s->transform, 4);
 	s->ray_in_obj_space = transform(r, invrs);
+
 	free_2d_array(invrs, 4);
+
 	if (!ft_strncmp(s->shape_name, "sp", 2))
+	{
+		// static int i;
+		// 	printf("\n%d\n", i++);
 		return (local_intersect_sphere(s->ray_in_obj_space));
+	}
 	else if(!ft_strncmp(s->shape_name, "pl", 2))
 		return(local_intersect_plane(s->ray_in_obj_space));
 	else if (!ft_strncmp(s->shape_name, "cy",2))
@@ -38,12 +60,12 @@ t_intersect	intersect(t_shape *s, t_ray r)
 }
 
 
-void print_vector(t_vector *tp)
-{
-    printf("vec x = %f\n", tp->x);
-    printf("vec y = %f\n", tp->y);
-    printf("vec z = %f\n", tp->z);
-}
+// void print_vector(t_vector *tp)
+// {
+//     printf("vec x = %f\n", tp->x);
+//     printf("vec y = %f\n", tp->y);
+//     printf("vec z = %f\n", tp->z);
+// }
 
 void print_tuple_sam( t_tuple *tp)
 {
@@ -153,6 +175,8 @@ void print_tuple_sam( t_tuple *tp)
 
 t_list	*intersect_world(t_world w, t_ray r) 
 {
+	static int i;
+	i++;
 	t_list *intersections_list;
 	t_list *shapes;
 	t_intersect inter;
@@ -171,10 +195,13 @@ t_list	*intersect_world(t_world w, t_ray r)
 		inter = intersect(temp_shape, r);
 		if (inter.count > 0)
 		{
-			
+			// static int i;
+			// printf("\n%d\n", i++);
 			intersection1 = malloc (sizeof (t_intersection));
 			intersection2 = malloc (sizeof (t_intersection));
 
+			printf("\nt1 = %f\n", inter.t[0]);
+			printf("\nt2 = %f\n", inter.t[1]);
 			intersection1->object = temp_shape;
 			intersection1->t = inter.t[0];
 			intersection1->count = 1;
@@ -201,6 +228,9 @@ t_list	*intersect_world(t_world w, t_ray r)
 
 t_color	color_at(t_world w, t_ray r)
 {
+	// printf("point\n");
+	// print_point((r.origin));
+	// exit(0);
 
 	t_list	*intersections_list;
 	t_comps			comps;
@@ -211,6 +241,7 @@ t_color	color_at(t_world w, t_ray r)
 
 	if (inter->count == 0)
 		return (color(0, 0, 0));
+
 	comps = prepare_computations(inter, r);
 	return (shade_hit(w, comps));
 	// t_list	*i;
