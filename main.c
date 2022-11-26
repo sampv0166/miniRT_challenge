@@ -90,9 +90,11 @@ int	main(int argc, char **argv)
 	// printf("%f\n",inter.t[1] );
 	// exit(0);
 
+	// exit(0);
 	setup_mlx(&scene_data);
 	scene_data.wrld.shapes = scene_data.wrld.shapes->next;
 	default_world(&scene_data);
+		
 	// c = camera(HEIGHT, WIDTH, PI/ 3);
 	// from = scene_data.camera.pos;
 	// to = point(0, 0, 0);

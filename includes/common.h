@@ -76,6 +76,8 @@ typedef struct s_shape
 	//specicifcally for cylinder
 	double diameter;
     double height;
+	double	minimum;
+	double	maximum;
 
 }			   t_shape;
 

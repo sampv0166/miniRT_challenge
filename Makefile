@@ -54,7 +54,7 @@ LIBFT_PATH = libs/libft
 LIBFT_PATH = libs/libft
 
 ifeq ($(OS), Linux)
-	MLX_FLAGS = -Llibs/mlx/linux -lmlx -Ilibs/mlx_linux -lXext -lX11 -lm -lz
+	MLX_FLAGS = -L libs/mlx/linux -lmlx -lm -lX11 -lXext
 	MLX_PATH = libs/mlx/linux
 else
 	MLX_FLAGS = -Llibs/mlx/mac -lmlx -Ilibs/mlx_mac -framework OpenGL -framework AppKit

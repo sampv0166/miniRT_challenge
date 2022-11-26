@@ -32,7 +32,7 @@ t_intersect local_intersect_plane(t_ray r)
 	return (inter);
 }
 
-int chec_approx_zero(double a)
+int check_approx_zero(double a)
 {
 	double temp = fabs(a - 0);
 
@@ -140,28 +140,32 @@ t_intersect				intersect_caps(t_shape *cy, t_ray ray)
 	return (intersec1);
 }
 
-
-
-t_intersect local_intersect_cylinder(double height, t_ray ray)
+t_intersect local_intersect_cylinder(t_shape *s, t_ray ray)
 {
 	double	a;
 	double		b;
 	double		c;
 	double		disc;
 	t_intersect inter1;
-	(void) height;
+	double	temp;
+	double	y0;
+	double	y1;
+	double	t0;
+	double	t1;
+	// (void) s;
 
 	a = pow(ray.direction.x, 2) + pow(ray.direction.z, 2);
-
-	if (chec_approx_zero(a))
+	s->maximum = (s->height) / 2;
+	s->minimum = -1 * (s->maximum);
+	if (check_approx_zero(a))
 	{
 		inter1.count = 0;
 		inter1.t[0] = 0;
 		inter1.t[1] = 0;
+		return (inter1);
 	}
-
-	b = (2 * ray.origin.x * ray.direction.x) +
-		(2 * ray.origin.z * ray.direction.z);
+	b = (2 * ray.origin.x * ray.direction.x)
+		+ (2 * ray.origin.z * ray.direction.z);
 	c = (pow(ray.origin.x, 2) + pow(ray.origin.z, 2)) - 1.0;
 	disc = pow(b, 2) - (4 * a * c);
 
@@ -171,15 +175,57 @@ t_intersect local_intersect_cylinder(double height, t_ray ray)
 		inter1.count = 0;
 		inter1.t[0] = 0;
 		inter1.t[1] = 0;
+		return (inter1);
 	}
 
 	// t0 ← (-b - √(disc)) / (2 * a)
 // t1 ← (-b + √(disc)) / (2 * a)
-	inter1.count =2;
+	inter1.count = 2;
 	inter1.t[0] = (((-1 * b) - sqrt(disc)) / (2 * a));
 	inter1.t[1] = (((-1 * b) + sqrt(disc)) / (2 * a));
 	// # this is just a placeholder, to ensure the tests
 	// # pass that expect the ray to miss.
+	if (inter1.t[0] > inter1.t[1])
+	{
+		temp = inter1.t[0];
+		inter1.t[0] = inter1.t[1];
+		inter1.t[1] = temp;
+	}
+	y0 = (ray.origin.y + inter1.t[0]) * ray.direction.y;
+	inter1.count = 0;
+	t0 = inter1.t[0];
+	t1 = inter1.t[1];
+	inter1.t[0] = 0;
+	inter1.t[1] = 0;
+	if (s->minimum < y0 && y0 < s->maximum)
+	{
+		inter1.t[0] = t0;
+		inter1.count++;
+	}
+	else
+	{
+		inter1.count--;
+	}
+	y1 = (ray.origin.y + inter1.t[1]) * ray.direction.y;
+	if (s->minimum < y1 && y1 < s->maximum)
+	{
+		inter1.t[1] = t1;
+		inter1.count++;
+	}
+	else
+	{
+		inter1.count--;
+	}
+	
+	// // printf("count: %d, inter1: %d, inter2: %d\n", )
+	// if (inter1.t[0] + inter1.t[1] == 0)
+	// {
+	// 	inter1.count = 0;
+	// }
+	// else
+	// {
+	// 	inter1.count = 2;
+	// }
 	return (inter1);
 
 	// 	t_shape *cy;
