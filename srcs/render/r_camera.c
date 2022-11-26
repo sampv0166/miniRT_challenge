@@ -1,5 +1,5 @@
 
-#include "../../../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 double	**view_transform(t_point from, t_point to, t_vector up)
 {

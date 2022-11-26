@@ -1,4 +1,4 @@
-#include "../../../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 // t_bool	is_shadowed(t_world w, t_point p)
 // {

@@ -1,4 +1,4 @@
-#include "../../../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 double	**transpose(double **mat)
 {

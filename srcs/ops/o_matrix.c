@@ -1,4 +1,4 @@
-#include "../../../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 t_tuple	matrix_multi_tp(double **mat, t_tuple tp)
 {

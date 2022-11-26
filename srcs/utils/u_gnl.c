@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   u_gnl.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 05:26:16 by apila-va          #+#    #+#             */
-/*   Updated: 2022/11/20 11:30:19 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:55:08 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 static char	*ft_strjoin_get(char *saved_line, char *buffer)
 {
