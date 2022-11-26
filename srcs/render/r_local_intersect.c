@@ -1,4 +1,4 @@
-#include "../../../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 t_intersect local_intersect_plane(t_ray r)
 {
