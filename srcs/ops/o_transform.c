@@ -1,6 +1,6 @@
 
-#include "../../../includes/minirt.h"
-#include "../../../includes/maths.h"
+#include "../../includes/minirt.h"
+#include "../../includes/maths.h"
 
 double	deg(double rad)
 {

@@ -1,5 +1,5 @@
 
-#include "../../../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 t_tuple	vector_tp(t_vector vec)
 {

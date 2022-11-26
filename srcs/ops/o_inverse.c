@@ -1,9 +1,5 @@
 
-#include "../../../includes/minirt.h"
-#include "../../../includes/maths.h"
-
-
-
+#include "../../includes/minirt.h"
 
 double	cofactor(double **mat, int size, int row, int col)
 {

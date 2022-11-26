@@ -1,4 +1,4 @@
-#include "../../../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 t_vector		local_normal_at_sphere(t_point obj_point, t_point point)
 {

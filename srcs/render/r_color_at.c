@@ -1,4 +1,4 @@
-#include "../../../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 t_ray	transform(t_ray r, double **m)
 {
@@ -200,8 +200,8 @@ t_list	*intersect_world(t_world w, t_ray r)
 			intersection1 = malloc (sizeof (t_intersection));
 			intersection2 = malloc (sizeof (t_intersection));
 
-			printf("\nt1 = %f\n", inter.t[0]);
-			printf("\nt2 = %f\n", inter.t[1]);
+			// printf("\nt1 = %f\n", inter.t[0]);
+			// printf("\nt2 = %f\n", inter.t[1]);
 			intersection1->object = temp_shape;
 			intersection1->t = inter.t[0];
 			intersection1->count = 1;
