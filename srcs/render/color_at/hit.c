@@ -114,7 +114,7 @@ t_intersection* hit(t_list *xs)
 			{
 				min_inter = inter2;
 				min = inter2->t;
-				printf("\n smallest values is == %f\n", inter2->t);
+				// printf("\n smallest values is == %f\n", inter2->t);
 				// return(inter2) ; // try to make this return pointer instead of returning value directly
 			}
 			xs = xs->next;

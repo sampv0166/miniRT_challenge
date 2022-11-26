@@ -64,6 +64,10 @@ void	write_pixel1(unsigned char *dst, double w, double h,
 int	main(int argc, char **argv)
 {
 
+
+
+
+
 	t_data		scene_data;
 	// t_camera2	c;
 	// t_point		from;
@@ -77,6 +81,21 @@ int	main(int argc, char **argv)
 	init_scene_data(&scene_data);
 	parse_scene(argv[1], &scene_data);
 
+
+	// t_ray r;
+    // t_intersect inter;
+	// t_shape cy;
+
+	// cy.height = 2;
+	// r.origin = point(0, 1.5, 0);
+    // r.direction = vector(0.1, 1, 0);
+    // r.direction =  normalize(r.direction);
+    // inter  =  local_intersect_cylinder( &cy,r);
+
+	//    printf("\ncount = %d\n", inter.count);
+    // printf("\n%f %f\n", inter.t[0], inter.t[1]);
+
+    // exit(0);
 
 	// t_ray r;
 	// t_intersect inter;

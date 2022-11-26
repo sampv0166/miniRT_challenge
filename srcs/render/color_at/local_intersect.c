@@ -141,15 +141,22 @@ t_intersect				intersect_caps(t_shape *cy, t_ray ray)
 }
 
 
-
-t_intersect local_intersect_cylinder(void *shape, t_ray ray)
+t_intersect local_intersect_cylinder(double h, t_ray ray)
 {
 	double	a;
 	double		b;
 	double		c;
 	double		disc;
 	t_intersect inter1;
-	(void) shape;
+	// (void) shape;ps_c
+	// t_shape *cy;
+
+	// cy = (t_shape *) shape;
+	// cy->height = 2;
+	// (void) cy;
+	printf("\nh == %f\n", h);
+
+	// ray.direction =  normalize(ray.direction);
 
 	a = pow(ray.direction.x, 2) + pow(ray.direction.z, 2);
 
@@ -171,16 +178,64 @@ t_intersect local_intersect_cylinder(void *shape, t_ray ray)
 		inter1.count = 0;
 		inter1.t[0] = 0;
 		inter1.t[1] = 0;
+		return (inter1);
 	}
 
 	// t0 ← (-b - √(disc)) / (2 * a)
 // t1 ← (-b + √(disc)) / (2 * a)
+	if (b > 0)
+	{
+		b = b * -1; 
+	}
 
-	inter1.t[0] = (((-1 * b) - sqrt(disc)) / (2 * a));
-	inter1.t[1] = (((-1 * b) + sqrt(disc)) / (2 * a));
+	inter1.t[0] = ((b - sqrt(disc)) / (2 * a));
+	inter1.t[1] = ((b + sqrt(disc)) / (2 * a));
 	// # this is just a placeholder, to ensure the tests
 	// # pass that expect the ray to miss.
-	return (inter1);
+
+
+	t_intersect	inter2;
+	double			y0_y1[2];
+	double			min;
+	double			max;
+	max = 			h / 2.0;
+	min = 			-1.0 * max;
+
+	inter2.count = 0;
+	inter2.t[0] = 0;
+	inter2.t[1] = 0;
+	double tmp;
+	
+	if (inter1.t[0] >  inter1.t[1])
+	{
+		tmp = inter1.t[0];
+		inter1.t[0] = inter1.t[1];
+		inter1.t[1] = tmp;
+	}
+	
+	y0_y1[0] = ray.origin.y + (inter1.t[0] * ray.direction.y);
+	if (min < y0_y1[0] && y0_y1[0] < max)
+	{
+		inter2.count = 1;
+		inter2.t[0] = inter1.t[0];
+		// return (inter2);
+	}
+
+	y0_y1[1] = ray.origin.y + (inter1.t[1] * ray.direction.y);
+	if (min < y0_y1[1] && y0_y1[1] < max)
+	{
+		inter2.count += 1;
+		inter2.t[1] = inter1.t[1];
+	}
+	// if (inter2.count > 0)
+	// {
+	// 	return (inter2);
+	// }
+	// else
+	// {
+	return (inter2);
+	// }
+
 
 	// 	t_shape *cy;
 	// 	t_intersect inter1;

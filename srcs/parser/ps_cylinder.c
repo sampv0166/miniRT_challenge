@@ -33,6 +33,8 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
 	double**	transform;
 	double		radius;
 
+    // printf("\ndam = %f\n", cy->height);
+    // exit(0);
 	radius = cy->diameter * 0.5;
 	scale = scaling(tuple (radius, cy->height * 0.5, radius, 1));
 	translate = translation(tuple (cy->position.x,
