@@ -26,7 +26,7 @@ L  	0,8,-3		1		255,255,255
 ###	CYLINDER
 ## (origin point | orientation [-1.0, 1.0] | diameter [>0] | height [>0] | color in RGB [0, 255])
 #	coord	normal	diam	height	color
-cy	3,0,0	0,1,0	5		4		25,250,25
+cy	3,0,0	0,1,0	2		2		25,250,25
 
 #
 ##

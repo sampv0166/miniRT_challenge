@@ -3,6 +3,7 @@
 		"chrono": "c",
 		"unordered_map": "c",
 		"__locale": "c",
-		"minirt.h": "c"
+		"minirt.h": "c",
+		"mlx.h": "c"
 	}
 }

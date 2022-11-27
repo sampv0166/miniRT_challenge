@@ -106,7 +106,7 @@ t_intersection* hit(t_list *xs)
 	inter = malloc(sizeof(t_intersection));
 	if (xs)
 	{
-		sort_intersections(xs);
+		// sort_intersections(xs);
 		while (xs)
 		{
 			inter2 = (t_intersection *) xs->content;

@@ -44,7 +44,7 @@ typedef struct s_ray
 typedef struct s_intersect
 {
 	int				count;
-	double			t[2];
+	double			t[4];
 }	t_intersect;
 
 

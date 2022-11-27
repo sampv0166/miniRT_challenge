@@ -184,6 +184,8 @@ t_list	*intersect_world(t_world w, t_ray r)
 	int first_check;
 	t_intersection *intersection1;
 	t_intersection *intersection2;
+	t_intersection *intersection3;
+	t_intersection *intersection4;
 	
 	first_check = 0;
 	intersections_list = NULL;
@@ -193,12 +195,29 @@ t_list	*intersect_world(t_world w, t_ray r)
 	{	
 		temp_shape = (t_shape *) shapes->content;
 		inter = intersect(temp_shape, r);
+		// printf("\ncount = %d\n", inter.count);
 		if (inter.count > 0)
 		{
 			// static int i;
 			// printf("\n%d\n", i++);
 			intersection1 = malloc (sizeof (t_intersection));
 			intersection2 = malloc (sizeof (t_intersection));
+			if(inter.t[2] > 0)
+			{
+				// printf("\n t3 = %f\n", inter.t[2]);
+				intersection3 = malloc (sizeof (t_intersection));
+					intersection3->object = temp_shape;
+			intersection3->t = inter.t[2];
+			intersection3->count = 1;
+			}
+						if(inter.t[3] > 0)
+			{
+				// printf("\n t4 = %f\n", inter.t[3]);
+				intersection4 = malloc (sizeof (t_intersection));
+						intersection4->object = temp_shape;
+			intersection4->t = inter.t[3];
+			intersection4->count = 1;
+			}
 
 			// printf("\nt1 = %f\n", inter.t[0]);
 			// printf("\nt2 = %f\n", inter.t[1]);
@@ -213,12 +232,28 @@ t_list	*intersect_world(t_world w, t_ray r)
 			{
 				intersections_list = ft_lstnew(intersection1);
 				ft_lstadd_back(&intersections_list, ft_lstnew(intersection2));
+				if(inter.t[2] > 0)
+				{
+					ft_lstadd_back(&intersections_list, ft_lstnew(intersection3));
+				}
+				if(inter.t[3] > 0)
+				{
+					ft_lstadd_back(&intersections_list, ft_lstnew(intersection4));
+				}
 				first_check = 1;
 			}
 			else
 			{
 				ft_lstadd_back(&intersections_list, ft_lstnew(intersection1));
 				ft_lstadd_back(&intersections_list, ft_lstnew(intersection2));
+				if(inter.t[2] > 0)
+				{
+					ft_lstadd_back(&intersections_list, ft_lstnew(intersection3));
+				}
+				if(inter.t[3] > 0)
+				{
+					ft_lstadd_back(&intersections_list, ft_lstnew(intersection4));
+				}
 			}
 		}
 		shapes = shapes->next;
@@ -239,9 +274,9 @@ t_color	color_at(t_world w, t_ray r)
 	intersections_list = intersect_world(w, r);
 	inter  = hit(intersections_list );
 
-	if (inter->count == 0)
+	if (inter->count <= 0)
 		return (color(0, 0, 0));
-
+	printf("\nsmallest value = %f \n", inter->t);
 	comps = prepare_computations(inter, r);
 	return (shade_hit(w, comps));
 	// t_list	*i;
