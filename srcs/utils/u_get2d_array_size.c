@@ -1,23 +1,12 @@
 
 #include "../../includes/minirt.h"
 
-int get_2darray_size(char **arr)
+int	get_2darray_size(char **arr)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (arr[i])
-        i++;  
-    return (i);    
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
 }
-
-
-/* default world 
-
-light source = pointlight(pos , color_intensity)
-
-
-
-
-
-*/ 

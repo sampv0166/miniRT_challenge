@@ -22,10 +22,9 @@ double		dot(t_tuple a, t_tuple b);
 double		**matrix_multi(double **mat1, double **mat2);
 double		**translation(t_tuple tp);
 double		**scaling(t_tuple tp);
-double		deg(double rad);
 double		**rotation_x(double rad);
 double		**rotation_y(double rad);
 double		**rotation_z(double rad);
 t_tuple		shearing(t_tuple tp, double *coord);
 
-#endif  
+#endif

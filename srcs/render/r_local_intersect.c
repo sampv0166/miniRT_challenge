@@ -11,16 +11,13 @@ t_intersect local_intersect_plane(t_ray r)
 		inter.t[1] = 0;
 		return (inter);
 	}
-	
 	inter.count = 2;
 	inter.t[0] = -1 * r.origin.y / r.direction.y ;
-	inter.t[1] = 0; 
+	inter.t[1] = 0;
 
 	if (inter.t[0] > 0)
 	{
-	// 	static int i;
-	// printf("plane inter count =  %d\n", i++);
-		return inter;
+		return (inter);
 	}
 	else
 	{
@@ -31,19 +28,6 @@ t_intersect local_intersect_plane(t_ray r)
 	}
 	return (inter);
 }
-
-int chec_approx_zero(double a)
-{
-	double temp = fabs(a - 0);
-
-	if(temp < EPSILON)
-	{
-		return 1;
-	}
-	return 0;
-}
-
-
 
 t_intersect	local_intersect_sphere(t_ray r)
 {
@@ -80,24 +64,10 @@ t_intersect	local_intersect_sphere(t_ray r)
 	return (inter);
 }
 
-// static void			get_y0_y1(t_intersect *inter, double *y0_y1, t_ray ray)
-// {
-// 	double	temp;
-
-// 	if (inter->t[0] > inter->t[1])
-// 	{
-// 		temp = inter->t[0] ;
-// 		inter->t[0]= inter->t[1];
-// 		inter->t[1]= temp;
-// 	}
-// 	y0_y1[0] = ray.origin.y + (inter->t[0] * ray.direction.y);
-// 	y0_y1[1] = ray.origin.y + (inter->t[1] * ray.direction.y);
-// }
-
-static int			check_cap(t_ray ray, double t)
+static int	check_cap(t_ray ray, double t)
 {
-	double x;
-	double z;
+	double	x;
+	double	z;
 
 	x = ray.origin.x + t * ray.direction.x;
 	z = ray.origin.z + t * ray.direction.z;
@@ -106,7 +76,7 @@ static int			check_cap(t_ray ray, double t)
 	return (0);
 }
 
-t_intersect				intersect_caps(t_shape *cy, t_ray ray)
+t_intersect	intersect_caps(t_shape *cy, t_ray ray)
 {
 	double			min;
 	double			max;
@@ -153,15 +123,15 @@ t_intersect local_intersect_cylinder(double height, t_ray ray)
 
 	a = pow(ray.direction.x, 2) + pow(ray.direction.z, 2);
 
-	if (chec_approx_zero(a))
+	if (double_equal(a, 0))
 	{
 		inter1.count = 0;
 		inter1.t[0] = 0;
 		inter1.t[1] = 0;
 	}
 
-	b = (2 * ray.origin.x * ray.direction.x) +
-		(2 * ray.origin.z * ray.direction.z);
+	b = (2 * ray.origin.x * ray.direction.x)
+			+ (2 * ray.origin.z * ray.direction.z);
 	c = (pow(ray.origin.x, 2) + pow(ray.origin.z, 2)) - 1.0;
 	disc = pow(b, 2) - (4 * a * c);
 

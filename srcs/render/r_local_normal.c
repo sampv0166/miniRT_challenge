@@ -1,13 +1,13 @@
 #include "../../includes/minirt.h"
 
-t_vector		local_normal_at_sphere(t_point obj_point, t_point point)
+t_vector	local_normal_at_sphere(t_point obj_point, t_point point)
 {
 	return (subtract_points(obj_point, point));
 }
 
-t_vector		local_normal_at_plane()
+t_vector	local_normal_at_plane(void)
 {
-	return (vector(0, 1 ,0));
+	return (vector(0, 1, 0));
 }
 
 t_vector		local_normal_at_cylinder(double h,  t_point pnt)

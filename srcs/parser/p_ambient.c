@@ -52,7 +52,7 @@ static int verify_digits(char **color_split ,char **info, t_data *scene_data)
 
 int check_number_range(double value)
 {
-    if (value < 1 && value > 0)
+    if (value <= 1 && value > 0)
     {
         return (1);
     }

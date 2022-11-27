@@ -8,7 +8,6 @@ SRCS = 	main.c \
 		srcs/parser/p_sphere.c \
 		srcs/parser/p_cylinder.c  \
 		srcs/ops/o_matrix.c  \
-		srcs/ops/o_transpose.c  \
 		srcs/ops/o_vector.c  \
 		srcs/ops/o_inverse.c  \
 		srcs/ops/o_normal.c \
@@ -16,6 +15,7 @@ SRCS = 	main.c \
 		srcs/ops/o_tuple.c \
 		srcs/ops/o_product.c \
 		srcs/ops/o_transform.c  \
+		srcs/ops/o_rotate.c  \
 		srcs/render/r_lighting.c \
 		srcs/render/r_light_vars.c \
 		srcs/render/r_light_calculate.c \
@@ -37,6 +37,8 @@ SRCS = 	main.c \
 		srcs/utils/u_get2d_array_size.c \
 		srcs/utils/u_parse_color.c \
 		srcs/utils/u_parse_double.c  \
+		srcs/utils/u_compare.c  \
+		srcs/utils/u_inverse.c  \
 		extra/print.c  \
 	
 OBJS = ${SRCS:.c=.o}

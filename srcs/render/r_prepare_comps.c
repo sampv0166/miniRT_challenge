@@ -10,9 +10,6 @@ t_point	position(t_ray r, float num)
 	res = add(point_tp(r.origin), multi);
 	p = point(res.x, res.y, res.z);
 	return (p);
-
-	// // testing
-	// return (r.origin + r.direction * num);
 }
 
 t_vector	normal_at(t_shape *s, t_point p)
@@ -37,16 +34,12 @@ t_vector	normal_at(t_shape *s, t_point p)
 	point.x = 0;
 	point.y = 0;
 	point.z = 0;
-	
 	if (!ft_strncmp(s->shape_name, "sp", 2))
 		obj_normal = local_normal_at_sphere(obj_point, point);
 	if (!ft_strncmp(s->shape_name, "pl", 2))
-	{
-
 		obj_normal = local_normal_at_plane();
-	}
 	if (!ft_strncmp(s->shape_name, "cy", 2))
-		obj_normal = local_normal_at_cylinder(s->height,obj_point);	
+		obj_normal = local_normal_at_cylinder(s->height, obj_point);
 	tp3 = vector_tp(obj_normal);
 
 	trnspose = transpose(invrs);
