@@ -276,8 +276,8 @@ t_color	color_at(t_world w, t_ray r)
 
 	if (inter->count == 0)
 		return (color(0, 0, 0));
-	printf("\ncount = %d\n", inter->count);		
-	printf("\nsmallest value = %f \n", inter->t);
+	// printf("\ncount = %d\n", inter->count);		
+	// printf("\nsmallest value = %f \n", inter->t);
 	comps = prepare_computations(inter, r);
 	return (shade_hit(w, comps));
 	// t_list	*i;
