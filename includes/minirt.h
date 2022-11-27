@@ -1,8 +1,8 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 10
-# define HEIGHT 10
+# define WIDTH 100
+# define HEIGHT 100
 
 # define KEY_ESC 53
 # define TRUE 1
@@ -16,7 +16,6 @@
 # include "../libs/mlx/mac/mlx.h"
 # include "../libs/libft/libft.h"
 # define EPSILON 0.00001
-# define PI 4.0 * atan(1.0)
 # include "parse.h"
 # include "maths.h"
 # include "tests.h"
@@ -28,7 +27,6 @@ void free_matrix(double **arr, int size);
 void print_vector(t_vector vector);
 int	double_equal(double a, double b);
 void print_point(t_point point);
-void print_tuple_sam( t_tuple *tp);
 void	print_matrix(double **mat, int col);
 void			print_error_msg_and_exit(char *error_msg, t_data *scene_data);
 void			default_world(t_data *scene_data);
@@ -63,4 +61,7 @@ t_vector		normal_at(t_shape *s, t_point p);
 // t_color			lighting(t_material m, t_light l, t_point pos,
 // 					t_vector eyev, t_vector normalv, t_bool	in_shadow);
 t_intersect		intersect_sphere(t_shape *s, t_ray r);
+double	determinant(double **mat, int size);
+double	**submatrix(double **mat, int size, int row, int col);
+double	cofactor(double **mat, int size, int row, int col);
 #endif

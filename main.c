@@ -78,8 +78,6 @@ int	main(int argc, char **argv)
 	render(scene_data.camera2, scene_data.wrld, &scene_data);
 	mlx_put_image_to_window(scene_data.mlx.mlx_ptr, scene_data.mlx.win_ptr,
 	scene_data.img.img_ptr, 0, 0);
-	print_error_msg_and_exit("freed everyythiing", &scene_data);
-	exit(0);
 	mlx_key_hook(scene_data.mlx.win_ptr, &key, &scene_data);
 	mlx_loop(scene_data.mlx.mlx_ptr);
 	return (0);

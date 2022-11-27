@@ -15,20 +15,14 @@ double	magnitude(t_vector vec)
 	return (ret);
 }
 
-
-
-
 t_vector	normalize(t_vector vec)
 {
 	t_vector	ret;
 	double		mag;
 
 	mag = magnitude(vec);
-
-
 	ret.x = vec.x / mag;
 	ret.y = vec.y / mag;
 	ret.z = vec.z / mag;
-	
 	return (ret);
 }

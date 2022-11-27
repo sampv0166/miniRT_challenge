@@ -2,15 +2,6 @@
 
 t_tuple	matrix_multi_tp(double **mat, t_tuple tp)
 {
-
-	// printf("\rec matrix\n");
-	// print_matrix(mat, 4);
-	// printf("\rec matrix\n");
-
-	// printf("\rrec tup\n");
-	// print_tuple_sam(&tp);
-	// printf("\rec tup\n");
-
 	t_tuple	res;
 	double	tmp[4];
 	int		i;
@@ -22,18 +13,12 @@ t_tuple	matrix_multi_tp(double **mat, t_tuple tp)
 			+ mat[i][1] * tp.y
 			+ mat[i][2] * tp.z
 			+ mat[i][3] * tp.w;
-		// printf("%lf\n", res[i][j]);
 		i++;
 	}
 	res.x = tmp[0];
 	res.y = tmp[1];
 	res.z = tmp[2];
 	res.w = tmp[3];
-
-	// printf("\nnew matrix\n");
-	// print_tuple_sam(&res);
-	// printf("\nnew matrix\n");
-
 	return (res);
 }
 
@@ -55,7 +40,6 @@ double	**matrix_multi(double **mat1, double **mat2)
 				+ mat1[i][1] * mat2[1][j]
 				+ mat1[i][2] * mat2[2][j]
 				+ mat1[i][3] * mat2[3][j];
-			// printf("%lf\n", res[i][j]);
 			j++;
 		}
 		i++;
@@ -110,5 +94,28 @@ double	**identity_matrix(void)
 	elem[14] = 0;
 	elem[15] = 1;
 	res = create_matrix(elem, 4);
+	return (res);
+}
+
+double	**transpose(double **mat)
+{
+	double	**res;
+	int		i;
+	int		j;
+
+	res = malloc(sizeof(double *) * 4);
+	i = 0;
+	j = 0;
+	while (i < 4)
+	{
+		res[i] = malloc(sizeof(double) * 4);
+		j = 0;
+		while (j < 4)
+		{
+			res[i][j] = mat[j][i];
+			j++;
+		}
+		i++;
+	}
 	return (res);
 }

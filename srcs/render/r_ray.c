@@ -8,5 +8,3 @@ t_ray	ray(t_point p, t_vector v)
 	ray.direction = v;
 	return (ray);
 }
-
-

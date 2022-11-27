@@ -56,9 +56,6 @@ void parse_camera(char **info, t_data *scene_data)
         to_tp_point = tuple(scene_data->camera.norm_vector.x, scene_data->camera.norm_vector.y, scene_data->camera.norm_vector.z ,1 );
         to_tp_vector = tuple(scene_data->camera.pos.x, scene_data->camera.pos.y, scene_data->camera.pos.z ,0);
         to_result = add(to_tp_point, to_tp_vector);
-
-        // print_tuple_sam(&to_result);
-        // exit(0);
         to = point(to_result.x, to_result.y, to_result.z);
         
         t_vector up1_vec;
