@@ -56,7 +56,8 @@ t_intersect	intersect(t_shape *s, t_ray r)
 		return(local_intersect_plane(s->ray_in_obj_space));
 	else if (!ft_strncmp(s->shape_name, "cy",2))
 		return(local_intersect_cylinder(s->height, s->ray_in_obj_space));
-	return (local_intersect_sphere(s->ray_in_obj_space));		
+	return (local_intersect_sphere(s->ray_in_obj_space));	
+
 }
 
 
@@ -193,10 +194,11 @@ t_list	*intersect_world(t_world w, t_ray r)
 	{	
 		temp_shape = (t_shape *) shapes->content;
 		inter = intersect(temp_shape, r);
+		// free_2d_array(temp_shape->ray_in_obj_space, 4);
 		if (inter.count > 0)
 		{
-			// static int i;
-			// printf("\n%d\n", i++);
+			static int i;
+			printf("\n%d\n", i + 2);
 			intersection1 = malloc (sizeof (t_intersection));
 			intersection2 = malloc (sizeof (t_intersection));
 
@@ -240,9 +242,33 @@ t_color	color_at(t_world w, t_ray r)
 	inter  = hit(intersections_list );
 
 	if (inter->count == 0)
+	{
+		free(inter);
+		t_list *temp;
+
+		while (intersections_list)
+		{
+			temp = intersections_list->next;
+			free(intersections_list->content);
+			free(intersections_list);
+			intersections_list = temp;
+		}
 		return (color(0, 0, 0));
+	}
 
 	comps = prepare_computations(inter, r);
+	// free(inter);
+	t_list *temp;
+
+	while (intersections_list)
+	{
+		
+		temp = intersections_list->next;
+		free(intersections_list->content);
+		free(intersections_list);
+		intersections_list = temp;
+	}
+
 	return (shade_hit(w, comps));
 	// t_list	*i;
 	// t_intersection	h;

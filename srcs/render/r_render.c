@@ -62,7 +62,6 @@ t_ray	ray_for_pixel(t_camera2 camera, double x, double y)
 }
 
 
-
 void render(t_camera2 cam, t_world wrld, t_data *scene_data)
 {
     double w;
@@ -79,10 +78,6 @@ void render(t_camera2 cam, t_world wrld, t_data *scene_data)
         while(w < WIDTH )
         {
             r = ray_for_pixel(cam, w, h);
-
-
-
-
             color = color_at(wrld, r);       
 			// exit(0);
             write_pixel(dst,w, h, color, scene_data);

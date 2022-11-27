@@ -40,7 +40,7 @@ void parse_sphere(char **info, t_data *scene_data)
         sphere->radius = parse_double(info[2]);
 
         parse_color(info[3], scene_data, &sphere->color);
-        sphere->transform = identity_matrix();
+        // sphere->transform = identity_matrix();
         sphere->material.shininess = 200.0;;
 	    sphere->material.diffuse = 0.7;
 		sphere->material.specular = 0.2;
@@ -63,8 +63,8 @@ void parse_sphere(char **info, t_data *scene_data)
 	scale = scaling(tuple (sphere->radius/ 2, sphere->radius/ 2, sphere->radius / 2, 1));
 	transform = matrix_multi(scale, translate);
 	sphere->transform = transform;
-	// free_matrix(translate);
-	// free_matrix(scale);
+	free_2d_array(translate, 4);
+	free_2d_array(scale, 4);
     // print_matrix(sphere->transform, 4);
     // exit(0);
 		// double **scale;
@@ -89,8 +89,12 @@ void parse_sphere(char **info, t_data *scene_data)
     {
         free_2d_char_array(point_split);
         free_2d_char_array(color_split);
+                 free(point_split);
+     free(color_split);
         print_error_msg_and_exit("Wrong Input", scene_data);  
     }
     free_2d_char_array(point_split);
     free_2d_char_array(color_split);
+             free(point_split);
+     free(color_split);
 }

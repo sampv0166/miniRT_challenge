@@ -68,7 +68,6 @@ void parse_camera(char **info, t_data *scene_data)
 
         up = cross(up1_vec , scene_data->camera.norm_vector);
 
-        
         // print_point(from);
 
         // print_point(to);
@@ -81,14 +80,17 @@ void parse_camera(char **info, t_data *scene_data)
         scene_data->camera2.transform = transform;
 		// rt->cam->transform = invert_matrix(transform);
 
-        scene_data->camera2.transform = inverse(transform, 4);
+        // scene_data->camera2.transform = inverse(transform, 4);
+       
         // print_matrix(scene_data->camera2.transform, 4);
         
 		scene_data->camera2 =  camera(WIDTH , HEIGHT, scene_data->camera.fov);
         t_tuple origin_tp;
-          scene_data->camera2.transform = inverse(transform, 4);
-         origin_tp =   matrix_multi_tp(scene_data->camera2.transform, tuple(0, 0, 0, 1));
-		 scene_data->camera2.origin = point(origin_tp.x, origin_tp.y, origin_tp.z);
+        scene_data->camera2.transform = inverse(transform, 4);
+        origin_tp =   matrix_multi_tp(scene_data->camera2.transform, tuple(0, 0, 0, 1));
+		scene_data->camera2.origin = point(origin_tp.x, origin_tp.y, origin_tp.z);
+         free_2d_array(transform, 4);
+        
         //  print_point(point(origin_tp));
         //  printf("%f, %f, %f", origin_tp.x, origin_tp.y, origin_tp.z);
         //  exit(0);
@@ -97,8 +99,12 @@ void parse_camera(char **info, t_data *scene_data)
     {
         free_2d_char_array(point_split);
         free_2d_char_array(norm_vec_split);
+        free(point_split);
+        free(norm_vec_split);
         print_error_msg_and_exit("Wrong Input", scene_data);
     }
     free_2d_char_array(point_split);
     free_2d_char_array(norm_vec_split);
+    free(point_split);
+     free(norm_vec_split);
 }

@@ -16,6 +16,9 @@ void parse_color(char *str, t_data *scene_data, t_color *colors)
     {
         if(skip_dot_verify_digits(rgb[i]))
         {
+             free_2d_char_array(rgb);
+       
+               free(rgb);
             print_error_msg_and_exit("INVALID COLOR VALUES", scene_data);      
         }
         i++;
@@ -27,9 +30,12 @@ void parse_color(char *str, t_data *scene_data, t_color *colors)
         (c[1] > 255 || c[1] < 0) ||
         (c[2] > 255 || c[2] < 0))
     {
+              free_2d_char_array(rgb);
+               free(rgb);
             print_error_msg_and_exit("INVALID COLOR VALUES", scene_data);
     }
-    free_memmory(rgb);
+     free_2d_char_array(rgb);
+    free(rgb);
     colors->r = c[0];
     colors->g = c[1];
     colors->b =  c [2];

@@ -51,7 +51,11 @@ void parse_light(char **info, t_data *scene_data)
     {
         free_2d_char_array(point_split);
         free_2d_char_array(color_split);
+           free(point_split);
+     free(color_split);
     }
     free_2d_char_array(point_split);
     free_2d_char_array(color_split);
+       free(point_split);
+     free(color_split);
 }

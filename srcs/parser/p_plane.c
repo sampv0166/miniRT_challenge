@@ -54,7 +54,7 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
     plane->norm_vector.z = parse_double(norm_vec[2]);
 
     parse_color(info[3], scene_data, &plane->color);
-    plane->transform = identity_matrix();
+    // plane->transform = identity_matrix();
     plane->material.shininess = 200.0;;
     plane->material.diffuse = 0.7;
     plane->material.specular = 0.2;
@@ -83,8 +83,9 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
     rotate = normal_rotation_matrix(tuple(plane->norm_vector.x , plane->norm_vector.y, plane->norm_vector.z, 0));
     transform = matrix_multi(translate , rotate);
     plane->transform = transform ;
-
-    print_matrix(plane->transform, 4);
+    free_2d_array(translate, 4);
+    free_2d_array(rotate , 4);
+    // print_matrix(plane->transform, 4);
     // exit(0);
     // double **rotation;
     // double **scaling;
@@ -116,7 +117,6 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
     ft_lstadd_back(&scene_data->wrld.shapes, ft_lstnew(plane));
 }
 
-// !REDUCE TO 25 LINES  - SAMAD
 void parse_plane(char **info, t_data *scene_data)
 {
     char **point_split;
@@ -139,9 +139,15 @@ void parse_plane(char **info, t_data *scene_data)
         free_2d_char_array(point_split);
         free_2d_char_array(norm_vec);
         free_2d_char_array(color_split);
+        free(point_split);
+        free(color_split);
+        free(norm_vec);
         print_error_msg_and_exit("Wrong Input", scene_data);    
     }
     free_2d_char_array(point_split);
     free_2d_char_array(norm_vec);
     free_2d_char_array(color_split);
+                     free(point_split);
+     free(color_split);
+       free(norm_vec);
 }

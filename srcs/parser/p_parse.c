@@ -2,7 +2,6 @@
 
 void check_for_a_c_l( char **info_split, t_data *scene_data)
 {
-   
     if (info_split[0][0] == 'A')
     {
         parse_ambient_lighting(info_split, scene_data);
@@ -60,11 +59,14 @@ static void parse_current_line(char *line, t_data *scene_data)
     else
     {
         free(line);
-        free_memmory(info_split);
+
+            free_2d_char_array(info_split);
+        free(info_split);
         print_error_msg_and_exit("Invalid Identifier", scene_data);
     }
   
-    free_memmory(info_split);                       
+    free_2d_char_array(info_split);
+    free(info_split);                     
 }
 
 void parse_scene(char *file_name, t_data *scene_data)
@@ -72,13 +74,18 @@ void parse_scene(char *file_name, t_data *scene_data)
     char *line;
     int fd;
 
+    line = NULL;
     if (check_file_name(file_name))
         print_error_msg_and_exit("FILE EXTENTION IS INCORRECT", scene_data);
     fd = open(file_name, O_RDONLY);
     if (fd < 0)
-        print_error_msg_and_exit("ERROR OPENING FILE", scene_data);  
+    {
+        free(scene_data->wrld.shapes);
+        printf("ERROR OPENING FILE\n");
+        exit(0);
+        // print_error_msg_and_exit("ERROR OPENING FILE", scene_data);  
+    }
 
-       
     while (1)
     {
         line = get_next_line(fd);
@@ -91,5 +98,7 @@ void parse_scene(char *file_name, t_data *scene_data)
             free_memmory(&line);
             break ;
         }
+        free_memmory(&line);
     }
+    close(fd);
 }

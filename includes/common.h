@@ -137,6 +137,7 @@ typedef struct s_camera2
 	double	half_height;
 	double	pixel_size;
 	t_point origin;
+	int		init;
 
 }	t_camera2;
 

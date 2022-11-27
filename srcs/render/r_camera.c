@@ -23,7 +23,13 @@ double	**view_transform(t_point from, t_point to, t_vector up)
 	m[2][1] = forward.y * -1;
 	m[2][2] = forward.z * -1;
 	tp = tuple((from.x * -1), (from.y * -1), (from.z * -1), 1);
-	return (matrix_multi(m, translation(tp)));
+	
+	double **tr = translation(tp);
+	double **r = matrix_multi(m, tr);
+	
+	free_2d_array(m, 4);
+	free_2d_array(tr, 4);
+	return (r);
 }
 
 // t_camera2	camera(double hsize, double vsize, double field_of_view)
@@ -67,7 +73,7 @@ t_camera2	camera(double hsize, double vsize, double field_of_view)
 	c.hsize = hsize;
 	c.vsize = vsize;
 	c.field_of_view = field_of_view;
-	c.transform = identity_matrix();
+	// c.transform = identity_matrix();
 	half_view = tan( degrees_to_radians (field_of_view) / 2);
 	aspect = c.hsize / c.vsize;
 	if (aspect >= 1)

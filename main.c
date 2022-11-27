@@ -36,11 +36,9 @@ void	setup_mlx(t_data *scene_data)
 
 void	init_scene_data(t_data *scene_data)
 {
-	t_shape	*shape;
-
-	shape = NULL;
 	scene_data->amb_set = 0;
-	scene_data->wrld.shapes = ft_lstnew(shape);
+	scene_data->wrld.shapes = NULL;
+	scene_data->camera2.init = 0;;
 }
 
 void	write_pixel1(unsigned char *dst, double w, double h,
@@ -63,44 +61,25 @@ void	write_pixel1(unsigned char *dst, double w, double h,
 
 int	main(int argc, char **argv)
 {
-
 	t_data		scene_data;
-	// t_camera2	c;
-	// t_point		from;
-	// t_point		to;
-	// t_vector	up;
-
 	(void) argc;
 	(void) argv;
 	if (argc != 2)
 		print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);
-	init_scene_data(&scene_data);
+	init_scene_data(&scene_data); // need to free scenedata.wrld.shapes
 	parse_scene(argv[1], &scene_data);
-
-
-	// t_ray r;
-	// t_intersect inter;
-
-	// r = ray(point(0,-1,0), vector(0,1,0));
-
-	// inter =   local_intersect_plane(r);
-
-	// printf("%d\n", inter.count);
-	// printf("%f\n",inter.t[0] );
-	// printf("%f\n",inter.t[1] );
-	// exit(0);
-
 	setup_mlx(&scene_data);
-	scene_data.wrld.shapes = scene_data.wrld.shapes->next;
+	// t_list *temp;
+	// temp = scene_data.wrld.shapes ;
+	// scene_data.wrld.shapes = scene_data.wrld.shapes->next;
+	// free(temp);
+	// scene_data.wrld.shapes  = NULL;
 	default_world(&scene_data);
-	// c = camera(HEIGHT, WIDTH, PI/ 3);
-	// from = scene_data.camera.pos;
-	// to = point(0, 0, 0);
-	// up = vector(0, 1, 0);
-	// c.transform = view_transform(from, to, up);
 	render(scene_data.camera2, scene_data.wrld, &scene_data);
 	mlx_put_image_to_window(scene_data.mlx.mlx_ptr, scene_data.mlx.win_ptr,
-		scene_data.img.img_ptr, 0, 0);
+	scene_data.img.img_ptr, 0, 0);
+	print_error_msg_and_exit("freed everyythiing", &scene_data);
+	exit(0);
 	mlx_key_hook(scene_data.mlx.win_ptr, &key, &scene_data);
 	mlx_loop(scene_data.mlx.mlx_ptr);
 	return (0);

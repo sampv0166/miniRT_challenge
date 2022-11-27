@@ -92,9 +92,10 @@ void	sort_intersections(t_list *xs)
 // 	return (inter2);
 // }
 
-t_intersection* hit(t_list *xs)
+t_intersection* hit(t_list *intersection_list)
 {
 	// int				i;
+	t_list *xs;
 	t_intersection	*inter2;
 	t_intersection	*inter;
 	t_intersection	*min_inter;
@@ -102,7 +103,7 @@ t_intersection* hit(t_list *xs)
 	min_inter = NULL;
 
 	min = __INT_MAX__;
-
+	xs = intersection_list;
 	inter = malloc(sizeof(t_intersection));
 	if (xs)
 	{
@@ -121,6 +122,7 @@ t_intersection* hit(t_list *xs)
 		}
 		if (min_inter && min_inter->t > 0)
 		{
+			free(inter);
 			return (min_inter);
 		}
 	}

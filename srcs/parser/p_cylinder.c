@@ -15,7 +15,7 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
     parse_color(info[5], scene_data, &cy->color);
     cy->diameter = parse_double(info[3]);
     cy->height = parse_double(info[4]);
-    cy->transform = identity_matrix();
+    // cy->transform = identity_matrix();
     cy->material.shininess = 200.0;
     cy->material.diffuse = 0.7;
     cy->material.specular = 0.2;
@@ -38,13 +38,13 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
 	translate = translation(tuple (cy->position.x,
 		cy->position.y, cy->position.z, 1));
 	transform = matrix_multi(translate, scale);
-	// free_matrix(translate);
+	free_2d_array(translate, 4);
 	rotate = normal_rotation_matrix(tuple(cy->norm_vector.x, cy->norm_vector.y, cy->norm_vector.z ,0 ));
 	translate = matrix_multi(rotate, transform);
 	cy->transform = translate;
-	// free_matrix(rotate);
-	// free_matrix(transform);
-	// free_matrix(scale);
+	free_2d_array(rotate, 4);
+	free_2d_array(transform, 4);
+	free_2d_array(scale, 4);
     
     
     // transalation
@@ -95,9 +95,15 @@ void parse_cylinder(char **info, t_data *scene_data)
         free_2d_char_array(point_split);
         free_2d_char_array(norm_vec);
         free_2d_char_array(color_split);
+                             free(point_split);
+     free(color_split);
+       free(norm_vec);
         print_error_msg_and_exit("Wrong Input", scene_data);
     }
     free_2d_char_array(point_split);
     free_2d_char_array(norm_vec);
     free_2d_char_array(color_split);
+                         free(point_split);
+     free(color_split);
+       free(norm_vec);
 }

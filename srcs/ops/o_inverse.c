@@ -61,6 +61,7 @@ double	**submatrix(double **mat, int size, int row, int col)
 	}
 	res = create_matrix(elem, size - 1);
 	free(elem);
+	// free_matrix(elem , size);
 	return (res);
 }
 
