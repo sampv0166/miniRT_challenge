@@ -9,16 +9,12 @@ t_intersect local_intersect_plane(t_ray r)
 		inter.count = 0;
 		inter.t[0] = 0;
 		inter.t[1] = 0;
-		inter.t[2] = 0;
-		inter.t[3] = 0;
 		return (inter);
 	}
 	
 	inter.count = 2;
 	inter.t[0] = -1 * r.origin.y / r.direction.y ;
 	inter.t[1] = 0; 
-	inter.t[2] = 0;
-	inter.t[3] = 0;
 
 	if (inter.t[0] > 0)
 	{
@@ -31,14 +27,12 @@ t_intersect local_intersect_plane(t_ray r)
 		inter.count = 0;
 		inter.t[0] = 0;
 		inter.t[1] = 0;
-		inter.t[2] = 0;
-		inter.t[3] = 0;
 		return (inter);
 	}
 	return (inter);
 }
 
-int check_approx_zero(double a)
+int chec_approx_zero(double a)
 {
 	double temp = fabs(a - 0);
 
@@ -48,6 +42,8 @@ int check_approx_zero(double a)
 	}
 	return 0;
 }
+
+
 
 t_intersect	local_intersect_sphere(t_ray r)
 {
@@ -76,15 +72,11 @@ t_intersect	local_intersect_sphere(t_ray r)
 		inter.count = 0;
 		inter.t[0] = 0;
 		inter.t[1] = 0;
-		inter.t[2] = 0;
-		inter.t[3] = 0;
 		return (inter);
 	}
 	inter.count = 2;
 	inter.t[0] = (-b - sqrt(d)) / (2 * a);
 	inter.t[1] = (-b + sqrt(d)) / (2 * a);
-	inter.t[2] = 0;
-	inter.t[3] = 0;
 	return (inter);
 }
 
@@ -102,271 +94,93 @@ t_intersect	local_intersect_sphere(t_ray r)
 // 	y0_y1[1] = ray.origin.y + (inter->t[1] * ray.direction.y);
 // }
 
-static int			check_cap(t_ray ray, double t)
-{
-	double x;
-	double z;
-
-	x = ray.origin.x + t * ray.direction.x;
-	z = ray.origin.z + t * ray.direction.z;
-	if ((pow(x, 2) + pow(z, 2)) <= 1)
-		return (1);
-	return (0);
-}
-
-t_intersect				intersect_caps(t_shape *cy, t_ray ray, t_intersect *i)
-{
-	double			min;
-	double			max;
-
-
-	max = cy->height / 2.0;
-	min = -1.0 * max;
-	i->t[2] = (min - ray.origin.y) / ray.direction.y;
-	if (check_cap(ray,i->t[2]))
-	{
-		i->count++;
-	}
-	i->t[3]= (max - ray.origin.y) / ray.direction.y;
-	if (check_cap(ray, i->t[3]))
-	{
-		i->count++;
-	}
-	// double			min;
-	// double			max;
-	// double			t;
-	// int k;
-	// k = 0;
-	// // printf("\n h = %f\n" , cy->height);
-	// max = cy->height / 2.0;
-	// min = -1.0 * max;
-	// i->t[2] = 0;
-	// i->t[3] = 0;
-
-	// t = (min - ray.origin.y) / ray.direction.y;
-	// if (check_cap(ray, t))
-	// {
-	// 	i->t[2] = (min - ray.origin.y) / ray.direction.y;
-	// 	i->count = i->count + 1;
-	// 	printf("\np3\n");
-	// }
-	// // else
-	// // {
-	// // 		// 	if (i->count > 0)
-	// // 		// {
-	// // 		i->count--;
-
-	// // 		// }
-	// // }
-	// t = (max - ray.origin.y) / ray.direction.y;
-
-	// if (check_cap(ray, t))
-	// {
-	// 	i->t[3] = (max - ray.origin.y) / ray.direction.y;
-	// i->count = i->count + 1;
-	// 	printf("\np4\n");
-	// }
-	// else
-	// {
-	// 		// if (i->count >0)
-	// 		// {
-	// 		i->count--;
-
-	// 		// }
-	// }
-	// if (k == 0)
-	// {
-	// 	i->count = i->count - 2;
-	// }
-	
-	return (*i);
-}
-
-
-t_intersect local_intersect_cylinder(t_shape *s, t_ray ray)
-{
-	double	a;
-	double		b;
-	double		c;
-	double		disc;
-	t_intersect inter1;
-
-	inter1.t[0] = 0;
-	inter1.t[1] = 0;
-	inter1.t[2] = 0;
-	inter1.t[3] = 0;
-	inter1.count = 0;
-	if (fabs(ray.direction.y) < EPSILON)
-		return (inter1);
-
-	a = pow(ray.direction.x, 2) + pow(ray.direction.z, 2);
-	b = (2 * ray.origin.x * ray.direction.x) + (2 * ray.origin.z * ray.direction.z);
-	c = (pow(ray.origin.x, 2) + pow(ray.origin.z, 2)) - 1.0;
-	disc = pow(b, 2) - (4 * a * c);
-
-	double			min;
-	double			max;
-
-	max = s->height / 2.0;
-	min = -1.0 * max;
-
-	inter1.t[0] = (((-1 * b) - sqrt(disc)) / (2 * a));
-	inter1.t[1] = (((-1 * b) + sqrt(disc)) / (2 * a));
-	double			y0_y1[2];
-	if (disc >= 0 &&  double_equal(a , 0) == 0)
-	{
-		double	temp;
-
-		if (inter1.t[0] > 	inter1.t[1] )
-		{
-			temp = inter1.t[0];
-			inter1.t[0]= inter1.t[1];
-			inter1.t[1] = temp;
-		}
-		y0_y1[0] = ray.origin.y + ( inter1.t[0] * ray.direction.y);
-		y0_y1[1] = ray.origin.y + (	inter1.t[1] * ray.direction.y);
-		if (min < y0_y1[0] && y0_y1[0] < max)
-		{
-			inter1.count++;
-			// insert_and_push(&intersec1, cylinder, head);
-		}
-		if (min < y0_y1[1] && y0_y1[1] < max)
-		{
-			inter1.count++;
-			// insert_and_push(&intersec2, cylinder, head);
-		}
-	}
-	return (intersect_caps(s, ray, &inter1));
-}
-
-
-// t_intersect local_intersect_cylinder(t_shape *s, t_ray ray)
+// static int			check_cap(t_ray ray, double t)
 // {
-// 	double		a;
+// 	double x;
+// 	double z;
+
+// 	x = ray.origin.x + t * ray.direction.x;
+// 	z = ray.origin.z + t * ray.direction.z;
+// 	if ((pow(x, 2) + pow(z, 2)) <= 1)
+// 		return (1);
+// 	return (0);
+// }
+
+// t_intersect				intersect_caps(t_shape *cy, t_ray ray)
+// {
+// 	double			min;
+// 	double			max;
+// 	t_intersect		intersec1;
+
+// 	max = cy->height / 2.0;
+// 	min = -1.0 * max;
+// 	intersec1.count = 2;
+// 	intersec1.t[0] = (min - ray.origin.y) / ray.direction.y;
+// 	if (check_cap(ray, intersec1.t[0]))
+// 	{
+// 		;
+// 	}
+// 	else
+// 	{
+// 		intersec1.t[0] = 0;
+// 	}
+// 	intersec1.count = 2;
+// 	intersec1.t[1] = (max - ray.origin.y) / ray.direction.y;
+// 	if (check_cap(ray, intersec1.t[1]))
+// 	{
+// 		;
+// 	}
+// 	else{
+// 		intersec1.t[1] = 0;
+// 	}
+// 	if (intersec1.t[0] == 0 && intersec1.t[1] == 0)
+// 	{
+// 		intersec1.count = 0;
+// 	}
+// 	return (intersec1);
+// }
+
+
+
+// t_intersect local_intersect_cylinder(double height, t_ray ray)
+// {
+// 	double	a;
 // 	double		b;
 // 	double		c;
 // 	double		disc;
 // 	t_intersect inter1;
-// 	double	temp;
-// 	double	y0;
-// 	double	y1;
-// 	// double	t0;
-// 	// double	t1;
+// 	(void) height;
 
-// 	// ray.direction = normalize(ray.direction);
+// 	a = pow(ray.direction.x, 2) + pow(ray.direction.z, 2);
 
-// 	if (fabs(ray.direction.y) < EPSILON)
+// 	if (chec_approx_zero(a))
 // 	{
-// 			inter1.count = 0;
+// 		inter1.count = 0;
 // 		inter1.t[0] = 0;
 // 		inter1.t[1] = 0;
-// 				inter1.t[2] = 0;
-// 		inter1.t[3] = 0;
-// 		return (inter1);
 // 	}
-// 	a = pow(ray.direction.x, 2) + pow(ray.direction.z, 2);
-// 	s->maximum = (s->height) / 2;
-// 	s->minimum = -1 * (s->maximum);
-// 	inter1.t[2] = 0;
-// 	inter1.t[3] = 0;
-// 	// if (check_approx_zero(a))
-// 	// {
-// 	// 	inter1.count = 0;
-// 	// 	inter1.t[0] = 0;
-// 	// 	inter1.t[1] = 0;
-// 	// 	inter1.t[2] = 0;
-// 	// 	inter1.t[3] = 0;
-// 	// 	return (inter1);
-// 	// 	// return (intersect_caps(s, ray, inter1));
-// 	// }
-// 	b = (2 * ray.origin.x * ray.direction.x)
-// 		+ (2 * ray.origin.z * ray.direction.z);
+
+// 	b = (2 * ray.origin.x * ray.direction.x) +
+// 		(2 * ray.origin.z * ray.direction.z);
 // 	c = (pow(ray.origin.x, 2) + pow(ray.origin.z, 2)) - 1.0;
 // 	disc = pow(b, 2) - (4 * a * c);
-// 	// if (disc < 0)
-// 	// {
-// 	// 	inter1.count = 0;
-// 	// 	inter1.t[0] = 0;
-// 	// 	inter1.t[1] = 0;
-// 	// 	inter1.t[2] = 0;
-// 	// 	inter1.t[3] = 0;
-// 	// 	return (inter1);
-// 	// }
+
+// 	// # ray does not intersect the cylinder
+// 	if (disc < 0)
+// 	{
+// 		inter1.count = 0;
+// 		inter1.t[0] = 0;
+// 		inter1.t[1] = 0;
+// 	}
 
 // 	// t0 ← (-b - √(disc)) / (2 * a)
 // // t1 ← (-b + √(disc)) / (2 * a)
-// 	// inter1.count = 0;
-// 	int k;
-// 	k = 0;
+// 	inter1.count =2;
 // 	inter1.t[0] = (((-1 * b) - sqrt(disc)) / (2 * a));
 // 	inter1.t[1] = (((-1 * b) + sqrt(disc)) / (2 * a));
 // 	// # this is just a placeholder, to ensure the tests
 // 	// # pass that expect the ray to miss.
-// 	inter1.count = 0;
-// 	if (disc >= 0 &&  double_equal(a , 0) == 0)
-// 	{
-// 		if (inter1.t[0] > inter1.t[1])
-// 		{
-// 			temp = inter1.t[0];
-// 			inter1.t[0] = inter1.t[1];
-// 			inter1.t[1] = temp;
-// 		}
-// 		y0 = (ray.origin.y + inter1.t[0]) * ray.direction.y;
-// 		// inter1.count = 0;
-// 		// t0 = inter1.t[0];
-// 		// t1 = inter1.t[1];
-// 		// inter1.t[0] = 0;
-// 		// inter1.t[1] = 0;
-
-// 		if (s->minimum < y0 && y0 < s->maximum)
-// 		{
-// 			// inter1.t[0] = t0;
-// 			inter1.count++;
-// 			printf("\np1\n");
-// 			k = k + 1;
-// 			;
-// 		}
-// 		else
-// 		{
-// 			inter1.t[0] = 0;
-// 		}
-// 		y1 = (ray.origin.y + inter1.t[1]) * ray.direction.y;
-// 		if (s->minimum < y1 && y1 < s->maximum)
-// 		{
-// 				printf("\np2\n");
-// 			k = k + 1;
-// 			// inter1.t[1] = t1;
-// 			inter1.count++;
-// 		}
-// 				else
-// 		{
-// 			inter1.t[1] = 0;
-// 		}
-// 		// if (k == 0)
-// 		// {
-// 		// 		inter1.count = inter1.count - 2;;
-// 		// }
-	
-// 	}
-// 		else
-// 		{
-			
-// 			inter1.t[0] = 0;
-// 				inter1.t[1] = 0;
-// 		}
-
-// 	// // printf("count: %d, inter1: %d, inter2: %d\n", )
-// 	// if (inter1.t[0] + inter1.t[1] == 0)
-// 	// {
-// 	// 	inter1.count = 0;
-// 	// }
-// 	// else
-// 	// {
-// 	// 	inter1.count = 2;
-// 	// }
-
-
-// 	return (intersect_caps(s, ray, &inter1));
+// 	return (inter1);
 
 // 	// 	t_shape *cy;
 // 	// 	t_intersect inter1;
@@ -532,3 +346,126 @@ t_intersect local_intersect_cylinder(t_shape *s, t_ray ray)
 // 	// }
 // 	// return (inter);
 // }
+
+static int          check_cap(t_ray ray, double t)
+{
+    double x;
+    double z;
+    x = ray.origin.x + t * ray.direction.x;
+    z = ray.origin.z + t * ray.direction.z;
+    if ((pow(x, 2) + pow(z, 2)) <= 1)
+		return (1);
+    return (0);
+}
+t_intersect             intersect_caps(double h, t_ray ray, t_intersect *i)
+{
+    double          min;
+    double          max;
+    max = h / 2.0;
+    min = -1.0 * max;
+    i->t[2] = (min - ray.origin.y) / ray.direction.y;
+    if (check_cap(ray,i->t[2]))
+    {
+        i->count++;
+    }
+    i->t[3]= (max - ray.origin.y) / ray.direction.y;
+    if (check_cap(ray, i->t[3]))
+    {
+        i->count++;
+    }
+    // double           min;
+    // double           max;
+    // double           t;
+    // int k;
+    // k = 0;
+    // // printf("\n h = %f\n" , cy->height);
+    // max = cy->height / 2.0;
+    // min = -1.0 * max;
+    // i->t[2] = 0;
+    // i->t[3] = 0;
+    // t = (min - ray.origin.y) / ray.direction.y;
+    // if (check_cap(ray, t))
+    // {
+    //  i->t[2] = (min - ray.origin.y) / ray.direction.y;
+    //  i->count = i->count + 1;
+    //  printf("\np3\n");
+    // }
+    // // else
+    // // {
+    // //       //  if (i->count > 0)
+    // //       // {
+    // //       i->count--;
+    // //       // }
+    // // }
+    // t = (max - ray.origin.y) / ray.direction.y;
+    // if (check_cap(ray, t))
+    // {
+    //  i->t[3] = (max - ray.origin.y) / ray.direction.y;
+    // i->count = i->count + 1;
+    //  printf("\np4\n");
+    // }
+    // else
+    // {
+    //      // if (i->count >0)
+    //      // {
+    //      i->count--;
+    //      // }
+    // }
+    // if (k == 0)
+    // {
+    //  i->count = i->count - 2;
+    // }
+    return (*i);
+}
+
+t_intersect local_intersect_cylinder(double h, t_ray ray)
+{
+	
+    double  a;
+    double      b;
+    double      c;
+    double      disc;
+    t_intersect inter1;
+    inter1.t[0] = 0;
+    inter1.t[1] = 0;
+    inter1.t[2] = 0;
+    inter1.t[3] = 0;
+    inter1.count = 0;
+    if (fabs(ray.direction.y) < EPSILON)
+		return (inter1);
+    a = pow(ray.direction.x, 2) + pow(ray.direction.z, 2);
+    b = (2 * ray.origin.x * ray.direction.x) + (2 * ray.origin.z * ray.direction.z);
+    c = (pow(ray.origin.x, 2) + pow(ray.origin.z, 2)) - 1.0;
+    disc = pow(b, 2) - (4 * a * c);
+    double          min;
+    double          max;
+    max = h / 2.0;
+    min = -1.0 * max;
+    inter1.t[0] = (((-1 * b) - sqrt(disc)) / (2 * a));
+    inter1.t[1] = (((-1 * b) + sqrt(disc)) / (2 * a));
+    double y0_y1[2];
+    if (disc >= 0 &&  double_equal(a , 0) == 0)
+    {
+        double  temp;
+        if (inter1.t[0] >   inter1.t[1] )
+        {
+            temp = inter1.t[0];
+            inter1.t[0]= inter1.t[1];
+            inter1.t[1] = temp;
+        }
+        y0_y1[0] = ray.origin.y + ( inter1.t[0] * ray.direction.y);
+        y0_y1[1] = ray.origin.y + ( inter1.t[1] * ray.direction.y);
+        if (min < y0_y1[0] && y0_y1[0] < max)
+        {
+            inter1.count++;
+            // insert_and_push(&intersec1, cylinder, head);
+        }
+        if (min < y0_y1[1] && y0_y1[1] < max)
+        {
+            inter1.count++;
+            // insert_and_push(&intersec2, cylinder, head);
+        }
+    }
+	return (intersect_caps(h, ray, &inter1));
+}
+
