@@ -1,8 +1,8 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 400
-# define HEIGHT 400
+# define WIDTH 300
+# define HEIGHT 300
 
 # define KEY_ESC 53
 # define TRUE 1
