@@ -4,6 +4,7 @@
 		"unordered_map": "c",
 		"__locale": "c",
 		"minirt.h": "c",
-		"ios": "c"
+		"ios": "c",
+		"algorithm": "c"
 	}
 }
