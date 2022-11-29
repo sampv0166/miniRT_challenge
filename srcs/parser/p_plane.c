@@ -83,6 +83,7 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
     rotate = normal_rotation_matrix(tuple(plane->norm_vector.x , plane->norm_vector.y, plane->norm_vector.z, 0));
     transform = matrix_multi(translate , rotate);
     plane->transform = transform ;
+	plane->inverse =  inverse(plane->transform  , 4);
     free_2d_array(translate, 4);
     free_2d_array(rotate , 4);
     // print_matrix(plane->transform, 4);

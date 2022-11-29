@@ -59,12 +59,14 @@ static void parse_current_line(char *line, t_data *scene_data)
     else
     {
         free(line);
-
-            free_2d_char_array(info_split);
+        free_2d_char_array(info_split);
         free(info_split);
         print_error_msg_and_exit("Invalid Identifier", scene_data);
     }
-  
+
+
+
+
     free_2d_char_array(info_split);
     free(info_split);                     
 }
@@ -100,5 +102,16 @@ void parse_scene(char *file_name, t_data *scene_data)
         }
         free_memmory(&line);
     }
+
+	// restore lights
+	t_list *shapes;
+	t_shape *sp;
+	shapes = scene_data->wrld.shapes;
+	while(shapes)
+	{	
+		sp = (t_shape*) shapes->content;
+		sp->material.ambient = scene_data->amb_ratio;
+		shapes = shapes->next;
+	}
     close(fd);
 }

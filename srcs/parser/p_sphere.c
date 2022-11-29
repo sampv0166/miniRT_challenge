@@ -63,6 +63,7 @@ void parse_sphere(char **info, t_data *scene_data)
 	scale = scaling(tuple (sphere->radius/ 2, sphere->radius/ 2, sphere->radius / 2, 1));
 	transform = matrix_multi(scale, translate);
 	sphere->transform = transform;
+	sphere->inverse =  inverse(sphere->transform , 4);
 	free_2d_array(translate, 4);
 	free_2d_array(scale, 4);
     // print_matrix(sphere->transform, 4);

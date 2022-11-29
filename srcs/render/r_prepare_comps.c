@@ -22,12 +22,12 @@ t_vector	normal_at(t_shape *s, t_point p)
 	t_tuple		tp2;
 	t_tuple		tp3;
 	t_tuple		tp4;
-	double		**invrs;
+	// double		**invrs;
 	double		**trnspose;
 
 	tp1 = point_tp(p);
-	invrs = inverse(s->transform, 4);
-	tp2 = matrix_multi_tp(invrs, tp1);
+	// invrs = inverse(s->transform, 4);
+	tp2 = matrix_multi_tp(s->inverse, tp1);
 	obj_point.x = tp2.x;
 	obj_point.y = tp2.y;
 	obj_point.z = tp2.z;
@@ -42,14 +42,14 @@ t_vector	normal_at(t_shape *s, t_point p)
 		obj_normal = local_normal_at_cylinder(s->height, obj_point);
 	
 	tp3 = vector_tp(obj_normal);
-	trnspose = transpose(invrs);
+	trnspose = transpose(s->inverse);
 	tp4 = matrix_multi_tp(trnspose , tp3);
 	world_normal.x = tp4.x;
 	world_normal.y = tp4.y;
 	world_normal.z = tp4.z;
-	free_2d_array(invrs,4 );
+	// free_2d_array(invrs,4 );
 	free_2d_array(trnspose,4 );
-	print_vector(normalize(world_normal));
+	// print_vector(normalize(world_normal));
 	return (normalize(world_normal));
 }
 

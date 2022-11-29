@@ -77,6 +77,8 @@ typedef struct s_shape
 	double diameter;
     double height;
 
+	double **inverse;
+
 }			   t_shape;
 
 
