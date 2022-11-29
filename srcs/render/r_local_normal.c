@@ -20,10 +20,6 @@ t_vector		local_normal_at_cylinder(double h,  t_point pnt)
 	max = h / 2.0;
 	min = -1.0 * max;
 
-
-	// max = 2.0;
-	// min = 1.0;
-
 	double dist;
 
 	dist = pow(pnt.x, 2) + pow(pnt.z, 2);
@@ -32,5 +28,5 @@ t_vector		local_normal_at_cylinder(double h,  t_point pnt)
 	else if (dist < 1 && pnt.y <= min + EPSILON)
 		return vector(0, -1, 0);
 	else
-	return (vector(pnt.x, 0 ,pnt.z));
+		return (vector(pnt.x, 0 ,pnt.z));
 }

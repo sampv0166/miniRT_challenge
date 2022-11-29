@@ -3,8 +3,8 @@
 
 void print_vector(t_vector vector)
 {
-		printf("%f\n",vector.x);
-	printf("%f\n", vector.y);
+		printf("\n%f,",vector.x);
+	printf("%f,", vector.y);
 	printf("%f\n", vector.z);
 }
 

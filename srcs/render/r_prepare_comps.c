@@ -40,8 +40,8 @@ t_vector	normal_at(t_shape *s, t_point p)
 		obj_normal = local_normal_at_plane();
 	if (!ft_strncmp(s->shape_name, "cy", 2))
 		obj_normal = local_normal_at_cylinder(s->height, obj_point);
+	
 	tp3 = vector_tp(obj_normal);
-
 	trnspose = transpose(invrs);
 	tp4 = matrix_multi_tp(trnspose , tp3);
 	world_normal.x = tp4.x;
@@ -49,6 +49,7 @@ t_vector	normal_at(t_shape *s, t_point p)
 	world_normal.z = tp4.z;
 	free_2d_array(invrs,4 );
 	free_2d_array(trnspose,4 );
+	print_vector(normalize(world_normal));
 	return (normalize(world_normal));
 }
 
