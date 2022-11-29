@@ -95,7 +95,6 @@ t_color	color_at(t_world w, t_ray r)
 	if (inter->count == 0)
 	{
 		free(inter);
-
 		while (intersections_list)
 		{
 			temp = intersections_list->next;

@@ -23,12 +23,12 @@ t_ray	transform(t_ray r, double **m)
 
 t_intersect	intersect(t_shape *s, t_ray r)
 {
-	double	**invrs;
+	// double	**invrs;
 
-	invrs = inverse(s->transform, 4);
-	s->ray_in_obj_space = transform(r, invrs);
+	// invrs = inverse(s->transform, 4);
+	s->ray_in_obj_space = transform(r, s->inverse);
 
-	free_2d_array(invrs, 4);
+	// free_2d_array(invrs, 4);
 
 	if (!ft_strncmp(s->shape_name, "sp", 2))
 		return (local_intersect_sphere(s->ray_in_obj_space));
