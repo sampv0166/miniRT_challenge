@@ -1,4 +1,3 @@
-
 #include "../../includes/minirt.h"
 
 t_vector	subtract_points(t_point p1, t_point p2)

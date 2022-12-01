@@ -47,7 +47,6 @@ double	**matrix_multi(double **mat1, double **mat2)
 	return (res);
 }
 
-
 double	**create_matrix(double *elem, int col)
 {
 	double	**mat;

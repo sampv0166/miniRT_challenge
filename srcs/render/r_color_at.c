@@ -23,13 +23,7 @@ t_ray	transform(t_ray r, double **m)
 
 t_intersect	intersect(t_shape *s, t_ray r)
 {
-	// double	**invrs;
-
-	// invrs = inverse(s->transform, 4);
 	s->ray_in_obj_space = transform(r, s->inverse);
-
-	// free_2d_array(invrs, 4);
-
 	if (!ft_strncmp(s->shape_name, "sp", 2))
 		return (local_intersect_sphere(s->ray_in_obj_space));
 	else if (!ft_strncmp(s->shape_name, "pl", 2))
@@ -64,19 +58,15 @@ t_list	*intersect_world(t_world w, t_ray r)
 			intersection2 = malloc (sizeof (t_intersection));
 			intersection3 = malloc (sizeof (t_intersection));
 			intersection4 = malloc (sizeof (t_intersection));
-		
 			intersection3->object = temp_shape;
 			intersection3->t = inter.t[2];
 			intersection3->count = 1;
-			
 			intersection4->object = temp_shape;
 			intersection4->t = inter.t[3];
 			intersection4->count = 1;
-			
 			intersection1->object = temp_shape;
 			intersection1->t = inter.t[0];
 			intersection1->count = 1;
-			
 			intersection2->object = temp_shape;
 			intersection2->t = inter.t[1];
 			intersection2->count = 1;
@@ -84,16 +74,16 @@ t_list	*intersect_world(t_world w, t_ray r)
 			{
 				intersections_list = ft_lstnew(intersection1);
 				ft_lstadd_back(&intersections_list, ft_lstnew(intersection2));
-				ft_lstadd_back(&intersections_list,ft_lstnew(intersection3));
-				ft_lstadd_back(&intersections_list,ft_lstnew(intersection4));
+				ft_lstadd_back(&intersections_list, ft_lstnew(intersection3));
+				ft_lstadd_back(&intersections_list, ft_lstnew(intersection4));
 				first_check = 1;
 			}
 			else
 			{
 				ft_lstadd_back(&intersections_list, ft_lstnew(intersection1));
 				ft_lstadd_back(&intersections_list, ft_lstnew(intersection2));
-				ft_lstadd_back(&intersections_list,ft_lstnew(intersection3));
-				ft_lstadd_back(&intersections_list,ft_lstnew(intersection4));
+				ft_lstadd_back(&intersections_list, ft_lstnew(intersection3));
+				ft_lstadd_back(&intersections_list, ft_lstnew(intersection4));
 			}
 		}
 		shapes = shapes->next;
@@ -109,8 +99,6 @@ t_color	color_at(t_world w, t_ray r)
 
 	intersections_list = intersect_world(w, r);
 	inter = hit(intersections_list);
-	// write(1, "1", 1);	
-
 	if (inter->count == 0)
 		return (color(0, 0, 0));
 	comps = prepare_computations(inter, r);

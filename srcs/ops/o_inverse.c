@@ -1,4 +1,3 @@
-
 #include "../../includes/minirt.h"
 
 int	invertible(double **mat, int size)

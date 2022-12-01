@@ -5,8 +5,8 @@ double	**translation(t_tuple tp)
 	double	**res;
 
 	res = identity_matrix();
-	res[0][3] = tp.x; 
-	res[1][3] = tp.y; 
+	res[0][3] = tp.x;
+	res[1][3] = tp.y;
 	res[2][3] = tp.z;
 	res[3][3] = tp.w;
 	return (res);
@@ -17,8 +17,8 @@ double	**scaling(t_tuple tp)
 	double	**res;
 
 	res = identity_matrix();
-	res[0][0] = tp.x; 
-	res[1][1] = tp.y; 
+	res[0][0] = tp.x;
+	res[1][1] = tp.y;
 	res[2][2] = tp.z;
 	res[3][3] = 1.0;
 	return (res);

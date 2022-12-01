@@ -18,7 +18,6 @@ t_intersect	local_intersect_plane(t_ray r)
 	inter.t[1] = 0;
 	inter.t[2] = 0;
 	inter.t[3] = 0;
-
 	if (inter.t[0] > 0)
 		return (inter);
 	else
@@ -87,29 +86,18 @@ t_intersect	intersect_caps(t_shape *cy, t_ray ray, t_intersect *i)
 	double			min;
 	double			max;
 
-
 	max = cy->height / 2.0;
 	min = -1.0 * max;
 	i->t[2] = (min - ray.origin.y) / ray.direction.y;
 	if (check_cap(ray, i->t[2]))
-	{
-		// printf("\nT3 = %f\n", i->t[2]);
 		i->count++;
-	}
 	else
-	{
 		i->t[2] = 0;
-	}
 	i->t[3] = (max - ray.origin.y) / ray.direction.y;
 	if (check_cap(ray, i->t[3]))
-	{
-		// printf("\nT4 = %f\n", i->t[3]);
 		i->count++;
-	}
 	else
-	{
 		i->t[3] = 0;
-	}
 	return (*i);
 }
 
@@ -137,17 +125,10 @@ t_intersect local_intersect_cylinder(t_shape *s, t_ray ray)
 		+ (2 * ray.origin.z * ray.direction.z);
 	c = (pow(ray.origin.x, 2) + pow(ray.origin.z, 2)) - 1.0;
 	disc = pow(b, 2) - (4 * a * c);
-
 	if (fabs(a) < EPSILON)
 		return (inter1);
-
 	inter1.t[0] = (((-1 * b) - sqrt(disc)) / (2 * a));
 	inter1.t[1] = (((-1 * b) + sqrt(disc)) / (2 * a));
-	// inter1.count = 2;
-	// return (inter1);
-
-
-
 	if (disc >= 0 && (double_equal(a, 0) == 0))
 	{
 		if (inter1.t[0] > inter1.t[1])
@@ -159,17 +140,11 @@ t_intersect local_intersect_cylinder(t_shape *s, t_ray ray)
 		y0_y1[0] = ray.origin.y + (inter1.t[0] * ray.direction.y);
 		y0_y1[1] = ray.origin.y + (inter1.t[1] * ray.direction.y);
 		if (min < y0_y1[0] && y0_y1[0] < max)
-		{
-			// printf("\nT1 = %f\n", inter1.t[0]);
 			inter1.count++;
-		}
 		else
-			inter1.t[0] = 0;		
+			inter1.t[0] = 0;
 		if (min < y0_y1[1] && y0_y1[1] < max)
-		{
-			// printf("\nT2 = %f\n", inter1.t[1]);
 			inter1.count++;
-		}	
 		else
 			inter1.t[1] = 0;
 	}
@@ -178,7 +153,6 @@ t_intersect local_intersect_cylinder(t_shape *s, t_ray ray)
 		inter1.t[0] = 0;
 		inter1.t[1] = 0;
 	}
-	// return (inter1);
 	if (fabs(ray.direction.y) < EPSILON)
 		return (inter1);
 	return (intersect_caps(s, ray, &inter1));

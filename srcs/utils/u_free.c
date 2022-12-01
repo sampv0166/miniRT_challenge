@@ -13,7 +13,6 @@ void	free_2d_array(double **arr, int size)
 	free(arr);
 }
 
-
 void	free_2d_char_array(char **arr)
 {
 	int	i;
