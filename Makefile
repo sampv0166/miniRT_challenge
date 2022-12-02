@@ -16,6 +16,7 @@ SRCS = 	main.c \
 		srcs/ops/o_product.c \
 		srcs/ops/o_transform.c  \
 		srcs/ops/o_rotate.c  \
+		srcs/render/r_intersect.c \
 		srcs/render/r_lighting.c \
 		srcs/render/r_light_vars.c \
 		srcs/render/r_light_calculate.c \
