@@ -16,7 +16,6 @@ t_bool	is_shadowed(t_world w, t_point p)
 	r = ray(p, direction);
 	xs = intersect_world(w, r);
 	inter = hit(xs);
-
 	if (inter->t && inter->t < distance)
 	{
 		if (inter->t == 0)

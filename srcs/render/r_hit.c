@@ -15,7 +15,6 @@ void	sort_intersections(t_list *xs)
 		while (temp)
 		{
 			inter2 = (t_intersection *) temp->content;
-
 			if (inter1->t > inter2->t)
 			{
 				temp_intersection = inter1;

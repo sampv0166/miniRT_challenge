@@ -67,7 +67,6 @@ double	minor(double **mat, int size, int row, int col)
 
 	submat = submatrix(mat, size, row, col);
 	det = determinant(submat, size - 1);
-
 	i = 0;
 	while (i < size - 1)
 	{

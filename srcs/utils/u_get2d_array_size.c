@@ -1,4 +1,3 @@
-
 #include "../../includes/minirt.h"
 
 int	get_2darray_size(char **arr)

@@ -1,4 +1,3 @@
-
 #include "../../includes/minirt.h"
 
 double	**set_matrix(t_vector left, t_vector true_up, t_vector forward)
