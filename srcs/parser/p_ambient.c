@@ -52,30 +52,33 @@ static int verify_digits(char **color_split ,char **info, t_data *scene_data)
 
 int check_number_range(double value)
 {
-    if (value <= 1 && value > 0)
+    if (value < 1 && value > 0)
     {
         return (1);
     }
     return (0);
 }
 
-void parse_ambient_lighting(char **info, t_data *scene_data)
+int parse_ambient_lighting(char **info, t_data *scene_data)
 {
     char **color_split;
 
     color_split = ft_split(info[2], ',');
     scene_data->amb_ratio = parse_double(info[1]);
+
     if (scene_data->amb_set == 0 && get_2darray_size(info) == 3 && 
-        verify_digits(color_split, info, scene_data) , check_number_range(scene_data->amb_ratio))
+        verify_digits(color_split, info, scene_data) && check_number_range(scene_data->amb_ratio) && parse_color(info[2], &scene_data->amb_color) )
     {
-        parse_color(info[2], scene_data, &scene_data->amb_color);
-        scene_data->amb_set = 1;
+        // parse_color(info[2], scene_data, &scene_data->amb_color);
+        // scene_data->amb_set = 1;
+        scene_data->num_objs.num_ambiance += 1;
     }
     else
-    {   
+    {
         free_2d_char_array(color_split);
-        print_error_msg_and_exit("Wrong Input", scene_data);
+        return (set_error_obj(4, "WRONG INPUT FOR AMBIENT LIGHTING" , scene_data));
     }
     free_2d_char_array(color_split);
     free(color_split);
+    return (1);
 }

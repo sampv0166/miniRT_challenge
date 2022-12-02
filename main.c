@@ -67,19 +67,20 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);
 	init_scene_data(&scene_data); // need to free scenedata.wrld.shapes
-	parse_scene(argv[1], &scene_data);
-	setup_mlx(&scene_data);
-	// t_list *temp;
-	// temp = scene_data.wrld.shapes ;
-	// scene_data.wrld.shapes = scene_data.wrld.shapes->next;
-	// free(temp);
-	// scene_data.wrld.shapes  = NULL;
-	default_world(&scene_data);
-	render(scene_data.camera2, scene_data.wrld, &scene_data);
-	// exit(0);
-	mlx_put_image_to_window(scene_data.mlx.mlx_ptr, scene_data.mlx.win_ptr,
-	scene_data.img.img_ptr, 0, 0);
-	mlx_key_hook(scene_data.mlx.win_ptr, &key, &scene_data);
-	mlx_loop(scene_data.mlx.mlx_ptr);
+	
+	if (parse_scene(argv[1], &scene_data))
+	{
+		setup_mlx(&scene_data);
+		default_world(&scene_data);
+		render(scene_data.camera2, scene_data.wrld, &scene_data);
+		mlx_put_image_to_window(scene_data.mlx.mlx_ptr, scene_data.mlx.win_ptr,
+		scene_data.img.img_ptr, 0, 0);
+		mlx_key_hook(scene_data.mlx.win_ptr, &key, &scene_data);
+		mlx_loop(scene_data.mlx.mlx_ptr);
+	}
+	else
+	{
+		print_error_msg_and_exit(scene_data.error.message, &scene_data);
+	}
 	return (0);
 }

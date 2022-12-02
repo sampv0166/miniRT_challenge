@@ -3,6 +3,12 @@
 
 typedef unsigned int t_bool;
 
+typedef struct s_error0bj
+{
+	int error_code;
+	char* message;
+}	t_errorObj ;
+
 typedef struct s_tuple
 {
 	double	x;
@@ -151,6 +157,17 @@ typedef struct s_camera
 
 }	t_camera;
 
+typedef struct s_numObjects
+{
+	int num_cam;
+	int num_light;
+	int num_ambiance;
+	int num_sp;
+	int num_pl;
+	int num_cy;
+
+} t_numObjects;
+
 typedef struct s_data
 {
 	t_mlx	mlx;
@@ -172,7 +189,10 @@ typedef struct s_data
 	int 	total_plane_count;
 	int		total_cylinder_count;
 
+	t_errorObj error;
+
 	char *line_ptr;
+	t_numObjects num_objs;
 }	t_data;
 
 

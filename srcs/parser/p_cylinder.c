@@ -12,7 +12,7 @@ static void store_in_scene_data(t_data *scene_data, char **point_split, char **n
     cy->norm_vector.y = parse_double(norm_vec[1]);
     cy->norm_vector.z = parse_double(norm_vec[2]);
 
-    parse_color(info[5], scene_data, &cy->color);
+    parse_color(info[5], &cy->color);
     cy->diameter = parse_double(info[3]);
     cy->height = parse_double(info[4]);
     // cy->transform = identity_matrix();

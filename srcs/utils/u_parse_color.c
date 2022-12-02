@@ -1,6 +1,6 @@
 #include "../../includes/minirt.h"
 
-void	parse_color(char *str, t_data *scene_data, t_color *colors)
+int	parse_color(char *str,  t_color *colors)
 {
 	char	**rgb;
 	double	c[3];
@@ -9,14 +9,14 @@ void	parse_color(char *str, t_data *scene_data, t_color *colors)
 	i = 0;
 	rgb = ft_split(str, ',');
 	if (get_2darray_size(rgb) != 3)
-		print_error_msg_and_exit("INVALID COLOR VALUES", scene_data);
+		return(0);
 	while (i < 3)
 	{
 		if (skip_dot_verify_digits(rgb[i]))
 		{
 			free_2d_char_array(rgb);
 			free(rgb);
-			print_error_msg_and_exit("INVALID COLOR VALUES", scene_data);
+			return(0);
 		}
 		i++;
 	}
@@ -29,11 +29,12 @@ void	parse_color(char *str, t_data *scene_data, t_color *colors)
 	{
 		free_2d_char_array(rgb);
 		free(rgb);
-		print_error_msg_and_exit("INVALID COLOR VALUES", scene_data);
+		return(0);
 	}
 	free_2d_char_array(rgb);
 	free(rgb);
 	colors->r = c[0];
 	colors->g = c[1];
 	colors->b = c[2];
+	return(1);
 }

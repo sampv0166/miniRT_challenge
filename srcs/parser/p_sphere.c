@@ -39,7 +39,7 @@ void parse_sphere(char **info, t_data *scene_data)
         
         sphere->radius = parse_double(info[2]);
 
-        parse_color(info[3], scene_data, &sphere->color);
+        parse_color(info[3], &sphere->color);
         // sphere->transform = identity_matrix();
         sphere->material.shininess = 200.0;;
 	    sphere->material.diffuse = 0.7;

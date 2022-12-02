@@ -1,19 +1,20 @@
 #include "../../includes/minirt.h"
 
-void check_for_a_c_l( char **info_split, t_data *scene_data)
+int check_for_a_c_l( char **info_split, t_data *scene_data)
 {
     if (info_split[0][0] == 'A')
     {
-        parse_ambient_lighting(info_split, scene_data);
+        return (parse_ambient_lighting(info_split, scene_data));
     }
     else if (info_split[0][0] == 'C')
     {
-        parse_camera(info_split,scene_data);
+        return (parse_camera(info_split,scene_data));
     }
     else if (info_split[0][0] == 'L')
     {
-        parse_light(info_split,scene_data);
+        return (parse_light(info_split,scene_data));
     }
+    return (1);
 }
 
 void check_for_sp_pl_cy( char **info_split, t_data *scene_data)
@@ -38,7 +39,7 @@ void check_for_sp_pl_cy( char **info_split, t_data *scene_data)
     }
 }
 
-static void parse_current_line(char *line, t_data *scene_data)
+int parse_current_line(char *line, t_data *scene_data)
 {
     
     char **info_split;
@@ -50,7 +51,12 @@ static void parse_current_line(char *line, t_data *scene_data)
     scene_data->line_ptr = line;
     if (info_split && ft_strlen(info_split[0]) == 1)
     {
-        check_for_a_c_l(info_split, scene_data);
+        if (!check_for_a_c_l(info_split, scene_data))
+        {
+            free_2d_char_array(info_split);
+            return (0);
+        }
+
     }
     else if (info_split &&  ft_strlen(info_split[0]) == 2)
     {
@@ -58,42 +64,50 @@ static void parse_current_line(char *line, t_data *scene_data)
     }
     else
     {
-        free(line);
         free_2d_char_array(info_split);
-        free(info_split);
-        print_error_msg_and_exit("Invalid Identifier", scene_data);
+        // free(info_split); 
+        return(set_error_obj(3, "INVALID IDENTIFIER", scene_data));
     }
-
-
-
-
     free_2d_char_array(info_split);
-    free(info_split);                     
+    // free(info_split); 
+    return(1);                   
 }
 
-void parse_scene(char *file_name, t_data *scene_data)
+int set_error_obj(int err_code,char *msg,t_data *scene_data)
+{
+    scene_data->error.message = msg;
+    scene_data->error.error_code = err_code;
+    return (0);
+}
+
+int parse_scene(char *file_name, t_data *scene_data)
 {
     char *line;
     int fd;
 
+    scene_data->num_objs.num_ambiance = 0;
+    scene_data->num_objs.num_cam = 0;
+    scene_data->num_objs.num_cy = 0;
+    scene_data->num_objs.num_light = 0;
+    scene_data->num_objs.num_pl = 0;
+    scene_data->num_objs.num_sp = 0;
+
     line = NULL;
     if (check_file_name(file_name))
-        print_error_msg_and_exit("FILE EXTENTION IS INCORRECT", scene_data);
+        return(set_error_obj(1,"FILE EXTENTION IS INCORRECT", scene_data));
     fd = open(file_name, O_RDONLY);
     if (fd < 0)
-    {
-        free(scene_data->wrld.shapes);
-        printf("ERROR OPENING FILE\n");
-        exit(0);
-        // print_error_msg_and_exit("ERROR OPENING FILE", scene_data);  
-    }
-
+        return (set_error_obj(2,"ERROR OPENING FILE", scene_data));
     while (1)
     {
         line = get_next_line(fd);
         if (line && *line != '#' && *line != '\n')
         {
-            parse_current_line(line, scene_data);
+            if (!parse_current_line(line, scene_data))
+            {
+                free_memmory(&line);
+                return(0);
+            }
         }
         else if (!line)
         {
@@ -103,6 +117,11 @@ void parse_scene(char *file_name, t_data *scene_data)
         free_memmory(&line);
     }
 
+    // check number of cams == 1
+    // check number of lights == 1
+    // check number of ambiant == 1
+    // check if there is atleast one object sp + cy + pl > 0 
+    
 	// restore lights
 	t_list *shapes;
 	t_shape *sp;
@@ -114,4 +133,5 @@ void parse_scene(char *file_name, t_data *scene_data)
 		shapes = shapes->next;
 	}
     close(fd);
+    return (1);
 }

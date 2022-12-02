@@ -22,7 +22,7 @@ double	**inverse(double **mat, int size)
 	if (!invertible(mat, size))
 	{
 		printf("not invertible!\n");
-		exit (1);
+		return (NULL);
 	}
 	res = malloc(sizeof(double *) * size);
 	det = determinant(mat, 4);
