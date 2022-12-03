@@ -16,46 +16,98 @@ int comma_count(char *str)
     return (count); 
 }
 
+int get_ambient_lighting(char **info_split, t_data *scene_data, char **color_split)
+{
+    int ret;
 
+    ret = 0;
+    ret = parse_ambient_lighting(info_split, scene_data, color_split);
+    if (color_split)
+        free_2d_char_array(color_split); 
+    return (ret);
+}
+
+int get_camera(char **info_split, t_data *scene_data, char **point_split, char **norm_split)
+{
+    int ret;
+
+    ret = parse_camera(info_split, scene_data, point_split, norm_split);
+    if (point_split)
+        free_2d_char_array(point_split);
+    if (norm_split)
+        free_2d_char_array(norm_split);
+    return (ret);
+}
+
+int get_light(char **info_split, t_data *scene_data, char **point_split, char **color_split)
+{
+    int ret;
+
+    ret = parse_light(info_split, scene_data, point_split, color_split);
+    if (point_split)
+        free_2d_char_array(point_split);
+    if (color_split)
+        free_2d_char_array(color_split);
+    return (ret);
+}
 
 int check_for_a_c_l(char **info_split, t_data *scene_data)
 {
     char **color_split;
     char **norm_split;
     char **point_split;
-    int  ret;
-    ret = 0;
 
     color_split = NULL;
     norm_split = NULL;
     point_split = NULL;
     
     if (info_split[0][0] == 'A')
-    {
-        ret = parse_ambient_lighting(info_split, scene_data, color_split);
-        if (color_split)
-            free_2d_char_array(color_split); 
-        return (ret);
-    }
+        return (get_ambient_lighting(info_split, scene_data, color_split));
     if (info_split[0][0] == 'C')
-    {
-        ret = parse_camera(info_split, scene_data, point_split, norm_split);
-        if (point_split)
-            free_2d_char_array(point_split);
-        if (norm_split)
-            free_2d_char_array(norm_split);
-        return (ret);
-    }
+        return (get_camera(info_split, scene_data, point_split,norm_split));
     if (info_split[0][0] == 'L')
-    {
-        ret = parse_light(info_split, scene_data, point_split, color_split);
-        if (point_split)
-            free_2d_char_array(point_split);
-        if (color_split)
-            free_2d_char_array(color_split);
-        return (ret);
-    }
+        return (get_light(info_split, scene_data, point_split,color_split));
     return(set_error_obj(3, "INVALID IDENTIFIER", scene_data));
+}
+
+int get_sphere(char **info_split, t_data *scene_data, char **point_split, char **color_split)
+{
+    int ret;
+
+    ret = parse_sphere(info_split,scene_data, point_split , color_split);
+    if (point_split)
+        free_2d_char_array(point_split);
+    if (color_split)
+        free_2d_char_array(color_split);
+    return (ret); 
+}
+
+int get_plane(char **info_split, t_data *scene_data, char **point_split, char **color_split, char **norm_split)
+{
+    int ret;
+
+    ret = parse_plane(info_split,scene_data, point_split, color_split, norm_split);
+    if (point_split)
+        free_2d_char_array(point_split);
+    if (color_split)
+        free_2d_char_array(color_split);
+    if (norm_split)
+        free_2d_char_array(norm_split);        
+    return (ret); 
+}
+
+int get_cylinder(char **info_split, t_data *scene_data, char **point_split, char **color_split, char **norm_split)
+{
+    int ret;
+
+    ret = parse_cylinder(info_split,scene_data, point_split, color_split, norm_split);
+    if (point_split)
+        free_2d_char_array(point_split);
+    if (color_split)
+        free_2d_char_array(color_split);
+    if (norm_split)
+        free_2d_char_array(norm_split);        
+    return (ret);
 }
 
 int check_for_sp_pl_cy( char **info_split, t_data *scene_data)
@@ -63,46 +115,17 @@ int check_for_sp_pl_cy( char **info_split, t_data *scene_data)
     char **color_split;
     char **norm_split;
     char **point_split;
-    int  ret;
-    ret = 0;
 
     color_split = NULL;
     norm_split = NULL;
     point_split = NULL;
 
     if(info_split[0][0] == 's' && info_split[0][1] == 'p')
-    {
-        ret = parse_sphere(info_split,scene_data, point_split , color_split);
-        if (point_split)
-            free_2d_char_array(point_split);
-        if (color_split)
-            free_2d_char_array(color_split);
-        return (ret); 
-    }
+        return(get_sphere(info_split, scene_data, point_split,color_split));
     if (info_split[0][0] == 'p' && info_split[0][1] == 'l')
-    {
-        ret = parse_plane(info_split,scene_data, point_split, color_split, norm_split);
-        if (point_split)
-            free_2d_char_array(point_split);
-        if (color_split)
-            free_2d_char_array(color_split);
-        if (norm_split)
-            free_2d_char_array(norm_split);        
-        return (ret);  
-        // return (parse_plane(info_split,scene_data));
-    }
+        return (get_plane(info_split,scene_data, point_split, color_split, norm_split));
     if (info_split[0][0] == 'c' && info_split[0][1] == 'y')
-    {
-        ret = parse_cylinder(info_split,scene_data, point_split, color_split, norm_split);
-        if (point_split)
-            free_2d_char_array(point_split);
-        if (color_split)
-            free_2d_char_array(color_split);
-        if (norm_split)
-            free_2d_char_array(norm_split);        
-        return (ret);
-        // return (parse_cylinder(info_split,scene_data));  
-    }
+        return (get_cylinder(info_split, scene_data, point_split, color_split, norm_split));
     return(set_error_obj(3, "INVALID IDENTIFIER", scene_data));
 }
 
@@ -181,12 +204,10 @@ int parse_scene(char *file_name, t_data *scene_data)
         free_memmory(&line);
     }
 
-    // check number of cams == 1
-    // check number of lights == 1
-    // check number of ambiant == 1
     // check if there is atleast one object sp + cy + pl > 0 
     
 	// restore lights
+
 	t_list *shapes;
 	t_shape *sp;
 	shapes = scene_data->wrld.shapes;
