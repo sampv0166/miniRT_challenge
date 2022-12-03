@@ -16,4 +16,13 @@ double		light_dot_normal(t_vector lightv, t_vector normalv);
 double		reflect_dot_eye(t_vector reflectv, t_vector eyev);
 t_color		lighting(t_comps c, t_light l, t_bool in_shadow);
 
+// Cylinder
+int			check_cap(t_ray ray, double t);
+t_intersect	intersect_caps(t_shape *cy, t_ray ray, t_intersect *i);
+void		init_intersect(t_intersect *inter1);
+void		check_intersect(t_intersect *inter1, double min,
+				double max, t_ray ray);
+void		set_intersect(t_intersect *inter1, t_ray ray,
+				double min, double max);
+
 #endif
