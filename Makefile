@@ -31,6 +31,7 @@ SRCS = 	main.c \
 		srcs/render/r_local_intersect.c \
 		srcs/render/r_prepare_comps.c \
 		srcs/render/r_shade_hit.c \
+		srcs/render/r_cylinder.c \
 		srcs/utils/u_gnl_utils.c \
 		srcs/utils/u_gnl.c \
 		srcs/utils/u_error.c \
