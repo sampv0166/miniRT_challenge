@@ -14,12 +14,12 @@ int skip_dot_verify_digits(char *str);
 
 
 int parse_scene(char *file_name, t_data *scene_data);
-int parse_camera(char **info, t_data *scene_data);
-void parse_sphere(char **info, t_data *scene_data);
-void parse_plane(char **info, t_data *scene_data);
-void parse_cylinder(char **info, t_data *scene_data);
-int parse_ambient_lighting(char **info, t_data *scene_data);
+int parse_camera(char **info, t_data *scene_data, char **point_split, char **norm_split);
+int parse_sphere(char **info, t_data *scene_data, char **point_split, char **color_split);
+int parse_plane(char **info, t_data *scene_data, char **point_split,char** color_split,char** norm_split);
+int parse_cylinder(char **info, t_data *scene_data, char **point_split,char** color_split,char** norm_split);
+int parse_ambient_lighting(char **info, t_data *scene_data, char **color_split);
 
-int parse_light(char **info, t_data *scene_data);
+int parse_light(char **info, t_data *scene_data, char **point_split, char **color_split );
 
 #endif

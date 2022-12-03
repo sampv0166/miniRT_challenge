@@ -22,6 +22,8 @@
 # include "utils.h"
 # include "render.h"
 
+int verify_digits(char **str);
+int comma_count(char *str);
 int set_error_obj(int err_code,char *msg,t_data *scene_data);
 double  **normal_rotation_matrix(t_tuple normal);
 void free_matrix(double **arr, int size);
