@@ -22,7 +22,7 @@
 
 
     // !REDUCE TO 25 LINES  - SAMAD
-int parse_light(char **info, t_data *scene_data, char **point_split, char **color_split )
+int light_error_check(char **info, t_data *scene_data)
 {
     if (scene_data->num_objs.num_light  == 1)
         return (set_error_obj(1, "LIGHT IS ALREADY SET", scene_data));
@@ -37,6 +37,15 @@ int parse_light(char **info, t_data *scene_data, char **point_split, char **colo
         return (set_error_obj(1, "LIGHT POINT FORMAT IS INCORRECT", scene_data));
     if(comma_count(info[3]) != 2)
         return (set_error_obj(1, "LIGHT COLOR FORMAT IS INCORRECT", scene_data));
+    
+    return (1);
+}
+
+
+int parse_light(char **info, t_data *scene_data, char **point_split, char **color_split )
+{
+    if (!light_error_check(info,scene_data ))
+        return (0);
     point_split = ft_split(info[1], ',');
     color_split = ft_split(info[3], ',');
     if (get_2darray_size(point_split) != 3)
