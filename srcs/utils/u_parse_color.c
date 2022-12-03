@@ -23,8 +23,8 @@ void	parse_color(char *str, t_data *scene_data, t_color *colors)
 	c[0] = parse_double(rgb[0]);
 	c[1] = parse_double(rgb[1]);
 	c[2] = parse_double(rgb[2]);
-	if ((c[0] > 255 || c[0] < 0) 
-		|| (c[1] > 255 || c[1] < 0) 
+	if ((c[0] > 255 || c[0] < 0)
+		|| (c[1] > 255 || c[1] < 0)
 		|| (c[2] > 255 || c[2] < 0))
 	{
 		free_2d_char_array(rgb);

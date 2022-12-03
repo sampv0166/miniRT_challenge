@@ -9,4 +9,3 @@ t_color	color(double red, double green, double blue)
 	new.b = blue;
 	return (new);
 }
-

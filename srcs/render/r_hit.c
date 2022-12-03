@@ -27,10 +27,26 @@ void	sort_intersections(t_list *xs)
 	}
 }
 
+void	find_min(t_list *xs, t_intersection **min_inter,
+	double *min)
+{
+	t_intersection	*temp;
+
+	while (xs)
+	{
+		temp = (t_intersection *) xs->content;
+		if (*min > temp->t && temp->t > 0)
+		{
+			*min_inter = temp;
+			*min = temp->t;
+		}
+		xs = xs->next;
+	}
+}
+
 t_intersection	*hit(t_list *intersection_list)
 {
 	t_list			*xs;
-	t_intersection	*inter2;
 	t_intersection	*inter;
 	t_intersection	*min_inter;
 	double			min;
@@ -42,16 +58,7 @@ t_intersection	*hit(t_list *intersection_list)
 	if (xs)
 	{
 		sort_intersections(xs);
-		while (xs)
-		{
-			inter2 = (t_intersection *) xs->content;
-			if (min > inter2->t && inter2->t > 0)
-			{
-				min_inter = inter2;
-				min = inter2->t;
-			}
-			xs = xs->next;
-		}
+		find_min(xs, &min_inter, &min);
 		if (min_inter && min_inter->t > 0)
 		{
 			free(inter);
