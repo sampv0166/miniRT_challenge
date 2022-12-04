@@ -106,9 +106,6 @@ int parse_plane(char **info, t_data *scene_data, char **point_split,char** color
         return (set_error_obj(1, "PLANE COLOR FORMAT IS INCORRECT", scene_data));
     if(comma_count(info[2]) != 2)
         return (set_error_obj(1, "PLANE NORM VEC FORMAT IS INCORRECT", scene_data));     
-    point_split = ft_split(info[1], ',');
-    color_split = ft_split(info[3], ',');
-    norm_split = ft_split(info[2], ',');
     if (get_2darray_size(point_split) != 3)
          return (set_error_obj(1, "WRONG NUMBER OF ARGUMENTS IN PLANE POINT", scene_data));
     if (get_2darray_size(color_split) != 3)

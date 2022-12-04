@@ -82,9 +82,7 @@ int camera_error_check(char **info, t_data *scene_data)
 int parse_camera(char **info, t_data *scene_data, char **point_split, char **norm_split)
 {
     if (!camera_error_check(info, scene_data))
-        return(0);  
-    point_split = ft_split(info[1], ',');
-    norm_split = ft_split(info[2], ',');        
+        return(0);        
     if (get_2darray_size(point_split) != 3)
         return (set_error_obj(2, "CAMERA POINT SHOULD HAVE 3 VALUES",scene_data));
     if (get_2darray_size(norm_split) != 3)
@@ -94,13 +92,9 @@ int parse_camera(char **info, t_data *scene_data, char **point_split, char **nor
     if (!verify_digits(norm_split))
         return (set_error_obj(2, "ONLY DIGITS ALLOWED IN CAMERA NORM VECTOR VALUES",scene_data));    
     store_in_scene_data(scene_data, point_split, norm_split, info);
-
     camera_transform(scene_data);
-
     if (scene_data->camera2.transform == NULL)
         return (set_error_obj(2, "CAMERA MATIX NOT INVERTIBLE",scene_data));
-    // free(point_split);
-    // free(norm_vec_split);
     scene_data->num_objs.num_cam += 1; 
     return(1);
 }

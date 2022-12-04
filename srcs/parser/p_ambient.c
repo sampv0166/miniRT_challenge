@@ -76,7 +76,6 @@ int parse_ambient_lighting(char **info, t_data *scene_data, char **color_split)
         return (set_error_obj(1, "AMBIENCE RATIO SHOULD BE BETWEEN 1 AND 0", scene_data));
     if(comma_count(info[2]) != 2)
         return (set_error_obj(1, "AMBIENT LIGHTING COLOR FORMAT IS INCORRECT", scene_data));
-    color_split = ft_split(info[2], ',');
     scene_data->num_objs.num_ambiance += 1;   
     if (!verify_digits(color_split))
         return (set_error_obj(2, "ONLY DIGITS ALLOWED IN AMBIENCE COLOR VALUES",scene_data));   

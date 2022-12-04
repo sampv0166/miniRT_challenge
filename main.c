@@ -71,10 +71,11 @@ int	main(int argc, char **argv)
 	if (parse_scene(argv[1], &scene_data))
 	{
 		setup_mlx(&scene_data);
-		// exit(0);
 		default_world(&scene_data);
 	
 		render(scene_data.camera2, scene_data.wrld, &scene_data);
+		free_scene_data(&scene_data);
+		// exit(0);
 		mlx_put_image_to_window(scene_data.mlx.mlx_ptr, scene_data.mlx.win_ptr,
 		scene_data.img.img_ptr, 0, 0);
 		mlx_key_hook(scene_data.mlx.win_ptr, &key, &scene_data);

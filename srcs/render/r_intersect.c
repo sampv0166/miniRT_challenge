@@ -74,5 +74,6 @@ t_list	*intersect_world(t_world w, t_ray r)
 		}
 		shapes = shapes->next;
 	}
+	free(intersection);
 	return (intersections_list);
 }

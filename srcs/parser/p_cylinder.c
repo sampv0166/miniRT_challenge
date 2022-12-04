@@ -99,9 +99,6 @@ int parse_cylinder(char **info, t_data *scene_data, char **point_split,char** co
          return (set_error_obj(1, "DIAMETER OF CYLINDER SHOULD BE A NUMBER", scene_data));
     if (skip_dot_verify_digits(info[3]))
          return (set_error_obj(1, "HEIGHT OF CYLINDER SHOULD BE A NUMBER", scene_data));
-    point_split = ft_split(info[1], ',');
-    color_split = ft_split(info[5], ',');
-    norm_split = ft_split(info[2], ',');
     if (get_2darray_size(point_split) != 3)
          return (set_error_obj(1, "WRONG NUMBER OF ARGUMENTS IN CYLINDER POINT", scene_data));
     if (get_2darray_size(color_split) != 3)

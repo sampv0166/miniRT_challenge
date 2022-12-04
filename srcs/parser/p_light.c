@@ -46,8 +46,6 @@ int parse_light(char **info, t_data *scene_data, char **point_split, char **colo
 {
     if (!light_error_check(info,scene_data ))
         return (0);
-    point_split = ft_split(info[1], ',');
-    color_split = ft_split(info[3], ',');
     if (get_2darray_size(point_split) != 3)
         return (set_error_obj(2, "LIGHT POINT SHOULD HAVE 3 VALUES",scene_data));
     if (get_2darray_size(color_split) != 3)
@@ -65,7 +63,6 @@ int parse_light(char **info, t_data *scene_data, char **point_split, char **colo
     scene_data->light_src.color.g  = scene_data->light_src.color.g/ 255;
     scene_data->light_src.color.b = scene_data->light_src.color.b/ 255;
     scene_data->num_objs.num_light += 1;
-        // normmalize the light color here
     scene_data->num_objs.num_light += 1;
     return (1);
 }

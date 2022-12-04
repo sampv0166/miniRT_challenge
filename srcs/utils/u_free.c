@@ -31,7 +31,7 @@ void	free_scene_data(t_data *scene_data)
 	t_list	*temp;
 	t_shape	*sp;
 
-	if (scene_data->camera2.init)
+	if (scene_data->camera2.transform)
 	{
 		free_2d_array(scene_data->camera2.transform, 4);
 	}
@@ -40,6 +40,7 @@ void	free_scene_data(t_data *scene_data)
 		temp = scene_data->wrld.shapes->next;
 		sp = (t_shape *) scene_data->wrld.shapes->content;
 		free_2d_array(sp->transform, 4);
+		free_2d_array(sp->inverse, 4);
 		free(sp);
 		free(scene_data->wrld.shapes);
 		scene_data->wrld.shapes = temp;

@@ -1,47 +1,36 @@
-==219623== Memcheck, a memory error detector
-==219623== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==219623== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
-==219623== Command: ./miniRT scenes/default.rt
-==219623== Parent PID: 139197
-==219623== 
-==219623== Invalid read of size 8
-==219623==    at 0x11252D: free_scene_data (u_free.c:68)
-==219623==    by 0x11240D: print_error_msg_and_exit (u_error.c:11)
-==219623==    by 0x10AE3F: parse_ambient_lighting (p_ambient.c:77)
-==219623==    by 0x10AF8B: check_for_a_c_l (p_parse.c:7)
-==219623==    by 0x10B192: parse_current_line (p_parse.c:53)
-==219623==    by 0x10B2F3: parse_scene (p_parse.c:94)
-==219623==    by 0x10AA84: main (main.c:73)
-==219623==  Address 0x18 is not stack'd, malloc'd or (recently) free'd
-==219623== 
-==219623== 
-==219623== Process terminating with default action of signal 11 (SIGSEGV)
-==219623==  Access not within mapped region at address 0x18
-==219623==    at 0x11252D: free_scene_data (u_free.c:68)
-==219623==    by 0x11240D: print_error_msg_and_exit (u_error.c:11)
-==219623==    by 0x10AE3F: parse_ambient_lighting (p_ambient.c:77)
-==219623==    by 0x10AF8B: check_for_a_c_l (p_parse.c:7)
-==219623==    by 0x10B192: parse_current_line (p_parse.c:53)
-==219623==    by 0x10B2F3: parse_scene (p_parse.c:94)
-==219623==    by 0x10AA84: main (main.c:73)
-==219623==  If you believe this happened as a result of a stack
-==219623==  overflow in your program's main thread (unlikely but
-==219623==  possible), you can try to increase the size of the
-==219623==  main thread stack using the --main-stacksize= flag.
-==219623==  The main thread stack size used in this run was 8388608.
-==219623== 
-==219623== HEAP SUMMARY:
-==219623==     in use at exit: 118 bytes in 8 blocks
-==219623==   total heap usage: 33 allocs, 25 frees, 363 bytes allocated
-==219623== 
-==219623== LEAK SUMMARY:
-==219623==    definitely lost: 0 bytes in 0 blocks
-==219623==    indirectly lost: 0 bytes in 0 blocks
-==219623==      possibly lost: 0 bytes in 0 blocks
-==219623==    still reachable: 118 bytes in 8 blocks
-==219623==         suppressed: 0 bytes in 0 blocks
-==219623== Reachable blocks (those to which a pointer was found) are not shown.
-==219623== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-==219623== 
-==219623== For lists of detected and suppressed errors, rerun with: -s
-==219623== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==29163== Memcheck, a memory error detector
+==29163== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==29163== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==29163== Command: ./miniRT scenes/00_basic_shapes.rt
+==29163== Parent PID: 5238
+==29163== 
+==29163== 
+==29163== Process terminating with default action of signal 2 (SIGINT)
+==29163==    at 0x4BB3D07: poll (poll.c:29)
+==29163==    by 0x4CD1C19: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==29163==    by 0x4CD3FF9: xcb_wait_for_event (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==29163==    by 0x48C00F7: _XReadEvents (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==29163==    by 0x48A9237: XNextEvent (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==29163==    by 0x1153F2: mlx_loop (in /home/abdu/rt_challenge/miniRT_challenge/miniRT)
+==29163==    by 0x10AC0A: main (main.c:82)
+==29163== 
+==29163== HEAP SUMMARY:
+==29163==     in use at exit: 66,014 bytes in 72 blocks
+==29163==   total heap usage: 76,011 allocs, 75,939 frees, 2,155,808 bytes allocated
+==29163== 
+==29163== 1 bytes in 1 blocks are definitely lost in loss record 1 of 47
+==29163==    at 0x4843839: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29163==    by 0x10A8D2: setup_mlx (main.c:26)
+==29163==    by 0x10AB07: main (main.c:73)
+==29163== 
+==29163== LEAK SUMMARY:
+==29163==    definitely lost: 1 bytes in 1 blocks
+==29163==    indirectly lost: 0 bytes in 0 blocks
+==29163==      possibly lost: 0 bytes in 0 blocks
+==29163==    still reachable: 66,013 bytes in 71 blocks
+==29163==         suppressed: 0 bytes in 0 blocks
+==29163== Reachable blocks (those to which a pointer was found) are not shown.
+==29163== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==29163== 
+==29163== For lists of detected and suppressed errors, rerun with: -s
+==29163== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 2 from 1)
