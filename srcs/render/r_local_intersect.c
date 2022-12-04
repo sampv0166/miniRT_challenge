@@ -6,11 +6,7 @@ t_intersect	local_intersect_plane(t_ray r)
 
 	if (fabs(r.direction.y) < EPSILON)
 	{
-		inter.count = 0;
-		inter.t[0] = 0;
-		inter.t[1] = 0;
-		inter.t[2] = 0;
-		inter.t[3] = 0;
+		init_intersect(&inter);
 		return (inter);
 	}
 	inter.count = 2;
@@ -22,11 +18,7 @@ t_intersect	local_intersect_plane(t_ray r)
 		return (inter);
 	else
 	{
-		inter.count = 0;
-		inter.t[0] = 0;
-		inter.t[1] = 0;
-		inter.t[2] = 0;
-		inter.t[3] = 0;
+		init_intersect(&inter);
 		return (inter);
 	}
 	return (inter);
@@ -36,34 +28,26 @@ t_intersect	local_intersect_sphere(t_ray r)
 {
 	t_intersect	inter;
 	t_vector	sphere_to_ray;
-	t_tuple		tp1;
-	t_tuple		tp2;
+	t_tuple		tp[2];
 	t_point		origin;
-	double		a;
-	double		b;
-	double		c;
-	double		d;
+	double		calc[4];
 
 	origin = point(0, 0, 0);
 	sphere_to_ray = subtract_points(r.origin, origin);
-	tp1 = vector_tp(r.direction);
-	a = dot(tp1, tp1);
-	tp2 = vector_tp(sphere_to_ray);
-	b = 2 * dot(tp1, tp2);
-	c = dot(tp2, tp2) - 1;
-	d = pow(b, 2) - 4 * a * c;
-	if (d < 0)
+	tp[0] = vector_tp(r.direction);
+	tp[1] = vector_tp(sphere_to_ray);
+	calc[0] = dot(tp[0], tp[0]);
+	calc[1] = 2 * dot(tp[0], tp[1]);
+	calc[2] = dot(tp[1], tp[1]) - 1;
+	calc[3] = pow(calc[1], 2) - 4 * calc[0] * calc[2];
+	if (calc[3] < 0)
 	{
-		inter.count = 0;
-		inter.t[0] = 0;
-		inter.t[1] = 0;
-		inter.t[2] = 0;
-		inter.t[3] = 0;
+		init_intersect(&inter);
 		return (inter);
 	}
 	inter.count = 2;
-	inter.t[0] = (-b - sqrt(d)) / (2 * a);
-	inter.t[1] = (-b + sqrt(d)) / (2 * a);
+	inter.t[0] = (-calc[1] - sqrt(calc[3])) / (2 * calc[0]);
+	inter.t[1] = (-calc[1] + sqrt(calc[3])) / (2 * calc[0]);
 	inter.t[2] = 0;
 	inter.t[3] = 0;
 	return (inter);

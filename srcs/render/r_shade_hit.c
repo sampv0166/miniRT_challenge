@@ -1,49 +1,41 @@
 #include "../../includes/minirt.h"
 
+void	free_intersections(t_intersection **inter, t_list **xs)
+{
+	t_list	*temp;
+
+	if ((*inter)->t == 0)
+		free(*inter);
+	while (*xs)
+	{
+		temp = (*xs)->next;
+		free((*xs)->content);
+		free(*xs);
+		*xs = temp;
+	}
+}
+
 t_bool	is_shadowed(t_world w, t_point p)
 {
 	t_vector		v;
-	double			distance;
 	t_vector		direction;
-	t_ray			r;
+	double			distance;
 	t_list			*xs;
 	t_intersection	*inter;
-	t_list			*temp;
 
 	v = subtract_points(w.l.pos, p);
 	distance = magnitude(v);
 	direction = normalize(v);
-	r = ray(p, direction);
-	xs = intersect_world(w, r);
+	xs = intersect_world(w, ray(p, direction));
 	inter = hit(xs);
 	if (inter->t && inter->t < distance)
 	{
-		if (inter->t == 0)
-		{
-			free(inter);
-		}
-		while (xs)
-		{
-			temp = xs->next;
-			free(xs->content);
-			free(xs);
-			xs = temp;
-		}
+		free_intersections(&inter, &xs);
 		return (TRUE);
 	}
 	else
 	{
-		if (inter->t == 0)
-		{
-			free(inter);
-		}
-		while (xs)
-		{
-			temp = xs->next;
-			free(xs->content);
-			free(xs);
-			xs = temp;
-		}
+		free_intersections(&inter, &xs);
 		return (FALSE);
 	}
 }
