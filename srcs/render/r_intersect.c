@@ -67,7 +67,7 @@ t_list	*intersect_world(t_world w, t_ray r)
 	{	
 		temp_shape = (t_shape *) shapes->content;
 		inter = intersect(temp_shape, r);
-		if (inter.count > 0)
+		if (inter.t[0] + inter.t[1] + inter.t[2] + inter.t[3] > 0)
 		{
 			add_intersections(intersection, temp_shape, inter);
 			create_intersections_list(intersection, &intersections_list);

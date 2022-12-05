@@ -35,7 +35,8 @@ void	find_min(t_list *xs, t_intersection **min_inter,
 	while (xs)
 	{
 		temp = (t_intersection *) xs->content;
-		if (*min > temp->t && temp->t > 0)
+		// printf("\n hit = %f\n", temp->t);
+		if (*min > temp->t && temp->t > EPSILON)
 		{
 			*min_inter = temp;
 			*min = temp->t;
@@ -57,10 +58,11 @@ t_intersection	*hit(t_list *intersection_list)
 	inter = malloc(sizeof(t_intersection));
 	if (xs)
 	{
-		sort_intersections(xs);
+		// sort_intersections(xs);
 		find_min(xs, &min_inter, &min);
-		if (min_inter && min_inter->t > 0)
+		if (min_inter && min_inter->t > EPSILON)
 		{
+			// printf("\n smallest  = %f\n", min_inter->t);
 			free(inter);
 			return (min_inter);
 		}

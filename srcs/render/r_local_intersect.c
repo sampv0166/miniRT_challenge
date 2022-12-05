@@ -10,10 +10,10 @@ t_intersect	local_intersect_plane(t_ray r)
 		return (inter);
 	}
 	inter.count = 2;
-	inter.t[0] = -1 * r.origin.y / r.direction.y ;
-	inter.t[1] = 0;
-	inter.t[2] = 0;
-	inter.t[3] = 0;
+	inter.t[0] = (-1 * r.origin.y) / r.direction.y ;
+	inter.t[1] = (-1 * r.origin.y)  / r.direction.y ;
+	inter.t[2] = (-1 * r.origin.y)  / r.direction.y ;
+	inter.t[3] = (-1 * r.origin.y)  / r.direction.y ;
 	if (inter.t[0] > 0)
 		return (inter);
 	else
@@ -48,8 +48,8 @@ t_intersect	local_intersect_sphere(t_ray r)
 	inter.count = 2;
 	inter.t[0] = (-calc[1] - sqrt(calc[3])) / (2 * calc[0]);
 	inter.t[1] = (-calc[1] + sqrt(calc[3])) / (2 * calc[0]);
-	inter.t[2] = 0;
-	inter.t[3] = 0;
+	inter.t[2] = (-calc[1] - sqrt(calc[3])) / (2 * calc[0]);
+	inter.t[3] = (-calc[1] + sqrt(calc[3])) / (2 * calc[0]);
 	return (inter);
 }
 
