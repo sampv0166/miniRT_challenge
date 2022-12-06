@@ -1,15 +1,15 @@
 #include "../../includes/minirt.h"
 
-t_intersect	intersect(t_shape *s, t_ray r)
+void	intersect(t_shape *s, t_ray r, t_list **intersections_list)
 {
 	s->ray_in_obj_space = transform(r, s->inverse);
 	if (!ft_strncmp(s->shape_name, "sp", 2))
-		return (local_intersect_sphere(s->ray_in_obj_space));
+		local_intersect_sphere(s, intersections_list);
 	else if (!ft_strncmp(s->shape_name, "pl", 2))
-		return (local_intersect_plane(s->ray_in_obj_space));
+		return (local_intersect_plane(s, intersections_list));
 	else if (!ft_strncmp(s->shape_name, "cy", 2))
-		return (local_intersect_cylinder(s, s->ray_in_obj_space));
-	return (local_intersect_sphere(s->ray_in_obj_space));
+		local_intersect_cylinder(s, s->ray_in_obj_space, intersections_list);
+	// return (local_intersect_sphere(s->ray_in_obj_space));
 }
 
 void	add_intersections(t_intersection **intersection,
@@ -55,25 +55,26 @@ void	create_intersections_list(t_intersection **intersection,
 t_list	*intersect_world(t_world w, t_ray r)
 {
 	t_list			*intersections_list;
+	// t_list			*temp_intersections_list;
 	t_list			*shapes;
-	t_intersect		inter;
+	// t_intersect		inter;
 	t_shape			*temp_shape;
-	t_intersection	**intersection;
+	// t_intersection	intersection;
 
-	intersections_list = NULL;
+	// intersections_list = *list;
 	shapes = w.shapes;
-	intersection = malloc (sizeof (t_intersection) * 4);
+	intersections_list = NULL;
+	// intersections_list = intersections_list->next;
+	// temp_intersections_list = intersections_list;
+	// intersection = malloc (sizeof (t_intersection) * 4);
 	while (shapes)
 	{	
+		// printf("\n%f\n", min_inter->t);
 		temp_shape = (t_shape *) shapes->content;
-		inter = intersect(temp_shape, r);
-		if (inter.count > 0)
-		{
-			add_intersections(intersection, temp_shape, inter);
-			create_intersections_list(intersection, &intersections_list);
-		}
+		intersect (temp_shape, r, &intersections_list);
 		shapes = shapes->next;
 	}
-	free(intersection);
+	// free(intersection);
+	
 	return (intersections_list);
 }

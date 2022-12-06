@@ -18,11 +18,11 @@ t_color		lighting(t_comps c, t_light l, t_bool in_shadow);
 
 // Cylinder
 int			check_cap(t_ray ray, double t);
-t_intersect	intersect_caps(t_shape *cy, t_ray ray, t_intersect *i);
+t_intersect	intersect_caps(t_shape *cy, t_ray ray, t_intersect *i,t_list **intersections_list);
 void		init_intersect(t_intersect *inter1);
 void		check_intersect(t_intersect *inter1, double min,
-				double max, t_ray ray);
+				double max, t_ray ray, t_list **intersections_lst ,t_shape *s);
 void		set_intersect(t_intersect *inter1, t_ray ray,
-				double min, double max);
+				double min, double max, t_list **intersections_lst,t_shape *s);
 
 #endif

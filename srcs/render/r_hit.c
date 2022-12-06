@@ -57,8 +57,9 @@ t_intersection	*hit(t_list *intersection_list)
 	inter = malloc(sizeof(t_intersection));
 	if (xs)
 	{
-		sort_intersections(xs);
+		// sort_intersections(xs);
 		find_min(xs, &min_inter, &min);
+		// printf("\n%f\n", min_inter->t);
 		if (min_inter && min_inter->t > 0)
 		{
 			free(inter);

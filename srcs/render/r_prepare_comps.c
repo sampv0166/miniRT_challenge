@@ -50,9 +50,6 @@ t_comps	prepare_computations(t_intersection *i, t_ray r)
 	comps.point = position(r, comps.t);
 	comps.eyev = negate_vector(r.direction);
 	comps.normalv = normal_at(comps.object, comps.point);
-	comps.over_point.x = comps.point.x + comps.normalv.x * EPSILON;
-	comps.over_point.y = comps.point.y + comps.normalv.y * EPSILON;
-	comps.over_point.z = comps.point.z + comps.normalv.z * EPSILON;
 	if (dot(vector_tp(comps.normalv), vector_tp(comps.eyev)) < 0)
 	{
 		comps.inside = TRUE;
@@ -60,5 +57,8 @@ t_comps	prepare_computations(t_intersection *i, t_ray r)
 	}
 	else
 		comps.inside = FALSE;
+	comps.over_point.x = comps.point.x + comps.normalv.x * EPSILON;
+	comps.over_point.y = comps.point.y + comps.normalv.y * EPSILON;
+	comps.over_point.z = comps.point.z + comps.normalv.z * EPSILON;
 	return (comps);
 }

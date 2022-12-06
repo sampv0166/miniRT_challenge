@@ -1,8 +1,8 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 50
-# define HEIGHT 50
+# define WIDTH 550
+# define HEIGHT 550
 
 # define KEY_ESC 53
 # define TRUE 1
@@ -52,9 +52,9 @@ t_vector		local_normal_at_cylinder(double h, t_point pnt);
 t_vector		local_normal_at_plane(void);
 t_color			shade_hit(t_world w, t_comps comps);
 t_color			color_at(t_world w, t_ray r);
-t_intersect		local_intersect_plane(t_ray r);
-t_intersect		local_intersect_sphere(t_ray r);
-t_intersect		local_intersect_cylinder(t_shape *s, t_ray r);
+void		local_intersect_plane(t_shape *s, t_list **intersections_lst);
+void		local_intersect_sphere(t_shape *s, t_list **intersections_lst);
+t_intersect		local_intersect_cylinder(t_shape *s, t_ray r ,  t_list **intersections_list);
 t_list			*intersect_world(t_world w, t_ray r);
 void			print_parsed_values(t_data *scene_data);
 t_ray			transform(t_ray r, double **m);
@@ -67,4 +67,5 @@ t_intersect		intersect_sphere(t_shape *s, t_ray r);
 double	determinant(double **mat, int size);
 double	**submatrix(double **mat, int size, int row, int col);
 double	cofactor(double **mat, int size, int row, int col);
+void create_intersection(t_list **intersections_list,double t, t_shape *shape);
 #endif

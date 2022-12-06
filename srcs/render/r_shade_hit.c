@@ -26,16 +26,16 @@ t_bool	is_shadowed(t_world w, t_point p)
 	v = subtract_points(w.l.pos, p);
 	distance = magnitude(v);
 	direction = normalize(v);
-	xs = intersect_world(w, ray(p, direction));
+	xs = intersect_world(w, ray(p, direction ));
 	inter = hit(xs);
 	if (inter->t && inter->t < distance)
 	{
-		free_intersections(&inter, &xs);
+		// free_intersections(&inter, &xs);
 		return (TRUE);
 	}
 	else
 	{
-		free_intersections(&inter, &xs);
+		// free_intersections(&inter, &xs);
 		return (FALSE);
 	}
 }
@@ -46,6 +46,8 @@ t_color	shade_hit(t_world w, t_comps comps)
 	t_bool	shadowed;
 
 	shadowed = is_shadowed(w, comps.over_point);
+	
 	c = lighting(comps, w.l, shadowed);
+	
 	return (c);
 }
