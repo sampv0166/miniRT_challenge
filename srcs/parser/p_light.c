@@ -10,7 +10,7 @@ int	light_error_check(char **info, t_data *scene_data)
 	if (skip_dot_verify_digits(info[2]))
 		return (set_error_obj(1, "LIGHT RATIO SHOULD BE A NUMBER", scene_data));
 	scene_data->light_src.ratio = parse_double(info[2]);
-	if (scene_data->light_src.ratio <= 0 || scene_data->light_src.ratio >= 1)
+	if (scene_data->light_src.ratio < 0 || scene_data->light_src.ratio > 1)
 		return (set_error_obj(1, "LIGHT RATIO SHOULD BE BETWEEN 0 AND 1",
 				scene_data));
 	if (comma_count(info[1]) != 2)

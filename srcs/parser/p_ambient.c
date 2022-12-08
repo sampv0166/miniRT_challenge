@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_ambient.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:13:00 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:13:01 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:46:36 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	parse_ambient_lighting(char **info, t_data *scene_data, char **color_split)
 	if (skip_dot_verify_digits(info[1]))
 		return (set_error_obj(1, "AMBIENCE RATIO IS NOT A NUMBER", scene_data));
 	scene_data->amb_ratio = parse_double(info[1]);
-	if (scene_data->amb_ratio <= 0 || scene_data->amb_ratio >= 1)
+	if (scene_data->amb_ratio < 0 || scene_data->amb_ratio > 1)
 		return (set_error_obj(1, "AMBIENCE RATIO SHOULD BE BETWEEN 1 AND 0",
 				scene_data));
 	if (comma_count(info[2]) != 2)
