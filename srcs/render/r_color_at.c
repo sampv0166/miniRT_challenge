@@ -19,20 +19,18 @@ t_ray	transform(t_ray r, double **m)
 	return (ret);
 }
 
+static void	free_intersections(t_list **xs)
+{
+	t_list	*temp;
 
-
-// static void	free_intersections(t_list **xs)
-// {
-// 	t_list	*temp;
-
-// 	while (*xs)
-// 	{
-// 		temp = (*xs)->next;
-// 		free((*xs)->content);
-// 		free(*xs);
-// 		*xs = temp;
-// 	}
-// }
+	while (*xs)
+	{
+		temp = (*xs)->next;
+		free((*xs)->content);
+		free(*xs);
+		*xs = temp;
+	}
+}
 
 t_color		color_at(t_world w, t_ray r)
 {
@@ -47,19 +45,19 @@ t_color		color_at(t_world w, t_ray r)
 	inter = hit(intersections_list);
 	if (inter->t <= EPSILON)
 	{
-		// free_intersections(&intersections_list);
-		// if(inter->t == 0)
-		// {
-		// 	free(inter);
-		// }
+		free_intersections(&intersections_list);
+		if (inter->t == 0)
+		{
+			free(inter);
+		}
 		return (color(0, 0, 0));
 	}
 	comps = prepare_computations(inter, r);
 	if (inter->count == 0)
 	{
-		// free(inter);
+		free(inter);
 	}
-	// free_intersections(&intersections_list);
+	free_intersections(&intersections_list);
 	
 	return (shade_hit(w, comps));
 }

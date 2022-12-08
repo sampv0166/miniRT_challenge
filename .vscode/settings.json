@@ -5,6 +5,8 @@
 		"__locale": "c",
 		"minirt.h": "c",
 		"ios": "c",
-		"algorithm": "c"
+		"algorithm": "c",
+		"libft.h": "c",
+		"__node_handle": "c"
 	}
 }

@@ -7,6 +7,12 @@ SRCS = 	main.c \
 		srcs/parser/p_plane.c \
 		srcs/parser/p_sphere.c \
 		srcs/parser/p_cylinder.c  \
+		srcs/parser/p_shapes.c  \
+		srcs/parser/p_scene.c  \
+		srcs/parser/p_error_sp.c  \
+		srcs/parser/p_error_cy.c  \
+		srcs/parser/p_error_pl.c  \
+		srcs/parser/p_error_cam.c  \
 		srcs/ops/o_matrix.c  \
 		srcs/ops/o_vector.c  \
 		srcs/ops/o_inverse.c  \
