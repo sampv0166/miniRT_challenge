@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_render.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:28:42 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:28:42 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/08 23:06:44 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,19 @@ void	write_pixel(double w, double h, t_color color, t_data *scene_data)
 	int				color_code;
 	unsigned char	*dst;
 
+	if (color.r > 1.0)
+        color.r = 1.0;
+    if (color.g > 1.0)
+        color.g = 1.0;
+    if (color.b > 1.0)
+        color.b = 1.0;
+    if (color.r < 0)
+        color.r = 0;
+    if (color.g < 0)
+        color.g = 0;
+    if (color.b < 0)
+        color.b = 0;
+		
 	rr = color.r * 255;
 	gg = color.g * 255;
 	bb = color.b * 255;
