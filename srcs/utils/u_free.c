@@ -43,7 +43,7 @@ void	free_scene_data(t_data *scene_data)
 	t_list	*temp;
 	t_shape	*sp;
 
-	if (scene_data->camera2.transform)
+	if (scene_data->num_objs.num_cam > 0)
 	{
 		free_2d_array(scene_data->camera2.transform, 4);
 	}

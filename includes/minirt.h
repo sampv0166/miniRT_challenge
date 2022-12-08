@@ -6,15 +6,15 @@
 /*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:11:34 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:11:34 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/08 18:32:00 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 500
-# define HEIGHT 500
+# define WIDTH 10
+# define HEIGHT 10
 
 # define KEY_ESC 53
 # define ON_DESTROY 17
