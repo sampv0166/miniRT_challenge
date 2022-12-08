@@ -11,6 +11,13 @@ int	key(int keycode, t_data *scene_data)
 	return (0);
 }
 
+int	win_close(t_data *scene_data)
+{
+	mlx_destroy_window(scene_data->mlx.mlx_ptr, scene_data->mlx.win_ptr);
+	free_scene_data(scene_data);
+	exit (0);
+}
+
 void	setup_mlx(t_data *scene_data)
 {
 	scene_data->mlx.mlx_ptr = malloc(sizeof(*scene_data->mlx.mlx_ptr));
@@ -62,9 +69,10 @@ int	main(int argc, char **argv)
 		render(scene_data.camera2, scene_data.wrld, &scene_data);
 		mlx_put_image_to_window(scene_data.mlx.mlx_ptr, scene_data.mlx.win_ptr,
 			scene_data.img.img_ptr, 0, 0);
+		mlx_hook(scene_data.mlx.win_ptr, ON_DESTROY, 0, win_close, &scene_data);
 		mlx_key_hook(scene_data.mlx.win_ptr, &key, &scene_data);
 		mlx_loop(scene_data.mlx.mlx_ptr);
-		free_scene_data(&scene_data);
+		// free_scene_data(&scene_data);
 	}
 	else
 		print_error_msg_and_exit(scene_data.error.message, &scene_data);
