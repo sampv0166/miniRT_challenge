@@ -10,7 +10,7 @@ int	light_error_check(char **info, t_data *scene_data)
 	if (skip_dot_verify_digits(info[2]))
 		return (set_error_obj(1, "LIGHT RATIO SHOULD BE A NUMBER", scene_data));
 	scene_data->light_src.ratio = parse_double(info[2]);
-	if (scene_data->light_src.ratio < 0 || scene_data->light_src.ratio > 1)
+	if (scene_data->light_src.ratio <= 0 || scene_data->light_src.ratio >= 1)
 		return (set_error_obj(1, "LIGHT RATIO SHOULD BE BETWEEN 0 AND 1",
 				scene_data));
 	if (comma_count(info[1]) != 2)
@@ -43,6 +43,9 @@ int	parse_light(char **info, t_data *scene_data, char **point_split,
 	scene_data->light_src.pos.x = parse_double(point_split[0]);
 	scene_data->light_src.pos.y = parse_double(point_split[1]);
 	scene_data->light_src.pos.z = parse_double(point_split[2]);
+	scene_data->light_src.color.r = parse_double(color_split[0]);
+	scene_data->light_src.color.g = parse_double(color_split[1]);
+	scene_data->light_src.color.b = parse_double(color_split[2]);
 	scene_data->light_src.color.r = scene_data->light_src.color.r / 255;
 	scene_data->light_src.color.g = scene_data->light_src.color.g / 255;
 	scene_data->light_src.color.b = scene_data->light_src.color.b / 255;

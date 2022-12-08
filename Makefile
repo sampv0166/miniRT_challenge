@@ -55,6 +55,8 @@ CC = gcc
 
 CFLAGS =  -g3
 
+CLEAR = $(shell clear)
+
 OS = $(shell uname)
 
 LIBFT = libs/libft/libft.a
@@ -81,6 +83,8 @@ $(NAME) : $(OBJS)
 	$(MAKE) -C $(LIBFT_PATH)
 	$(MAKE) -C $(LIBFT_PATH) bonus
 	$(CC) $(OBJS) $(LIBFT) $(MLX_FLAGS)  $(CFLAGS) -o $(NAME)
+	@echo $(CLEAR)
+	@echo "\033[32mminirt compiled successfully\n BOYYYAAA!\033[0m"
 
 clean:
 	$(MAKE) clean -C $(MLX_PATH)

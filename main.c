@@ -49,7 +49,7 @@ void	write_pixel1(double w, double h, t_color color, t_data *scene_data)
 	rr = color.r * 255;
 	gg = color.g * 255;
 	bb = color.b * 255;
-	color_code = rr << 16 | gg << 8 | bb;
+	color_code = 1 << 24 | rr << 16 | gg << 8 | bb;
 	dst = scene_data->img.data + (int)(h * scene_data->img.size_line
 			+ w * (scene_data->img.bits_per_pixel / 8));
 	*(unsigned int *) dst = color_code;
@@ -64,6 +64,7 @@ int	main(int argc, char **argv)
 	init_scene_data(&scene_data);
 	if (parse_scene(argv[1], &scene_data))
 	{
+
 		setup_mlx(&scene_data);
 		default_world(&scene_data);
 		render(scene_data.camera2, scene_data.wrld, &scene_data);

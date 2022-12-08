@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   p_ambient.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/08 18:13:00 by imustafa          #+#    #+#             */
+/*   Updated: 2022/12/08 18:13:01 by imustafa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minirt.h"
 
 int	check_str(char *str, int *dot_count, int i)
@@ -52,7 +64,7 @@ int	parse_ambient_lighting(char **info, t_data *scene_data, char **color_split)
 	if (skip_dot_verify_digits(info[1]))
 		return (set_error_obj(1, "AMBIENCE RATIO IS NOT A NUMBER", scene_data));
 	scene_data->amb_ratio = parse_double(info[1]);
-	if (scene_data->amb_ratio < 0 || scene_data->amb_ratio > 1)
+	if (scene_data->amb_ratio <= 0 || scene_data->amb_ratio >= 1)
 		return (set_error_obj(1, "AMBIENCE RATIO SHOULD BE BETWEEN 1 AND 0",
 				scene_data));
 	if (comma_count(info[2]) != 2)
@@ -64,5 +76,8 @@ int	parse_ambient_lighting(char **info, t_data *scene_data, char **color_split)
 				scene_data));
 	if (!parse_color(info[2], &scene_data->amb_color))
 		return (set_error_obj(2, "AMBIENCE COLOR VALUE IS WRONG", scene_data));
+	scene_data->amb_color.r = scene_data->amb_color.r / 255;
+	scene_data->amb_color.g = scene_data->amb_color.g / 255;
+	scene_data->amb_color.b = scene_data->amb_color.b / 255;
 	return (1);
 }
