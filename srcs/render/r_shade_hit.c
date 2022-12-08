@@ -30,12 +30,12 @@ t_bool	is_shadowed(t_world w, t_point p)
 	inter = hit(xs);
 	if (inter->t && inter->t < distance)
 	{
-		// free_intersections(&inter, &xs);
+		free_intersections(&inter, &xs);
 		return (TRUE);
 	}
 	else
 	{
-		// free_intersections(&inter, &xs);
+		free_intersections(&inter, &xs);
 		return (FALSE);
 	}
 }

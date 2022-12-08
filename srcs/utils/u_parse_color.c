@@ -1,25 +1,33 @@
 #include "../../includes/minirt.h"
 
-int	parse_color(char *str,  t_color *colors)
+int	error_check_color(char **rgb)
 {
-	char	**rgb;
-	double	c[3];
-	int		i;
+	int	i;
 
 	i = 0;
-	rgb = ft_split(str, ',');
-	if (get_2darray_size(rgb) != 3)
-		return(0);
 	while (i < 3)
 	{
 		if (skip_dot_verify_digits(rgb[i]))
 		{
 			free_2d_char_array(rgb);
 			free(rgb);
-			return(0);
+			return (0);
 		}
 		i++;
 	}
+	return (1);
+}
+
+int	parse_color(char *str, t_color *colors)
+{
+	char	**rgb;
+	double	c[3];
+
+	rgb = ft_split(str, ',');
+	if (get_2darray_size(rgb) != 3)
+		return (0);
+	if (!error_check_color(rgb))
+		return (0);
 	c[0] = parse_double(rgb[0]);
 	c[1] = parse_double(rgb[1]);
 	c[2] = parse_double(rgb[2]);
@@ -29,12 +37,12 @@ int	parse_color(char *str,  t_color *colors)
 	{
 		free_2d_char_array(rgb);
 		free(rgb);
-		return(0);
+		return (0);
 	}
 	free_2d_char_array(rgb);
 	free(rgb);
 	colors->r = c[0];
 	colors->g = c[1];
 	colors->b = c[2];
-	return(1);
+	return (1);
 }
