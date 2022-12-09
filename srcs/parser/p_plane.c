@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_plane.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:16:07 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:16:07 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/09 21:07:54 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	add_plane_transform(t_shape *plane)
 				plane->norm_vector.y, plane->norm_vector.z, 0));
 	transform = matrix_multi(translate, rotate);
 	plane->transform = transform ;
+	// print_matrix(plane->transform, 4);
+	// exit(0);
 	plane->inverse = inverse(plane->transform, 4);
 	free_2d_array(translate, 4);
 	free_2d_array(rotate, 4);

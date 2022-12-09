@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   o_normal.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:12:30 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:12:30 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/09 17:50:03 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,19 @@ t_vector	normalize(t_vector vec)
 {
 	t_vector	ret;
 	double		mag;
-
+	
 	mag = magnitude(vec);
-	ret.x = vec.x / mag;
-	ret.y = vec.y / mag;
-	ret.z = vec.z / mag;
+	if (mag == 0)
+	{
+		ret.x = 0;
+		ret.y = 0;
+		ret.z = 0;
+	}
+	else
+	{
+		ret.x = vec.x / mag;
+		ret.y = vec.y / mag;
+		ret.z = vec.z / mag;
+	}
 	return (ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_camera.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:27:43 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:27:43 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:33:16 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,20 @@ double	**set_matrix(t_vector left, t_vector true_up, t_vector forward)
 	return (m);
 }
 
+void init_vector(t_vector *vec)
+{
+	vec->x = 0;
+	vec->y = 0;
+	vec->z = 0;
+}
+
 double	**view_transform(t_point from, t_point to, t_vector up)
 {
 	double		**m;
 	t_vector	v[3];
 	t_tuple		tp;
 	double		**translate;
-	double		**ret;
-
+	double		**ret; 
 	v[0] = normalize(subtract_points(to, from));
 	v[1] = cross(v[0], normalize(up));
 	v[2] = cross(v[1], v[0]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_camera.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:13:04 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:13:04 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/09 23:10:17 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_vector	calculate_up(t_data *scene_data)
 	t_vector	up;
 	t_vector	up1_vec;
 
-	up1_vec = cross(scene_data->camera.norm_vector, vector(0, 1, 1));
+	up1_vec = cross(scene_data->camera.norm_vector, vector(0, 1, 0));
 	up = cross(up1_vec, scene_data->camera.norm_vector);
 	return (up);
 }
@@ -51,13 +51,17 @@ void	camera_transform(t_data *scene_data)
 			scene_data->camera.pos.z);
 	to = calculate_to(scene_data);
 	up = calculate_up(scene_data);
+	
 	transform = view_transform(from, to, up);
 	scene_data->camera2.transform = transform;
 	scene_data->camera2 = camera(WIDTH, HEIGHT, scene_data->camera.fov);
 	scene_data->camera2.transform = inverse(transform, 4);
-	origin_tp = matrix_multi_tp(scene_data->camera2.transform,
-			tuple(0, 0, 0, 1));
-	scene_data->camera2.origin = point(origin_tp.x, origin_tp.y, origin_tp.z);
+	if (scene_data->camera2.transform)
+	{
+		origin_tp = matrix_multi_tp(scene_data->camera2.transform,
+		tuple(0, 0, 0, 1));
+		scene_data->camera2.origin = point(origin_tp.x, origin_tp.y, origin_tp.z);
+	}
 	free_2d_array(transform, 4);
 }
 
@@ -71,6 +75,8 @@ void	store_in_scene_data(t_data *scene_data, char **point_split,
 	scene_data->camera.norm_vector.y = parse_double(norm_vec_split[1]);
 	scene_data->camera.norm_vector.z = parse_double(norm_vec_split[2]);
 	scene_data->camera.fov = parse_double(info[3]);
+	if (scene_data->camera.norm_vector.x == 0 && scene_data->camera.norm_vector.y == 0 && scene_data->camera.norm_vector.z == 0)
+		scene_data->camera.norm_vector.z = 1;
 }
 
 int	parse_camera(char **info, t_data *scene_data, char **point_split,
@@ -82,6 +88,8 @@ int	parse_camera(char **info, t_data *scene_data, char **point_split,
 		return (0);
 	store_in_scene_data(scene_data, point_split, norm_split, info);
 	camera_transform(scene_data);
+	// print_matrix(scene_data->camera2.transform, 4);
+	// exit(0);
 	if (scene_data->camera2.transform == NULL)
 		return (set_error_obj(2, "CAMERA MATIX NOT INVERTIBLE", scene_data));
 	scene_data->num_objs.num_cam += 1;

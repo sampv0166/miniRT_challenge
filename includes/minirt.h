@@ -6,15 +6,15 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:11:34 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 23:06:58 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/09 17:02:50 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 150
-# define HEIGHT 150
+# define WIDTH 500
+# define HEIGHT 500
 
 # define KEY_ESC 53
 # define ON_DESTROY 17

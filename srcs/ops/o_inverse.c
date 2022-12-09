@@ -3,25 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   o_inverse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:12:22 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:12:22 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/09 22:44:21 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-int	invertible(double **mat, int size)
+double	invertible(double **mat, int size)
 {
 	double	det;
-	double	zero;
 
 	det = determinant(mat, size);
-	zero = 0.0;
-	if (double_equal(det, zero))
-		return (0);
-	return (1);
+	return (det);
 }
 
 double	**inverse(double **mat, int size)

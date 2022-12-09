@@ -53,7 +53,7 @@ OBJS = ${SRCS:.c=.o}
 
 CC = gcc
 
-CFLAGS =  -g3
+CFLAGS = -Wall -Werror -Wextra -Ofast -g3
 
 CLEAR = $(shell clear)
 
@@ -83,7 +83,7 @@ $(NAME) : $(OBJS)
 	$(MAKE) -C $(LIBFT_PATH)
 	$(MAKE) -C $(LIBFT_PATH) bonus
 	$(CC) $(OBJS) $(LIBFT) $(MLX_FLAGS)  $(CFLAGS) -o $(NAME)
-	@echo $(CLEAR)
+	
 	@echo "\033[32mminirt compiled successfully\n BOYYYAAA!\033[0m"
 
 clean:

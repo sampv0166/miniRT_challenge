@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_free.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:29:00 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:29:00 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/09 17:06:53 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void	free_scene_data(t_data *scene_data)
 		temp = scene_data->wrld.shapes->next;
 		sp = (t_shape *) scene_data->wrld.shapes->content;
 		free_2d_array(sp->transform, 4);
-		free_2d_array(sp->inverse, 4);
+		if (sp->inverse)
+			free_2d_array(sp->inverse, 4);
 		free(sp);
 		free(scene_data->wrld.shapes);
 		scene_data->wrld.shapes = temp;
