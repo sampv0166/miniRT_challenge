@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:12:30 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/09 17:50:03 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/10 02:36:14 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_vector	normalize(t_vector vec)
 {
 	t_vector	ret;
 	double		mag;
-	
+
 	mag = magnitude(vec);
 	if (mag == 0)
 	{

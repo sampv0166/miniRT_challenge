@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:19:33 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 17:19:34 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/10 02:34:01 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ typedef struct s_shape
 	double		diameter;
 	double		height;
 	double		**inverse;
+	double		min;
+	double		max;
 }	t_shape;
 
 typedef struct s_intersection

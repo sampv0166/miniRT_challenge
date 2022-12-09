@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   p_light.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/08 18:13:04 by imustafa          #+#    #+#             */
+/*   Updated: 2022/12/10 02:43:40 by apila-va         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minirt.h"
 
 int	light_error_check(char **info, t_data *scene_data)
@@ -22,6 +34,16 @@ int	light_error_check(char **info, t_data *scene_data)
 	return (1);
 }
 
+void	normalize_light_color(t_data *scene_data, char **color_split)
+{
+	scene_data->light_src.color.r = parse_double(color_split[0]);
+	scene_data->light_src.color.g = parse_double(color_split[1]);
+	scene_data->light_src.color.b = parse_double(color_split[2]);
+	scene_data->light_src.color.r = scene_data->light_src.color.r / 255;
+	scene_data->light_src.color.g = scene_data->light_src.color.g / 255;
+	scene_data->light_src.color.b = scene_data->light_src.color.b / 255;
+}
+
 int	parse_light(char **info, t_data *scene_data, char **point_split,
 		char **color_split)
 {
@@ -43,13 +65,7 @@ int	parse_light(char **info, t_data *scene_data, char **point_split,
 	scene_data->light_src.pos.x = parse_double(point_split[0]);
 	scene_data->light_src.pos.y = parse_double(point_split[1]);
 	scene_data->light_src.pos.z = parse_double(point_split[2]);
-	scene_data->light_src.color.r = parse_double(color_split[0]);
-	scene_data->light_src.color.g = parse_double(color_split[1]);
-	scene_data->light_src.color.b = parse_double(color_split[2]);
-	scene_data->light_src.color.r = scene_data->light_src.color.r / 255;
-	scene_data->light_src.color.g = scene_data->light_src.color.g / 255;
-	scene_data->light_src.color.b = scene_data->light_src.color.b / 255;
-	scene_data->num_objs.num_light += 1;
+	normalize_light_color(scene_data, color_split);
 	scene_data->num_objs.num_light += 1;
 	return (1);
 }

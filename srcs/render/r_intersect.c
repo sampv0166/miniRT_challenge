@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_intersect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:28:09 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:28:09 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/10 02:48:27 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	intersect(t_shape *s, t_ray r, t_list **intersections_list)
 		return (local_intersect_plane(s, intersections_list));
 	else if (!ft_strncmp(s->shape_name, "cy", 2))
 		local_intersect_cylinder(s, s->ray_in_obj_space, intersections_list);
-	// return (local_intersect_sphere(s->ray_in_obj_space));
 }
 
 void	add_intersections(t_intersection **intersection,
@@ -67,26 +66,16 @@ void	create_intersections_list(t_intersection **intersection,
 t_list	*intersect_world(t_world w, t_ray r)
 {
 	t_list			*intersections_list;
-	// t_list			*temp_intersections_list;
 	t_list			*shapes;
-	// t_intersect		inter;
 	t_shape			*temp_shape;
-	// t_intersection	intersection;
 
-	// intersections_list = *list;
 	shapes = w.shapes;
 	intersections_list = NULL;
-	// intersections_list = intersections_list->next;
-	// temp_intersections_list = intersections_list;
-	// intersection = malloc (sizeof (t_intersection) * 4);
 	while (shapes)
 	{	
-		// printf("\n%f\n", min_inter->t);
 		temp_shape = (t_shape *) shapes->content;
 		intersect (temp_shape, r, &intersections_list);
 		shapes = shapes->next;
 	}
-	// free(intersection);
-	
 	return (intersections_list);
 }

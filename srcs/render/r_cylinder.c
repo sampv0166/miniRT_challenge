@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_cylinder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:27:56 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:27:56 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/10 02:47:18 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	check_cap(t_ray ray, double t)
 	return (0);
 }
 
-t_intersect	intersect_caps(t_shape *cy, t_ray ray, t_intersect *i,t_list **intersections_lst)
+t_intersect	intersect_caps(t_shape *cy, t_ray ray, t_intersect *i, \
+			t_list **intersections_lst)
 {
 	double			min;
 	double			max;
@@ -35,7 +36,7 @@ t_intersect	intersect_caps(t_shape *cy, t_ray ray, t_intersect *i,t_list **inter
 	if (check_cap(ray, i->t[2]))
 	{
 		if (i->t[2] > EPSILON)
-			create_intersection(intersections_lst,i->t[2], cy);
+			create_intersection(intersections_lst, i->t[2], cy);
 	}
 	else
 		i->t[2] = 0;
@@ -43,7 +44,7 @@ t_intersect	intersect_caps(t_shape *cy, t_ray ray, t_intersect *i,t_list **inter
 	if (check_cap(ray, i->t[3]))
 	{
 		if (i->t[2] > EPSILON)
-			create_intersection(intersections_lst,i->t[3], cy);
+			create_intersection(intersections_lst, i->t[3], cy);
 	}
 	else
 		i->t[3] = 0;
@@ -63,43 +64,23 @@ void	init_intersect(t_intersect *inter1)
 	(*inter1).count = 0;
 }
 
-// int get_list_count(t_list **ls)
-// {
-// 	int i;
-// 	i = 0;	
-
-// 	t_list **st;
-// 	st =  ls;
-
-// 	while (*st)
-// 	{
-// 		*st = (*st)->next;
-// 		i++;
-// 	}
-// 	printf("\n%d\n", i);
-// 	return (i);
-// }
-
-void create_intersection(t_list **intersections_list,double t, t_shape *shape)
+void	create_intersection(t_list **intersections_list, double t, \
+	t_shape *shape)
 {
-	t_intersection *inter;
+	t_intersection	*inter;
+
 	inter = malloc (sizeof (t_intersection));
 	inter->object = shape;
 	inter->t = t;
 	inter->count = 1;
 	if (*intersections_list == NULL)
-	{
-		// 
 		*intersections_list = ft_lstnew(inter);
-	}
 	else
-	{
 		ft_lstadd_back(intersections_list, ft_lstnew(inter));
-	}
-	// 
 }
 
-void	check_intersect(t_intersect *inter1, double min, double max, t_ray ray, t_list **intersections_list,t_shape *s)
+void	check_intersect(t_intersect *inter1, \
+		t_ray ray, t_list **intersections_list, t_shape *s)
 {
 	double		y0_y1[2];
 	double		temp;
@@ -112,23 +93,24 @@ void	check_intersect(t_intersect *inter1, double min, double max, t_ray ray, t_l
 	}
 	y0_y1[0] = ray.origin.y + ((*inter1).t[0] * ray.direction.y);
 	y0_y1[1] = ray.origin.y + ((*inter1).t[1] * ray.direction.y);
-	if (min < y0_y1[0] && y0_y1[0] < max)
+	if (s->min < y0_y1[0] && y0_y1[0] < s->max)
 	{
 		if (inter1->t[0] > EPSILON)
-			create_intersection(intersections_list ,inter1->t[0],s);
+			create_intersection(intersections_list, inter1->t[0], s);
 	}
 	else
 		(*inter1).t[0] = 0;
-	if (min < y0_y1[1] && y0_y1[1] < max)
+	if (s->min < y0_y1[1] && y0_y1[1] < s->max)
 	{
 		if (inter1->t[0] > EPSILON)
-			create_intersection(intersections_list ,inter1->t[1],s);
+			create_intersection(intersections_list, inter1->t[1], s);
 	}
 	else
 		(*inter1).t[1] = 0;
 }
 
-void	set_intersect(t_intersect *inter1, t_ray ray, double min, double max, t_list **intersections_list, t_shape *s)
+void	set_intersect(t_intersect *inter1, t_ray ray, \
+		t_list **intersections_list, t_shape *s)
 {
 	double	a;
 	double	b;
@@ -143,7 +125,7 @@ void	set_intersect(t_intersect *inter1, t_ray ray, double min, double max, t_lis
 	(*inter1).t[0] = (((-1 * b) - sqrt(disc)) / (2 * a));
 	(*inter1).t[1] = (((-1 * b) + sqrt(disc)) / (2 * a));
 	if (disc >= 0 && (double_equal(a, 0) == 0))
-		check_intersect(inter1, min, max, ray,intersections_list, s);
+		check_intersect(inter1, ray, intersections_list, s);
 	else
 	{
 		(*inter1).t[0] = 0;

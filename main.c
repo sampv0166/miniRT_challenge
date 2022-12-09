@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/08 18:28:52 by imustafa          #+#    #+#             */
+/*   Updated: 2022/12/10 02:28:42 by apila-va         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./includes/minirt.h"
 
 int	key(int keycode, t_data *scene_data)
@@ -31,13 +43,6 @@ void	setup_mlx(t_data *scene_data)
 			WIDTH, HEIGHT, "minirt");
 }
 
-void	init_scene_data(t_data *scene_data)
-{
-	scene_data->amb_set = 0;
-	scene_data->wrld.shapes = NULL;
-	scene_data->camera2.init = 0;
-}
-
 void	write_pixel1(double w, double h, t_color color, t_data *scene_data)
 {
 	int				rr;
@@ -61,10 +66,11 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);
-	init_scene_data(&scene_data);
+	scene_data.amb_set = 0;
+	scene_data.wrld.shapes = NULL;
+	scene_data.camera2.init = 0;
 	if (parse_scene(argv[1], &scene_data))
 	{
-
 		setup_mlx(&scene_data);
 		default_world(&scene_data);
 		render(scene_data.camera2, scene_data.wrld, &scene_data);
@@ -73,7 +79,6 @@ int	main(int argc, char **argv)
 		mlx_hook(scene_data.mlx.win_ptr, ON_DESTROY, 0, win_close, &scene_data);
 		mlx_key_hook(scene_data.mlx.win_ptr, &key, &scene_data);
 		mlx_loop(scene_data.mlx.mlx_ptr);
-		// free_scene_data(&scene_data);
 	}
 	else
 		print_error_msg_and_exit(scene_data.error.message, &scene_data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_hit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:28:04 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:28:04 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/10 02:47:42 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,7 @@ t_intersection	*hit(t_list *intersection_list)
 	inter = malloc(sizeof(t_intersection));
 	if (xs)
 	{
-		// sort_intersections(xs);
 		find_min(xs, &min_inter, &min);
-		// printf("\n%f\n", min_inter->t);
 		if (min_inter && min_inter->t > 0)
 		{
 			free(inter);

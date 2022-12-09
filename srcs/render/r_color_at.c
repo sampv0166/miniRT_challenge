@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_color_at.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:27:48 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:27:48 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/10 02:44:58 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,14 @@ static void	free_intersections(t_list **xs)
 	}
 }
 
-t_color		color_at(t_world w, t_ray r)
+t_color	color_at(t_world w, t_ray r)
 {
 	t_list			*intersections_list;
 	t_comps			comps;
 	t_intersection	*inter;
 
 	intersections_list = NULL;
-	
 	intersections_list = intersect_world(w, r);
-	
 	inter = hit(intersections_list);
 	if (inter->t <= EPSILON)
 	{
@@ -70,6 +68,5 @@ t_color		color_at(t_world w, t_ray r)
 		free(inter);
 	}
 	free_intersections(&intersections_list);
-	
 	return (shade_hit(w, comps));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_local_intersect.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:28:25 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:28:25 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/10 02:49:09 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	local_intersect_plane(t_shape *s, t_list **intersections_list)
 		return ;
 	}
 	inter.count = 1;
-	inter.t[0] = -1 * s->ray_in_obj_space.origin.y / s->ray_in_obj_space.direction.y ;
-
+	inter.t[0] = -1 * s->ray_in_obj_space.origin.y \
+	/ s->ray_in_obj_space.direction.y;
 	if (inter.t[0] > EPSILON)
-		create_intersection(intersections_list , inter.t[0],s);
+		create_intersection(intersections_list, inter.t[0], s);
 	else
 	{
 		return ;
@@ -58,20 +58,21 @@ void	local_intersect_sphere(t_shape *s, t_list **intersections_list)
 	create_intersection(intersections_list, inter.t[1], s);
 }
 
-t_intersect	local_intersect_cylinder(t_shape *s, t_ray ray,  t_list **intersections_list)
+t_intersect	local_intersect_cylinder(t_shape *s, t_ray ray, \
+			t_list **intersections_list)
 {
 	double		calc;
 	t_intersect	inter1;
 	double		min;
 	double		max;
 
-	max = s->height / 2.0;
-	min = -1.0 * max;
+	s->max = s->height / 2.0;
+	s->min = -1.0 * s->max;
 	init_intersect(&inter1);
 	calc = pow(ray.direction.x, 2) + pow(ray.direction.z, 2);
 	if (fabs(calc) < EPSILON)
 		return (inter1);
-	set_intersect(&inter1, ray, min, max, intersections_list, s);
+	set_intersect(&inter1, ray, intersections_list, s);
 	if (fabs(ray.direction.y) < EPSILON)
 		return (inter1);
 	return (intersect_caps(s, ray, &inter1, intersections_list));
