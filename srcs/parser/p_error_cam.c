@@ -21,8 +21,8 @@ int	camera_error_main(char **info, t_data *scene_data)
 				scene_data));
 	if (skip_dot_verify_digits(info[3]))
 		return (set_error_obj(1, "CAMERA FOV IS NOT A NUMBER", scene_data));
-	scene_data->camera.fov = parse_double(info[1]);
-	if (scene_data->camera.fov < 0 || scene_data->amb_ratio > 180)
+	scene_data->camera.fov = parse_double(info[3]);
+	if (scene_data->camera.fov < 0 || scene_data->camera.fov > 180)
 		return (set_error_obj(1, "CAMERA FOV SHOULD BE BETWEEN 0 AND 180",
 				scene_data));
 	if (comma_count(info[1]) != 2)

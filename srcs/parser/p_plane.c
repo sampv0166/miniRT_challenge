@@ -65,7 +65,7 @@ void	populate_plane_split(t_shape *plane, char **point_split,
 	plane->norm_vector.z = parse_double(norm_vec[2]);
 }
 
-void	add_plane_transform(t_shape *plane)
+void	add_plane_transform(t_shape *plane, t_data *scene_data)
 {
 	double		**translate;
 	double		**rotate;
@@ -78,6 +78,8 @@ void	add_plane_transform(t_shape *plane)
 	transform = matrix_multi(translate, rotate);
 	plane->transform = transform ;
 	plane->inverse = inverse(plane->transform, 4);
+	scene_data->tranform_to_free = plane->transform;
+	scene_data->inverse_to_free = plane->inverse;
 	free_2d_array(translate, 4);
 	free_2d_array(rotate, 4);
 }
@@ -90,23 +92,25 @@ int	parse_plane(char **info, t_data *scene_data, char **point_split,
 	t_shape	*plane;
 
 	norm_split = ft_split(info[2], ',');
+	scene_data->norm_split_to_free = norm_split;
 	plane = malloc (sizeof (t_shape));
+	scene_data->shape_to_free = plane;
 	if (!error_checks_plane(info, scene_data))
 		return (0);
 	if (!error_checks_plane_split(scene_data, point_split,
 			color_split, norm_split))
-		return (0);
+		return (0);	
 	if (!parse_color(info[3], &color))
 		return (set_error_obj(2, "PLANE COLOR VALUE IS WRONG",
 				scene_data));
 	populate_plane_basic(plane, scene_data, &color);
 	populate_plane_split(plane, point_split, norm_split);
-	add_plane_transform(plane);
-	scene_data->num_objs.num_pl += 1;
+	if (norm_vector(&plane->norm_vector))
+		return (set_error_obj(2, "plane orientation vector should be between -1 and 1", scene_data));
+	add_plane_transform(plane, scene_data);
 	ft_lstadd_back(&scene_data->wrld.shapes, ft_lstnew(plane));
+	scene_data->num_objs.num_pl += 1;
 	if (plane->inverse == NULL)
 		return (set_error_obj(2, "PLANE MATRIX IS NOT INVERTIBLE", scene_data));
-	free_2d_char_array(norm_split);
-	free(norm_split);
 	return (1);
 }

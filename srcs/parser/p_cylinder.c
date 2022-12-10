@@ -53,6 +53,7 @@ t_shape	*populate_cylinder_basic(t_data *scene_data, char **info,
 	t_shape	*cy;
 
 	cy = malloc (sizeof (t_shape));
+	scene_data->shape_to_free = cy;
 	cy->color.r = color->r;
 	cy->color.g = color->g;
 	cy->color.b = color->b;
@@ -77,6 +78,7 @@ int	parse_cylinder(char **info, t_data *scene_data, char **point_split,
 	t_shape	*cy;
 
 	norm_split = ft_split(info[2], ',');
+	scene_data->norm_split_to_free = norm_split;
 	if (!error_check_base(info, scene_data))
 		return (0);
 	if (!error_check_split_cy(scene_data, point_split, color_split,
@@ -91,8 +93,8 @@ int	parse_cylinder(char **info, t_data *scene_data, char **point_split,
 	if (cy->inverse == NULL)
 		return (set_error_obj(2, "CYLINDER MATRIX IS NOT INVERTIBLE",
 				scene_data));
+	if (norm_vector(&cy->norm_vector))
+		return (set_error_obj(2, "cylinder orientation vector should be between -1 and 1", scene_data));				
 	scene_data->num_objs.num_cy += 1;
-	free_2d_char_array(norm_split);
-	free(norm_split);
 	return (1);
 }

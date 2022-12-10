@@ -40,6 +40,10 @@ int	get_plane(char **info_split, t_data *scene_data, char **point_split,
 	free(point_split);
 	free_2d_char_array(color_split);
 	free(color_split);
+	free_2d_char_array(scene_data->norm_split_to_free);
+	free(scene_data->norm_split_to_free);
+	if (ret == 0)
+		free(scene_data->shape_to_free);
 	return (ret);
 }
 
@@ -56,6 +60,8 @@ int	get_cylinder(char **info_split, t_data *scene_data, char **point_split,
 	free(point_split);
 	free_2d_char_array(color_split);
 	free(color_split);
+	free_2d_char_array(scene_data->norm_split_to_free);
+	free(scene_data->norm_split_to_free);
 	return (ret);
 }
 
@@ -89,6 +95,7 @@ int	parse_current_line(char *line, t_data *scene_data)
 		if (!check_for_a_c_l(info_split, scene_data))
 		{
 			free_2d_char_array(info_split);
+			free(info_split);
 			return (0);
 		}
 	}
@@ -97,8 +104,16 @@ int	parse_current_line(char *line, t_data *scene_data)
 		if (!check_for_sp_pl_cy(info_split, scene_data))
 		{
 			free_2d_char_array(info_split);
+			free(info_split);
 			return (0);
 		}
+	}
+	else
+	{
+		set_error_obj(3, "INVALID IDENTIFIER", scene_data);
+		free_2d_char_array(info_split);
+		free(info_split);
+		return (0);
 	}
 	free_2d_char_array(info_split);
 	free(info_split);

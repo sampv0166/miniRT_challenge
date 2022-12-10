@@ -185,6 +185,10 @@ typedef struct s_data
 	t_errorObj		error;
 	char			*line_ptr;
 	t_numObjects	num_objs;
+	char			**norm_split_to_free;
+	t_shape			*shape_to_free;
+	double**		tranform_to_free;
+	double**		inverse_to_free;
 }	t_data;
 
 #endif

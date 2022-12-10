@@ -64,11 +64,11 @@ int	main(int argc, char **argv)
 {
 	t_data		scene_data;
 
-	if (argc != 2)
-		print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);
+	scene_data.num_objs.num_cam = 0;
 	scene_data.amb_set = 0;
 	scene_data.wrld.shapes = NULL;
-	scene_data.camera2.init = 0;
+	if (argc != 2)
+		print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);
 	if (parse_scene(argv[1], &scene_data))
 	{
 		setup_mlx(&scene_data);

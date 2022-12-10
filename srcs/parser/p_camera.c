@@ -81,6 +81,17 @@ void	store_in_scene_data(t_data *scene_data, char **point_split,
 		scene_data->camera.norm_vector.z = 1;
 }
 
+int	norm_vector(t_vector *vec)
+{
+	if (vec->x < -1 || vec->x > 1)
+		return (1);
+	if (vec->y < -1 || vec->y > 1)
+		return (1);
+	if (vec->z < -1 || vec->z > 1)
+		return (1);
+	return (0);	
+}
+
 int	parse_camera(char **info, t_data *scene_data, char **point_split,
 		char **norm_split)
 {
@@ -89,6 +100,8 @@ int	parse_camera(char **info, t_data *scene_data, char **point_split,
 	if (!camera_error_split(scene_data, point_split, norm_split))
 		return (0);
 	store_in_scene_data(scene_data, point_split, norm_split, info);
+	if (norm_vector(&scene_data->camera.norm_vector))
+		return (set_error_obj(2, "camera orientation vector should be between -1 and 1", scene_data));	
 	camera_transform(scene_data);
 	if (scene_data->camera2.transform == NULL)
 		return (set_error_obj(2, "CAMERA MATIX NOT INVERTIBLE", scene_data));

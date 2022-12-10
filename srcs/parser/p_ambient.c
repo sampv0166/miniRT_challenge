@@ -36,7 +36,7 @@ int	check_str(char *str, int *dot_count, int i)
 			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 int	skip_dot_verify_digits(char *str)
@@ -46,7 +46,8 @@ int	skip_dot_verify_digits(char *str)
 
 	i = 0;
 	dot_count = 0;
-	check_str(str, &dot_count, i);
+	if (check_str(str, &dot_count, i))
+		return (1);
 	if (ft_strlen(str) == 1 && *str == '.')
 		return (1);
 	if (dot_count > 1)

@@ -6,17 +6,23 @@ ERROR: Light parameter should receive four parameters, one intensity value and t
 ERROR: RGB value must be an integer between 0 and 255.
 ERROR: You cannot have more than one window resolution parameter.
 ERROR: You cannot have more than one ambient light parameter.
+
 ERROR: Camera FoV value must be an integer between 0 and 180.
 ERROR: Camera view point parameters must be passed as X,Y,Z coordinates (e.g. 0.0,0.0,20.6).
+
 ERROR: Camera orientation vector parameters must be passed as X,Y,Z coordinates between -1.0 and 1.0.
 ERROR: Coordinates must be entered as a decimal nmber (e.g. 10.5).
+
 ERROR: Scene light parameter should receive one set of X,Y,Z coordinates, one intensity value, and one set of RGB values.
 ERROR: Scene light intensity value must be between 0.0 and 1.0.
+
 ERROR: Sphere parameter should receive one set of X,Y,Z coordinates, one diameter value, and one set of RGB values.
 ERROR: Sphere center point parameters must be passed as X,Y,Z coordinates (e.g. 0.0,0.0,20.6).
+
 ERROR: Plane position parameters must be passed as X,Y,Z coordinates (e.g. 0.0,0.0,20.6).
 ERROR: Plane parameter should receive one set of X,Y,Z coordinates, one set of 3D normalized orientation vector values, and one set of RGB values.
 ERROR: Plane 3D normalized orientation vector values must be between -1.0 and 1.0.
+
 ERROR: Square parameter should receive the following values: X,Y,Z center coordinates, one set of 3D normalized orientation vector, side size, RGB colors.
 ERROR: Square center point parameters must be passed as X,Y,Z coordinates (e.g. 0.0,0.0,20.6).
 ERROR: Square 3D normalized orientation vector values must be between -1.0 and 1.0.

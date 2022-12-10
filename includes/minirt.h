@@ -13,8 +13,8 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 500
-# define HEIGHT 500
+# define WIDTH 10
+# define HEIGHT 10
 
 # define KEY_ESC 53
 # define ON_DESTROY 17
@@ -80,4 +80,5 @@ double			**submatrix(double **mat, int size, int row, int col);
 double			cofactor(double **mat, int size, int row, int col);
 void			create_intersection(t_list **intersections_list, double t,
 					t_shape *shape);
+int				norm_vector(t_vector *vec);
 #endif
