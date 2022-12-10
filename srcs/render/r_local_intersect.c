@@ -58,22 +58,20 @@ void	local_intersect_sphere(t_shape *s, t_list **intersections_list)
 	create_intersection(intersections_list, inter.t[1], s);
 }
 
-t_intersect	local_intersect_cylinder(t_shape *s, t_ray ray, \
+void	local_intersect_cylinder(t_shape *s, t_ray ray, \
 			t_list **intersections_list)
 {
 	double		calc;
 	t_intersect	inter1;
-	double		min;
-	double		max;
 
 	s->max = s->height / 2.0;
 	s->min = -1.0 * s->max;
 	init_intersect(&inter1);
 	calc = pow(ray.direction.x, 2) + pow(ray.direction.z, 2);
 	if (fabs(calc) < EPSILON)
-		return (inter1);
+		return ;
 	set_intersect(&inter1, ray, intersections_list, s);
 	if (fabs(ray.direction.y) < EPSILON)
-		return (inter1);
-	return (intersect_caps(s, ray, &inter1, intersections_list));
+		return ;
+	intersect_caps(s, ray, &inter1, intersections_list);
 }

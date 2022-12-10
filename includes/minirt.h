@@ -66,7 +66,7 @@ t_color			shade_hit(t_world w, t_comps comps);
 t_color			color_at(t_world w, t_ray r);
 void			local_intersect_plane(t_shape *s, t_list **intersections_lst);
 void			local_intersect_sphere(t_shape *s, t_list **intersections_lst);
-t_intersect		local_intersect_cylinder(t_shape *s, t_ray r,
+void			local_intersect_cylinder(t_shape *s, t_ray r,
 					t_list **intersections_list);
 t_list			*intersect_world(t_world w, t_ray r);
 void			print_parsed_values(t_data *scene_data);

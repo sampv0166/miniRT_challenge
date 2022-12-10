@@ -1,36 +1,34 @@
-==29163== Memcheck, a memory error detector
-==29163== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==29163== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
-==29163== Command: ./miniRT scenes/00_basic_shapes.rt
-==29163== Parent PID: 5238
-==29163== 
-==29163== 
-==29163== Process terminating with default action of signal 2 (SIGINT)
-==29163==    at 0x4BB3D07: poll (poll.c:29)
-==29163==    by 0x4CD1C19: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
-==29163==    by 0x4CD3FF9: xcb_wait_for_event (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
-==29163==    by 0x48C00F7: _XReadEvents (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
-==29163==    by 0x48A9237: XNextEvent (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
-==29163==    by 0x1153F2: mlx_loop (in /home/abdu/rt_challenge/miniRT_challenge/miniRT)
-==29163==    by 0x10AC0A: main (main.c:82)
-==29163== 
-==29163== HEAP SUMMARY:
-==29163==     in use at exit: 66,014 bytes in 72 blocks
-==29163==   total heap usage: 76,011 allocs, 75,939 frees, 2,155,808 bytes allocated
-==29163== 
-==29163== 1 bytes in 1 blocks are definitely lost in loss record 1 of 47
-==29163==    at 0x4843839: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==29163==    by 0x10A8D2: setup_mlx (main.c:26)
-==29163==    by 0x10AB07: main (main.c:73)
-==29163== 
-==29163== LEAK SUMMARY:
-==29163==    definitely lost: 1 bytes in 1 blocks
-==29163==    indirectly lost: 0 bytes in 0 blocks
-==29163==      possibly lost: 0 bytes in 0 blocks
-==29163==    still reachable: 66,013 bytes in 71 blocks
-==29163==         suppressed: 0 bytes in 0 blocks
-==29163== Reachable blocks (those to which a pointer was found) are not shown.
-==29163== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-==29163== 
-==29163== For lists of detected and suppressed errors, rerun with: -s
-==29163== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 2 from 1)
+==33879== Memcheck, a memory error detector
+==33879== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33879== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==33879== Command: ./miniRT scenes/00_basic_shapes.rt
+==33879== Parent PID: 22106
+==33879== 
+==33879== 
+==33879== Process terminating with default action of signal 2 (SIGINT)
+==33879==    at 0x10EAFA: lighting (r_lighting.c:35)
+==33879==    by 0x111399: shade_hit (r_shade_hit.c:61)
+==33879==    by 0x1100BF: color_at (r_color_at.c:71)
+==33879==    by 0x10FCA6: render (r_render.c:83)
+==33879==    by 0x10A82B: main (main.c:76)
+==33879== 
+==33879== HEAP SUMMARY:
+==33879==     in use at exit: 69,326 bytes in 166 blocks
+==33879==   total heap usage: 148,315 allocs, 148,149 frees, 3,938,412 bytes allocated
+==33879== 
+==33879== 1 bytes in 1 blocks are definitely lost in loss record 1 of 66
+==33879==    at 0x4843839: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33879==    by 0x10AA51: setup_mlx (main.c:35)
+==33879==    by 0x10A7F2: main (main.c:74)
+==33879== 
+==33879== LEAK SUMMARY:
+==33879==    definitely lost: 1 bytes in 1 blocks
+==33879==    indirectly lost: 0 bytes in 0 blocks
+==33879==      possibly lost: 0 bytes in 0 blocks
+==33879==    still reachable: 69,325 bytes in 165 blocks
+==33879==         suppressed: 0 bytes in 0 blocks
+==33879== Reachable blocks (those to which a pointer was found) are not shown.
+==33879== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==33879== 
+==33879== For lists of detected and suppressed errors, rerun with: -s
+==33879== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
