@@ -48,7 +48,7 @@ void	populate_plane_basic(t_shape *plane, t_data *scene_data,
 	plane->material.diffuse = 0.7;
 	plane->material.specular = 0.2;
 	plane->shape_name = "pl";
-	plane->material.ambient = scene_data->amb_ratio;
+	plane->material.ambient = 0.1;
 	plane->material.color.r = plane->color.r / 255;
 	plane->material.color.g = plane->color.g / 255;
 	plane->material.color.b = plane->color.b / 255;

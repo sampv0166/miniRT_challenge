@@ -61,7 +61,7 @@ t_shape	*populate_sphere(t_color color, t_data *scene_data,
 	sphere->material.color.g = sphere->color.g / 255;
 	sphere->material.color.b = sphere->color.b / 255;
 	sphere->shape_name = "sp";
-	sphere->material.ambient = scene_data->amb_ratio;
+	sphere->material.ambient = 0.1;
 	add_sphere_transform(sphere);
 	return (sphere);
 }

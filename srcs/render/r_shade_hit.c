@@ -59,5 +59,7 @@ t_color	shade_hit(t_world w, t_comps comps)
 
 	shadowed = is_shadowed(w, comps.over_point);
 	c = lighting(comps, w.l, shadowed);
+	// if (w.l.ratio == 0)
+	// 	return (color(comps.object->material.color.r, comps.object->material.color.g , comps.object->material.color.b));
 	return (c);
 }
