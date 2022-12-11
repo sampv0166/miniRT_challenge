@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:27:37 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:27:37 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:35:30 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_file_name(char *file_name)
 	int	i;
 
 	i = 0;
-	while (file_name[i])
+	while (file_name[i] && file_name[i + 1])
 	{
 		i++;
 	}

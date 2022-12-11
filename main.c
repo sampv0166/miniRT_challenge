@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:28:52 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/11 15:24:19 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:35:43 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int	main(int argc, char **argv)
 		mlx_loop(scene_data.mlx.mlx_ptr);
 	}
 	else
+	{
 		print_error_msg_and_exit(scene_data.error.message, &scene_data);
+	}
 	return (0);
 }

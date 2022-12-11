@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:27:24 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/11 15:43:52 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:35:14 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	parse_scene(char *file_name, t_data *scene_data)
 	t_shape	*sp;
 
 	init_scene(scene_data);
-	if (check_file_name(file_name))
+	if (!check_file_name(file_name))
 		return (set_error_obj(1, "FILE EXTENTION IS INCORRECT", scene_data));
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
