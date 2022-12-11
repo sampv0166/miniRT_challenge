@@ -27,14 +27,16 @@ t_vector	reflect(t_vector vec, t_vector normal)
 	return (ret);
 }
 
-t_light	point_light(t_point pos, t_color intensity)
-{
-	t_light	l;
+// t_light	point_light(t_point pos, double intensity)
+// {
+// 	t_light	l;
 
-	l.pos = pos;
-	l.color = intensity;
-	return (l);
-}
+// 	l.pos = pos;
+// 	l.color.r = l.color.r * intensity;
+// 	l.color.g = l.color.g * intensity;
+// 	l.color.b = l.color.b * intensity;
+// 	return (l);
+// }
 
 t_material	material(void)
 {

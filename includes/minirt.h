@@ -71,7 +71,7 @@ void			local_intersect_cylinder(t_shape *s, t_ray r,
 t_list			*intersect_world(t_world w, t_ray r);
 void			print_parsed_values(t_data *scene_data);
 t_ray			transform(t_ray r, double **m);
-t_light			point_light(t_point pos, t_color intensity);
+t_light			point_light(t_point pos, double intensity);
 t_point			position(t_ray r, float num);
 t_vector		normal_at(t_shape *s, t_point p);
 t_intersect		intersect_sphere(t_shape *s, t_ray r);
