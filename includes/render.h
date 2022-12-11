@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:12:04 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/10 02:35:49 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:26:59 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_color		calc_ambient(t_comps c, t_light l);
 t_color		calc_diffuse(t_comps c, t_light l, t_vector lightv);
 t_color		calc_specular(t_material m, t_light l, double reflect_dot_eye);
 t_vector	reflect(t_vector vec, t_vector normal);
-t_light		point_light(t_point pos, double intensity);
+t_light		point_light(t_point pos, t_color color , double ratio);
 t_material	material(void);
 double		light_dot_normal(t_vector lightv, t_vector normalv);
 double		reflect_dot_eye(t_vector reflectv, t_vector eyev);

@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:28:52 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/10 02:28:42 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:24:19 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	main(int argc, char **argv)
 		print_error_msg_and_exit("NOT ENOUGH ARGUMENTS", &scene_data);
 	if (parse_scene(argv[1], &scene_data))
 	{
+		// print_parsed_values(&scene_data);
+		// exit(0);
 		setup_mlx(&scene_data);
 		default_world(&scene_data);
 		render(scene_data.camera2, scene_data.wrld, &scene_data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_light_vars.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:28:17 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:28:17 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:26:38 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,17 @@ t_vector	reflect(t_vector vec, t_vector normal)
 	return (ret);
 }
 
-// t_light	point_light(t_point pos, double intensity)
-// {
-// 	t_light	l;
+t_light	point_light(t_point pos, t_color color , double ratio)
+{
+	t_light	l;
 
-// 	l.pos = pos;
-// 	l.color.r = l.color.r * intensity;
-// 	l.color.g = l.color.g * intensity;
-// 	l.color.b = l.color.b * intensity;
-// 	return (l);
-// }
+	l.pos = pos;
+	// l.color = intensity;
+	l.color.r = color.r * ratio;
+	l.color.g = color.g * ratio;
+	l.color.b = color.b * ratio;
+	return (l);
+}
 
 t_material	material(void)
 {
