@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_scene.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:27:24 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:27:24 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:43:52 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ int	parse_scene(char *file_name, t_data *scene_data)
 	{	
 		sp = (t_shape *) shapes->content;
 		sp->material.ambient = scene_data->amb_ratio;
+		sp->material.color.r = sp->material.color.r * scene_data->amb_ratio;
+		sp->material.color.g = sp->material.color.g * scene_data->amb_ratio;
+		sp->material.color.b = sp->material.color.b * scene_data->amb_ratio;
 		shapes = shapes->next;
 	}
 	close(fd);
