@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imustafa <imustafa@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:19:33 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/10 02:34:01 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:30:02 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_light
 	t_point	pos;
 	t_color	color;
 	double	ratio;
+	double	ambient_ratio;
 }	t_light;
 
 typedef struct s_world

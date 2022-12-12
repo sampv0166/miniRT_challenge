@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_shade_hit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imustafa <imustafa@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:28:46 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/10 02:51:18 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:26:42 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,10 @@ t_color	shade_hit(t_world w, t_comps comps)
 
 	shadowed = is_shadowed(w, comps.over_point);
 	c = lighting(comps, w.l, shadowed);
+	if (w.l.ratio == 0 && w.l.ambient_ratio == 0)
+		return (color(0, 0, 0));
+	if (w.l.ratio == 0)
+		return (color(comps.object->material.color.r, comps.object->material.color.g,
+			comps.object->material.color.b));
 	return (c);
 }

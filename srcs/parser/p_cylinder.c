@@ -63,7 +63,7 @@ t_shape	*populate_cylinder_basic(t_data *scene_data, char **info,
 	cy->material.shininess = 200.0;
 	cy->material.diffuse = 0.7;
 	cy->material.specular = 0.2;
-	cy->material.ambient = scene_data->amb_ratio;
+	cy->material.ambient = 0.1;
 	cy->material.color.r = cy->color.r / 255;
 	cy->material.color.b = cy->color.b / 255;
 	cy->material.color.g = cy->color.g / 255;

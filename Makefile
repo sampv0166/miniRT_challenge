@@ -53,7 +53,7 @@ OBJS = ${SRCS:.c=.o}
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -Ofast -g3
+CFLAGS = -Ofast -g3
 
 CLEAR = $(shell clear)
 

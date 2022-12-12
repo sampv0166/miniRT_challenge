@@ -70,13 +70,19 @@ int	parse_scene(char *file_name, t_data *scene_data)
 	if (!parse_line(fd, scene_data))
 		return (0);
 	shapes = scene_data->wrld.shapes;
+	t_color color;
+
+	color.r = scene_data->amb_color.r * scene_data->amb_ratio;
+	color.g = scene_data->amb_color.g * scene_data->amb_ratio;
+	color.b = scene_data->amb_color.b * scene_data->amb_ratio;
 	while (shapes)
 	{	
 		sp = (t_shape *) shapes->content;
 		sp->material.ambient = scene_data->amb_ratio;
-		sp->material.color.r = sp->material.color.r * scene_data->amb_ratio;
-		sp->material.color.g = sp->material.color.g * scene_data->amb_ratio;
-		sp->material.color.b = sp->material.color.b * scene_data->amb_ratio;
+		sp->material.color.r = sp->material.color.r + color.r;
+		sp->material.color.g = sp->material.color.g + color.g;
+		sp->material.color.b = sp->material.color.b + color.b;
+		
 		shapes = shapes->next;
 	}
 	close(fd);
