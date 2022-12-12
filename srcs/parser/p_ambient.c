@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:13:00 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/12 17:53:42 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/12 21:26:40 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	check_str(char *str, int *dot_count, int i)
 			return (1);
 		i++;
 	}
+	if (i == 1 && str[0] == '-')
+		return (1);
 	return (0);
 }
 
