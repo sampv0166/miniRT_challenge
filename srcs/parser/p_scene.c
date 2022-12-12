@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:27:24 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/12 19:39:47 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/12 21:07:41 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,24 @@ int	parse_scene(char *file_name, t_data *scene_data)
 	int		fd;
 	t_list	*shapes;
 	t_shape	*sp;
+	t_color color;
 
 	init_scene(scene_data);
 	if (!check_file_name(file_name))
 		return (set_error_obj(1, "FILE EXTENTION IS INCORRECT", scene_data));
 	fd = open(file_name, O_RDONLY);
-	if (fd < 0)
-		return (set_error_obj(2, "ERROR OPENING FILE", scene_data));
+	if (fd < 0 || read(fd, file_name, 1) < 0)
+		return (set_error_obj(2, "FILE ERROR", scene_data));
 	if (!parse_line(fd, scene_data))
 		return (0);
 	shapes = scene_data->wrld.shapes;
-	t_color color;
 
+	if (scene_data->num_objs.num_cam == 0)
+		return (set_error_obj(1, "CAMERA IS NOT NET", scene_data));	
+	if (scene_data->num_objs.num_light == 0)
+		return (set_error_obj(1, "LIGHT IS NOT NET", scene_data));
+	if (scene_data->num_objs.num_ambiance == 0)
+		return (set_error_obj(1, "AMBIENCE IS NOT NET", scene_data));			
 	color.r = scene_data->amb_color.r * scene_data->amb_ratio;
 	color.g = scene_data->amb_color.g * scene_data->amb_ratio;
 	color.b = scene_data->amb_color.b * scene_data->amb_ratio;
