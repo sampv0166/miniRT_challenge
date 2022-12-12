@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:27:24 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/11 19:35:14 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/12 19:39:47 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,4 @@ int	parse_scene(char *file_name, t_data *scene_data)
 	}
 	close(fd);
 	return (1);
-}
+} 

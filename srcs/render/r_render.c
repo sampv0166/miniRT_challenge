@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:28:42 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/10 02:51:05 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/12 19:40:30 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	write_pixel(double w, double h, t_color color, t_data *scene_data)
 	gg = color.g * 255;
 	bb = color.b * 255;
 	color_code = rr << 16 | gg << 8 | bb;
+	
 	dst = scene_data->img.data + (int)(h * scene_data->img.size_line
 			+ w * (scene_data->img.bits_per_pixel / 8));
 	*(unsigned int *)dst = color_code;
