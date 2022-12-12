@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:13:04 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/11 19:04:21 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:57:15 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ int	light_error_check(char **info, t_data *scene_data)
 {
 	if (scene_data->num_objs.num_light == 1)
 		return (set_error_obj(1, "LIGHT IS ALREADY SET", scene_data));
-	if (get_2darray_size(info) != 4)
-		return (set_error_obj(1, "WRONG NUMBER OF ARGUMENTS IN LIGHT",
-				scene_data));
 	if (skip_dot_verify_digits(info[2]))
 		return (set_error_obj(1, "LIGHT RATIO SHOULD BE A NUMBER", scene_data));
 	scene_data->light_src.ratio = parse_double(info[2]);

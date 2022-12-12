@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_parse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:16:00 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:16:00 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:57:27 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,25 @@ int	check_for_a_c_l(char **info_split, t_data *scene_data)
 	norm_split = NULL;
 	point_split = NULL;
 	if (info_split[0][0] == 'A')
+	{
+		if (get_2darray_size(info_split) != 3)
+			return (set_error_obj(1, "WRONG NUMBER OF ARGUMENTS IN AMBIENT LIGHT",
+				scene_data));
 		return (get_ambient_lighting(info_split, scene_data, color_split));
+	}
 	if (info_split[0][0] == 'C')
+	{
+		if (get_2darray_size(info_split) != 4)
+			return (set_error_obj(1, "WRONG NUMBER OF ARGUMENTS IN CAMERA",
+				scene_data));
 		return (get_camera(info_split, scene_data, point_split, norm_split));
+	}
 	if (info_split[0][0] == 'L')
+	{
+		if (get_2darray_size(info_split) != 4)
+			return (set_error_obj(1, "WRONG NUMBER OF ARGUMENTS IN LIGHT",
+				scene_data));
 		return (get_light(info_split, scene_data, point_split, color_split));
+	}
 	return (set_error_obj(3, "INVALID IDENTIFIER", scene_data));
 }

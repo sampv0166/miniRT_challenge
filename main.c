@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:28:52 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/11 19:35:43 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:18:14 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	key(int keycode, t_data *scene_data)
 {
-	if (keycode)
+	if (keycode == KEY_ESC)
 	{
 		mlx_destroy_window(scene_data->mlx.mlx_ptr, scene_data->mlx.win_ptr);
 		free_scene_data(scene_data);

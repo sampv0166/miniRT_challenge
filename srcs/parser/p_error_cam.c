@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_error_cam.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:13:11 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:13:11 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:56:03 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ int	camera_error_main(char **info, t_data *scene_data)
 {
 	if (scene_data->num_objs.num_cam == 1)
 		return (set_error_obj(1, "CAMERA IS ALREADY SET", scene_data));
-	if (get_2darray_size(info) != 4)
-		return (set_error_obj(1, "WRONG NUMBER OF ARGUMENTS IN CAMERA",
-				scene_data));
 	if (skip_dot_verify_digits(info[3]))
 		return (set_error_obj(1, "CAMERA FOV IS NOT A NUMBER", scene_data));
 	scene_data->camera.fov = parse_double(info[3]);

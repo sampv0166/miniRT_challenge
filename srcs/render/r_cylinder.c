@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_cylinder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imustafa <imustafa@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:27:56 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/10 02:47:18 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:11:59 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_intersect	intersect_caps(t_shape *cy, t_ray ray, t_intersect *i, \
 	i->t[2] = (min - ray.origin.y) / ray.direction.y;
 	if (check_cap(ray, i->t[2]))
 	{
-		if (i->t[2] > EPSILON)
+		// if (i->t[2] > EPSILON)
 			create_intersection(intersections_lst, i->t[2], cy);
 	}
 	else
@@ -43,7 +43,7 @@ t_intersect	intersect_caps(t_shape *cy, t_ray ray, t_intersect *i, \
 	i->t[3] = (max - ray.origin.y) / ray.direction.y;
 	if (check_cap(ray, i->t[3]))
 	{
-		if (i->t[2] > EPSILON)
+		// if (i->t[2] > EPSILON)
 			create_intersection(intersections_lst, i->t[3], cy);
 	}
 	else
