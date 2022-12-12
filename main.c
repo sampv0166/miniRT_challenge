@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imustafa <imustafa@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:28:52 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/11 15:24:19 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:28:23 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	key(int keycode, t_data *scene_data)
 {
-	if (keycode)
+	if (keycode == KEY_ESC)
 	{
 		mlx_destroy_window(scene_data->mlx.mlx_ptr, scene_data->mlx.win_ptr);
 		free_scene_data(scene_data);
