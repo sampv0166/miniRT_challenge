@@ -6,7 +6,7 @@
 /*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:28:52 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/13 16:52:49 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/13 16:54:34 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,6 @@ void	setup_mlx(t_data *scene_data)
 			&(scene_data->img.size_line), &(scene_data->img.endian));
 	scene_data->mlx.win_ptr = mlx_new_window(scene_data->mlx.mlx_ptr,
 			WIDTH, HEIGHT, "minirt");
-}
-
-void	write_pixel1(double w, double h, t_color color, t_data *scene_data)
-{
-	int				rr;
-	int				gg;
-	int				bb;
-	int				color_code;
-	unsigned char	*dst;
-
-	rr = color.r * 255;
-	gg = color.g * 255;
-	bb = color.b * 255;
-	color_code = rr << 16 | gg << 8 | bb;
-	dst = scene_data->img.data + (int)(h * scene_data->img.size_line
-			+ w * (scene_data->img.bits_per_pixel / 8));
-	*(unsigned int *) dst = color_code;
 }
 
 int	main(int argc, char **argv)
