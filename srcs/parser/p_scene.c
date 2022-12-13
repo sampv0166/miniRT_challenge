@@ -6,7 +6,7 @@
 /*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:27:24 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/12 21:22:40 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:12:51 by apila-va         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ int	parse_scene(char *file_name, t_data *scene_data)
 	shapes = scene_data->wrld.shapes;
 
 	if (scene_data->num_objs.num_cam == 0)
-		return (set_error_obj(1, "CAMERA IS NOT NET", scene_data));	
+		return (set_error_obj(1, "CAMERA IS NOT SET", scene_data));	
 	if (scene_data->num_objs.num_light == 0)
-		return (set_error_obj(1, "LIGHT IS NOT NET", scene_data));
+		return (set_error_obj(1, "LIGHT IS NOT SET", scene_data));
 	if (scene_data->num_objs.num_ambiance == 0)
-		return (set_error_obj(1, "AMBIENCE IS NOT NET", scene_data));			
+		return (set_error_obj(1, "AMBIENCE IS NOT SET", scene_data));			
 	color.r = scene_data->amb_color.r * scene_data->amb_ratio;
 	color.g = scene_data->amb_color.g * scene_data->amb_ratio;
 	color.b = scene_data->amb_color.b * scene_data->amb_ratio;
