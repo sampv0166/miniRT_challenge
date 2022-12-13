@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imustafa <imustafa@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:19:33 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/12 13:30:02 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:27:44 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,8 +188,8 @@ typedef struct s_data
 	t_numObjects	num_objs;
 	char			**norm_split_to_free;
 	t_shape			*shape_to_free;
-	double**		tranform_to_free;
-	double**		inverse_to_free;
+	double			**tranform_to_free;
+	double			**inverse_to_free;
 }	t_data;
 
 #endif

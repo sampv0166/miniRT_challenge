@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:11:34 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/11 15:26:51 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/13 16:10:00 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void			local_intersect_cylinder(t_shape *s, t_ray r,
 t_list			*intersect_world(t_world w, t_ray r);
 void			print_parsed_values(t_data *scene_data);
 t_ray			transform(t_ray r, double **m);
-t_light	point_light(t_point pos, t_color color , double ratio);
+t_light			point_light(t_point pos, t_color color, double ratio);
 t_point			position(t_ray r, float num);
 t_vector		normal_at(t_shape *s, t_point p);
 t_intersect		intersect_sphere(t_shape *s, t_ray r);

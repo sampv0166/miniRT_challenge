@@ -6,7 +6,7 @@
 /*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:11:38 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:11:38 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:48:16 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,16 @@ int		error_checks_plane(char **info, t_data *scene_data);
 int		camera_error_main(char **info, t_data *scene_data);
 int		camera_error_split(t_data *scene_data, char **point_split,
 			char **norm_split);
-
+int		get_ambient_lighting(char **info_split, t_data *scene_data,
+			char **color_split);
+int		get_camera(char **info_split, t_data *scene_data, char **point_split,
+			char **norm_split);
+int		get_light(char **info_split, t_data *scene_data, char **point_split,
+			char **color_split);
+int		get_sphere(char **info_split, t_data *scene_data, char **point_split,
+			char **color_split);
+int		get_plane(char **info_split, t_data *scene_data, char **point_split,
+			char **color_split);
+int		get_cylinder(char **info_split, t_data *scene_data, char **point_split,
+			char **color_split);
 #endif

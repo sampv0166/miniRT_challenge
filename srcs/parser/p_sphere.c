@@ -6,7 +6,7 @@
 /*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:27:33 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:27:33 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:14:25 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void	add_sphere_transform(t_shape *sphere)
 	free_2d_array(scale, 4);
 }
 
-t_shape	*populate_sphere(t_color color, t_data *scene_data,
-		char **point_split, char **info)
+t_shape	*populate_sphere(t_color color, char **point_split, char **info)
 {
 	t_shape	*sphere;
 
@@ -77,7 +76,7 @@ int	parse_sphere(char **info, t_data *scene_data, char **point_split,
 	if (!parse_color(info[3], &color))
 		return (set_error_obj(2, "SPHERE COLOR VALUE IS WRONG",
 				scene_data));
-	sphere = populate_sphere(color, scene_data, point_split, info);
+	sphere = populate_sphere(color, point_split, info);
 	ft_lstadd_back(&scene_data->wrld.shapes, ft_lstnew(sphere));
 	if (sphere->inverse == NULL)
 		return (set_error_obj(1, "SPHERE INVERSE MATRIX IS NOT INVERTIBLE",

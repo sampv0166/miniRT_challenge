@@ -38,6 +38,7 @@ SRCS = 	main.c \
 		srcs/render/r_prepare_comps.c \
 		srcs/render/r_shade_hit.c \
 		srcs/render/r_cylinder.c \
+		srcs/render/r_cyl_cap.c \
 		srcs/utils/u_gnl_utils.c \
 		srcs/utils/u_gnl.c \
 		srcs/utils/u_error.c \
@@ -47,13 +48,15 @@ SRCS = 	main.c \
 		srcs/utils/u_parse_double.c  \
 		srcs/utils/u_compare.c  \
 		srcs/utils/u_inverse.c  \
-		extra/print.c  \
+		srcs/utils/u_camera.c  \
+		srcs/utils/u_parse_error.c  \
+		srcs/utils/u_parse_error2.c
 	
 OBJS = ${SRCS:.c=.o}
 
 CC = gcc
 
-CFLAGS = -Ofast -g3
+CFLAGS = -Wall -Werror -Wextra
 
 CLEAR = $(shell clear)
 

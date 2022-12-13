@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 22:22:27 by apila-va          #+#    #+#             */
-/*   Updated: 2022/02/22 09:07:33 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/13 16:50:59 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ void	init(size_t *i, int *s, size_t *res)
 
 void	skip_sapces_and_signs(const char *str, size_t *i, int *s)
 {
-	while (str && (str[(*i)] == ' ' || str[(*i)] == '\n' || str[(*i)] == '\t' || \
-		str[(*i)] == '\v' || str[(*i)] == '\f' || str[(*i)] == '\r'))
+	while (str && (str[(*i)] == ' ' || str[(*i)] == '\n'
+			|| str[(*i)] == '\t' || str[(*i)] == '\v' || str[(*i)] == '\f'
+			|| str[(*i)] == '\r'))
 		(*i)++;
 	if (str && (str[(*i)] == '-' || str[(*i)] == '+'))
 	{
@@ -32,16 +33,10 @@ void	skip_sapces_and_signs(const char *str, size_t *i, int *s)
 	}
 }
 
-// int	exit_atoi(int *atoi_chec)
-// {
-// 	*atoi_chec = 1;
-// 	return (*atoi_chec);
-// }
-
 int	ft_atoi(const char *str)
 {
 	size_t	i;
-	int	s;
+	int		s;
 	size_t	res;
 
 	init(&i, &s, &res);

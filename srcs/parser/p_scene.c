@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   p_scene.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:27:24 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/13 12:12:51 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/13 16:42:55 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-
-int	set_error_obj(int err_code, char *msg, t_data *scene_data)
-{
-	scene_data->error.message = msg;
-	scene_data->error.error_code = err_code;
-	return (0);
-}
 
 void	init_scene(t_data *scene_data)
 {
@@ -55,12 +48,36 @@ int	parse_line(int fd, t_data *scene_data)
 	return (1);
 }
 
+t_color	set_color(t_data *scene_data)
+{
+	t_color	color;
+
+	color.r = scene_data->amb_color.r * scene_data->amb_ratio;
+	color.g = scene_data->amb_color.g * scene_data->amb_ratio;
+	color.b = scene_data->amb_color.b * scene_data->amb_ratio;
+	return (color);
+}
+
+void	set_shapes(t_data *scene_data, t_color color)
+{
+	t_shape	*sp;
+	t_list	*shapes;
+
+	shapes = scene_data->wrld.shapes;
+	while (shapes)
+	{
+		sp = (t_shape *) shapes->content;
+		sp->material.ambient = scene_data->amb_ratio;
+		sp->material.color.r = sp->material.color.r + color.r;
+		sp->material.color.g = sp->material.color.g + color.g;
+		sp->material.color.b = sp->material.color.b + color.b;
+		shapes = shapes->next;
+	}
+}
+
 int	parse_scene(char *file_name, t_data *scene_data)
 {
 	int		fd;
-	t_list	*shapes;
-	t_shape	*sp;
-	t_color color;
 
 	init_scene(scene_data);
 	if (!check_file_name(file_name))
@@ -70,27 +87,13 @@ int	parse_scene(char *file_name, t_data *scene_data)
 		return (set_error_obj(2, "FILE ERROR", scene_data));
 	if (!parse_line(fd, scene_data))
 		return (0);
-	shapes = scene_data->wrld.shapes;
-
 	if (scene_data->num_objs.num_cam == 0)
-		return (set_error_obj(1, "CAMERA IS NOT SET", scene_data));	
+		return (set_error_obj(1, "CAMERA IS NOT SET", scene_data));
 	if (scene_data->num_objs.num_light == 0)
 		return (set_error_obj(1, "LIGHT IS NOT SET", scene_data));
 	if (scene_data->num_objs.num_ambiance == 0)
-		return (set_error_obj(1, "AMBIENCE IS NOT SET", scene_data));			
-	color.r = scene_data->amb_color.r * scene_data->amb_ratio;
-	color.g = scene_data->amb_color.g * scene_data->amb_ratio;
-	color.b = scene_data->amb_color.b * scene_data->amb_ratio;
-	while (shapes)
-	{	
-		sp = (t_shape *) shapes->content;
-		sp->material.ambient = scene_data->amb_ratio;
-		sp->material.color.r = sp->material.color.r + color.r;
-		sp->material.color.g = sp->material.color.g + color.g;
-		sp->material.color.b = sp->material.color.b + color.b;
-		
-		shapes = shapes->next;
-	}
+		return (set_error_obj(1, "AMBIENCE IS NOT SET", scene_data));
+	set_shapes(scene_data, set_color(scene_data));
 	close(fd);
 	return (1);
-} 
+}

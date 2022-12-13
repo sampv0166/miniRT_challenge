@@ -6,7 +6,7 @@
 /*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:13:08 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/08 18:13:08 by imustafa         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:30:06 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	populate_cylinder_split(t_shape *cy,
 	cy->norm_vector.x = parse_double(norm_vec[0]);
 	cy->norm_vector.y = parse_double(norm_vec[1]);
 	cy->norm_vector.z = parse_double(norm_vec[2]);
+	add_cylinder_transform(cy);
 }
 
 t_shape	*populate_cylinder_basic(t_data *scene_data, char **info,
@@ -71,7 +72,7 @@ t_shape	*populate_cylinder_basic(t_data *scene_data, char **info,
 }
 
 int	parse_cylinder(char **info, t_data *scene_data, char **point_split,
-	char **color_split)
+		char **color_split)
 {
 	t_color	color;
 	char	**norm_split;
@@ -88,13 +89,14 @@ int	parse_cylinder(char **info, t_data *scene_data, char **point_split,
 		return (set_error_obj(2, "CYLINDER COLOR VALUE IS WRONG", scene_data));
 	cy = populate_cylinder_basic(scene_data, info, &color);
 	populate_cylinder_split(cy, point_split, norm_split);
-	add_cylinder_transform(cy);
 	ft_lstadd_back(&scene_data->wrld.shapes, ft_lstnew(cy));
 	if (cy->inverse == NULL)
 		return (set_error_obj(2, "CYLINDER MATRIX IS NOT INVERTIBLE",
 				scene_data));
 	if (norm_vector(&cy->norm_vector))
-		return (set_error_obj(2, "cylinder orientation vector should be between -1 and 1", scene_data));				
+		return (set_error_obj(2,
+				"CYLINDER ORIENTATION VECTOR SHOULD BE BETWEEN -1 and 1",
+				scene_data));
 	scene_data->num_objs.num_cy += 1;
 	return (1);
 }

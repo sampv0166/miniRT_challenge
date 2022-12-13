@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_local_intersect.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:28:25 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/10 02:49:09 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:28:13 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	local_intersect_plane(t_shape *s, t_list **intersections_list)
 		return ;
 	}
 	inter.count = 1;
-	inter.t[0] = -1 * s->ray_in_obj_space.origin.y \
-	/ s->ray_in_obj_space.direction.y;
+	inter.t[0] = -1 * s->ray_in_obj_space.origin.y
+		/ s->ray_in_obj_space.direction.y;
 	if (inter.t[0] > EPSILON)
 		create_intersection(intersections_list, inter.t[0], s);
 	else
@@ -58,7 +58,7 @@ void	local_intersect_sphere(t_shape *s, t_list **intersections_list)
 	create_intersection(intersections_list, inter.t[1], s);
 }
 
-void	local_intersect_cylinder(t_shape *s, t_ray ray, \
+void	local_intersect_cylinder(t_shape *s, t_ray ray,
 			t_list **intersections_list)
 {
 	double		calc;

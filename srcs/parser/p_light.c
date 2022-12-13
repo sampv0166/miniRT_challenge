@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_light.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:13:04 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/12 17:57:15 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:29:52 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,6 @@ int	light_error_check(char **info, t_data *scene_data)
 
 void	normalize_light_color(t_data *scene_data)
 {
-	// scene_data->light_src.color.r = parse_double(color_split[0]);
-	// scene_data->light_src.color.g = parse_double(color_split[1]);
-	// scene_data->light_src.color.b = parse_double(color_split[2]);
 	scene_data->light_src.color.r = scene_data->light_src.color.r / 255;
 	scene_data->light_src.color.g = scene_data->light_src.color.g / 255;
 	scene_data->light_src.color.b = scene_data->light_src.color.b / 255;
@@ -60,7 +57,8 @@ int	parse_light(char **info, t_data *scene_data, char **point_split,
 				"ONLY DIGITS ALLOWED IN LIGHT COLOR VALUES",
 				scene_data));
 	if (!parse_color(info[3], &scene_data->light_src.color))
-		return (set_error_obj(2, "LIGHT COLOR VALUE IS WRONG", scene_data));			
+		return (set_error_obj(2, "LIGHT COLOR VALUE IS WRONG",
+				scene_data));
 	scene_data->light_src.pos.x = parse_double(point_split[0]);
 	scene_data->light_src.pos.y = parse_double(point_split[1]);
 	scene_data->light_src.pos.z = parse_double(point_split[2]);

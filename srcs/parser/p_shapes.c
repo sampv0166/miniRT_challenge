@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_shapes.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apila-va <apila-va@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imustafa <imustafa@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:27:29 by imustafa          #+#    #+#             */
-/*   Updated: 2022/12/12 18:02:50 by apila-va         ###   ########.fr       */
+/*   Updated: 2022/12/13 16:01:18 by imustafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,36 +65,11 @@ int	get_cylinder(char **info_split, t_data *scene_data, char **point_split,
 	return (ret);
 }
 
-int	check_for_sp_pl_cy(char **info_split, t_data *scene_data)
+int	free_info(char	**info_split)
 {
-	char	**color_split;
-	char	**point_split;
-
-	color_split = NULL;
-	point_split = NULL;
-	if (info_split[0][0] == 's' && info_split[0][1] == 'p')
-	{
-		if (get_2darray_size(info_split) != 4)
-			return (set_error_obj(1, "WRONG NUMBER OF ARGUMENTS IN SPHERE",
-				scene_data));
-		return (get_sphere(info_split, scene_data, point_split, color_split));
-	}
-	if (info_split[0][0] == 'p' && info_split[0][1] == 'l')
-	{
-		if (get_2darray_size(info_split) != 4)
-			return (set_error_obj(1, "WRONG NUMBER OF ARGUMENTS IN PLANE",
-				scene_data));
-		return (get_plane(info_split, scene_data, point_split,
-				color_split));
-	}
-	if (info_split[0][0] == 'c' && info_split[0][1] == 'y')
-	{
-		if (get_2darray_size(info_split) != 6)
-			return (set_error_obj(1, "WRONG NO OF ARGUMENTS IN CYLINDER",
-				scene_data));
-		return (get_cylinder(info_split, scene_data, point_split, color_split));
-	}
-	return (set_error_obj(3, "INVALID IDENTIFIER", scene_data));
+	free_2d_char_array(info_split);
+	free(info_split);
+	return (0);
 }
 
 int	parse_current_line(char *line, t_data *scene_data)
@@ -108,27 +83,17 @@ int	parse_current_line(char *line, t_data *scene_data)
 	if (info_split && ft_strlen(info_split[0]) == 1)
 	{
 		if (!check_for_a_c_l(info_split, scene_data))
-		{
-			free_2d_char_array(info_split);
-			free(info_split);
-			return (0);
-		}
+			return (free_info(info_split));
 	}
 	else if (info_split && ft_strlen(info_split[0]) == 2)
 	{
 		if (!check_for_sp_pl_cy(info_split, scene_data))
-		{
-			free_2d_char_array(info_split);
-			free(info_split);
-			return (0);
-		}
+			return (free_info(info_split));
 	}
 	else
 	{
 		set_error_obj(3, "INVALID IDENTIFIER", scene_data);
-		free_2d_char_array(info_split);
-		free(info_split);
-		return (0);
+		return (free_info(info_split));
 	}
 	free_2d_char_array(info_split);
 	free(info_split);
